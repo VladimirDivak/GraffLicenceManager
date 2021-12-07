@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "GraffLicenceManager": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://192.168.1.157:5000"
+    }
+  }
+}
