@@ -110,7 +110,7 @@ body {
     margin-right: 0;
 }
 
-.status-icon {
+.status-icon-on {
     margin-left: 4px;
     height: 12px;
     width: 12px;
@@ -119,9 +119,13 @@ body {
     border-radius: 12px;
 }
 
-.status > h3 {
-    font-size: 11px;
-    color: #6DD58C;
+.status-icon-off {
+    margin-left: 4px;
+    height: 12px;
+    width: 12px;
+    background-color: #DA0000;
+    border: none;
+    border-radius: 12px;
 }
 
 .state {

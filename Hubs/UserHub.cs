@@ -137,7 +137,6 @@ namespace GraffLicenceManager.Hubs {
             }
         }
         public async Task OnValidationRequest(string hardwareId) {
-            Console.WriteLine($"[{DateTime.Now}] {databaseService.GetComputer(hardwareId).localUserName} обращается за лицензией.");
             Computer comp = databaseService.GetComputer(hardwareId);
             License lic = databaseService.GetLicense(databaseService.GetComputer(hardwareId).productName);
             if (lic.status == true && comp.isBanned == false) await Clients.Caller.SendAsync("OnValidationResponse", true);

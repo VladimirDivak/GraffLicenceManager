@@ -14,7 +14,14 @@
     {
         <div class="card">
             <div class="card-top-content">
-                <img src="@lic.iconPath" alt="">
+                @if(lic.iconPath == string.Empty)
+                {
+                    <img src="icons/IconDefault.svg" alt="">
+                }
+                else
+                {
+                    <img src="@lic.iconPath" alt="">   
+                }
                 <div class="project-info">
                     <h1>@lic.productName</h1>
                     <h2>@lic.companyName</h2>
@@ -22,13 +29,13 @@
                 <div class="status">
                     @if(lic.status)
                     {
-                        <h3>ON</h3>
-                        <div class="status-icon"></div>
+                        <h3 style="font-size: 11px; color: #6DD58C;">ON</h3>
+                        <div class="status-icon-on"></div>
                     }
                     else
                     {
-                        <h3>OFF</h3>
-                        <div class="status-icon"></div>
+                        <h3 style="font-size: 11px; color: #DA0000;">OFF</h3>
+                        <div class="status-icon-off"></div>
                     }
                 </div>
             </div>
@@ -51,19 +58,58 @@
 
 @code {
     private HubConnection connection;
-    private List<License> _licenses = new List<License>();
-    private List<Computer> _computers = new List<Computer>();
+    protected List<License> _licenses = new List<License>();
+    protected List<Computer> _computers = new List<Computer>();
 
     protected async override Task OnInitializedAsync()
     {
         connection = new HubConnectionBuilder()
-            .WithUrl(NavigationManager.ToAbsoluteUri("/adminhub"))
+            .WithUrl(NavigationManager
+            .ToAbsoluteUri("/adminhub"))
             .Build();
 
         connection.On<List<License>, List<Computer>>("OnLicensesListResponse", (licenses, computers) =>
         {
             _licenses = licenses;
             _computers = computers;
+            StateHasChanged();
+        });
+
+        connection.On<License>("OnAddNewLicense", license =>
+        {
+            _licenses.Add(license);
+            StateHasChanged();
+        });
+
+        connection.On<License>("OnLicenseStatusChanged", license =>
+        {
+            var licenseIndex = _licenses.IndexOf(_licenses.Find(x => x.id == license.id));
+            _licenses[licenseIndex] = license;
+            StateHasChanged();
+        });
+
+        connection.On<string>("OnLicenseRemoved", licenseRegData =>
+        {
+            _licenses.Remove(_licenses.Find(x => x.registrationDate == licenseRegData));
+            StateHasChanged();
+        });
+
+        connection.On<Computer>("OnAddNewComputer", computer =>
+        {
+            _computers.Add(computer);
+            StateHasChanged();
+        });
+
+        connection.On<Computer>("OnComputerSatusChanged", computer =>
+        {
+            var computerIndex = _computers.IndexOf(_computers.Find(x => x.id == computer.id));
+            _computers[computerIndex] = computer;
+            StateHasChanged();
+        });
+
+        connection.On<string>("OnComputerRemoved", computerRegDate =>
+        {
+            _computers.Remove(_computers.Find(x => x.activationDate == computerRegDate));
             StateHasChanged();
         });
 

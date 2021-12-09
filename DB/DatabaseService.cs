@@ -5,6 +5,14 @@ using System.Collections.Generic;
 
 namespace GraffLicenceManager.DB {
     public class DatabaseService {
+        public event Action<Computer> OnAddNewComputer;
+        public event Action<Computer> OnComputerStatusChanged;
+        public event Action<string> OnComputerRemoved;
+
+        public event Action<License> OnAddNewLicense;
+        public event Action<License> OnLicenseStatusChanged;
+        public event Action<string> OnLicenseRemoved;
+
         private readonly IMongoCollection<License> _licenses;
         private readonly IMongoCollection<Computer> _computers;
 
@@ -39,27 +47,49 @@ namespace GraffLicenceManager.DB {
         
         public License CreateLicense(License licence) {
             _licenses.InsertOne(licence);
+            OnAddNewLicense?.Invoke(licence);
+
             return licence;
         }
 
         public Computer CreateComputer(Computer computer) {
             _computers.InsertOne(computer);
+            OnAddNewComputer?.Invoke(computer);
+
             return computer;
         }
 
         public void UpdateLicense(License licence) {
             _licenses.DeleteOne(lic => lic.companyName == licence.companyName && lic.productName == licence.productName);
             _licenses.InsertOne(licence);
+
+            OnLicenseStatusChanged?.Invoke(licence);
         }
+
         public void UpdateComputer(Computer computer) {
             _computers.DeleteOne(comp => comp.hardwareId == computer.hardwareId);
             _computers.InsertOne(computer);
+
+            OnComputerStatusChanged?.Invoke(computer);
         }
 
-        public void RemoveLicense(License licence) => _licenses.DeleteOne(lic => lic.id == licence.id);
-        public void RemoveLicense(string projectName) => _licenses.DeleteOne(lic => lic.productName == projectName);
-        public void RemoveComputer(Computer computer) => _computers.DeleteOne(comp => comp.Equals(computer));
-        public void RemoveComputer(string hardwareID) => _computers.DeleteOne(comp => comp.hardwareId == hardwareID);
+        public void RemoveLicense(License licence) {
+            _licenses.DeleteOne(lic => lic.id == licence.id);
+            OnLicenseRemoved?.Invoke(licence.registrationDate);
+        }
+
+        public void RemoveLicense(string projectName) {
+            OnLicenseRemoved?.Invoke(GetLicense(projectName).registrationDate);
+            _licenses.DeleteOne(lic => lic.productName == projectName);
+        }
+        public void RemoveComputer(Computer computer) {
+            OnComputerRemoved?.Invoke(computer.activationDate);
+            _computers.DeleteOne(comp => comp.Equals(computer));
+        }
+        public void RemoveComputer(string hardwareID) {
+            OnComputerRemoved?.Invoke(GetComputer(hardwareID).activationDate);
+            _computers.DeleteOne(comp => comp.hardwareId == hardwareID);
+        }
         public void RemoveComputers(string product) => _computers.DeleteMany(x => x.productName == product);
     }
 }
