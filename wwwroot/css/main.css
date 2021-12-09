@@ -47,8 +47,20 @@ body {
     padding-bottom: 12px;
 }
 
+    .content > h2 {
+        height: 24px;
+        margin-bottom: 8px;
+        margin-left: 8px;
+        margin-top: 8px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.1px;
+        color: #E3E3E3;
+    }
+
 .card {
-    height: 154px;
+    min-height: 154px;
     margin-top: 4px;
     margin-bottom: 4px;
     display: flex;
@@ -57,6 +69,42 @@ body {
     background: #1F1F1F;
     border: 1px solid #444746;
     border-radius: 12px;
+}
+
+.card-top {
+    min-height: 96px;
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: #1F1F1F;
+    border-left: 1px solid #444746;
+    border-right: 1px solid #444746;
+    border-top: 1px solid #444746;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.card-middle {
+    min-height: 96px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: #1F1F1F;
+    border-left: 1px solid #444746;
+    border-right: 1px solid #444746;
+    border-top: 1px solid #444746;
+}
+
+.card-bottom {
+    min-height: 96px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: #1F1F1F;
+    border: 1px solid #444746;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
 }
 
 .card-top-content {
@@ -81,7 +129,7 @@ body {
     justify-content: space-between;
 }
 
-.project-info {
+.info {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -89,13 +137,13 @@ body {
     margin-left: 16px;
 }
 
-    .project-info > h1 {
+    .info > h1 {
         font-weight: 400;
         font-size: 22px;
         color: #E3E3E3;
     }
 
-    .project-info > h2 {
+    .info > h2 {
         font-weight: 500;
         font-size: 12px;
         line-height: 16px;

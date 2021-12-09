@@ -1,0 +1,254 @@
+﻿@page "/licenses"
+@using Microsoft.AspNetCore.SignalR.Client
+@inject NavigationManager NavigationManager
+@implements IAsyncDisposable
+
+<link rel="stylesheet" href="css/main.css">
+<div class="header">
+    <img class="logo" src="icons/Logo_GRAFFinteractive_Default.svg" alt="">
+    <p>GRAFF Interactive Validator</p>
+    <img src="icons/FAB.svg" alt="">
+</div>
+<div class="content">
+    @switch(pageState)
+    {
+        case(PageState.Licenses):
+            @foreach(var lic in licenses)
+            {
+                <div class="card" @onclick="@(eventArgs => OnLicenseSelect(lic.id))">
+                    <div class="card-top-content">
+                        @if(lic.iconPath == string.Empty)
+                        {
+                            <img src="icons/IconDefault.svg" alt="">
+                        }
+                        else
+                        {
+                            <img src="@lic.iconPath" alt="">   
+                        }
+                        <div class="info">
+                            <h1>@lic.productName</h1>
+                            <h2>@lic.companyName</h2>
+                        </div>
+                        <div class="status">
+                            @if(lic.status)
+                            {
+                                <h3 style="font-size: 11px; color: #6DD58C;">ON</h3>
+                                <div class="status-icon-on"></div>
+                            }
+                            else
+                            {
+                                <h3 style="font-size: 11px; color: #DA0000;">OFF</h3>
+                                <div class="status-icon-off"></div>
+                            }
+                        </div>
+                    </div>
+                    <div class="card-bottom-content">
+                        <div class="state">
+                            <p>Одобрено копий:</p>
+                            <p>Активировано копий:</p>
+                            <p>Сейчас онлайн:</p>
+                        </div>
+                        <div class="state-value">
+                            <p>@lic.licensesCounter</p>
+                            <p>@licenses.Count(x => x.productName == lic.productName)</p>
+                            <p>@computers.Where(x => x.productName == lic.productName).Count(x => x.isActive)</p>
+                        </div>
+                        <img src="icons/FAB_Edit.svg" alt="">
+                    </div>
+                </div>
+            }
+            break;
+
+        case(PageState.LicenseInfo):
+            <h2>Информация о лицензии</h2>
+            <div class="card">
+                <div class="card-top-content">
+                    @if(selectedLicense.iconPath == string.Empty)
+                    {
+                        <img src="icons/IconDefault.svg" alt="">
+                    }
+                    else
+                    {
+                        <img src="@selectedLicense.iconPath" alt="">   
+                    }
+                    <div class="info">
+                        <h1>@selectedLicense.productName</h1>
+                        <h2>@selectedLicense.companyName</h2>
+                    </div>
+                    <div class="status">
+                        @if(selectedLicense.status == true)
+                        {
+                            <h3 style="font-size: 11px; color: #6DD58C;">ON</h3>
+                            <div class="status-icon-on"></div>
+                        }
+                        else
+                        {
+                            <h3 style="font-size: 11px; color: #DA0000;">OFF</h3>
+                            <div class="status-icon-off"></div>
+                        }
+                    </div>
+                </div>
+                <div class="card-bottom-content">
+                    <div class="state">
+                        <p>Одобрено копий:</p>
+                        <p>Активировано копий:</p>
+                        <p>Сейчас онлайн:</p>
+                        <p style="margin: 8px"> </p>
+                        <p>Доступ без интернета:</p>
+                        <p>Лицензия добавлена:</p>
+                    </div>
+                    <div class="state-value">
+                        <p>@selectedLicense.licensesCounter</p>
+                        <p>@computers.Where(x => x.productName == selectedLicense.productName).Count()</p>
+                        <p>@computers.Where(x => x.productName == selectedLicense.productName && x.isActive).Count()</p>
+                        <p style="margin: 8px"> </p>
+                        <p>@selectedLicense.trialPeriod</p>
+                        <p>@selectedLicense.registrationDate</p>
+                    </div>
+                    <img src="icons/FAB_Edit.svg" alt="">
+                </div>
+            </div>
+            <h2>Привязанные компьютеры</h2>
+            @foreach(var computer in computers.Where(x => x.productName == selectedLicense.productName))
+            {
+                if(computers.IndexOf(computer) == 0)
+                {
+                    cardPosition = "card-top";
+                }
+                else if(computers.IndexOf(computer) > 0 && computers.IndexOf(computer) < computers.IndexOf(computers.Last()))
+                {
+                    cardPosition = "card-middle";
+                }
+                else
+                {
+                    cardPosition = "card-bottom";
+                }
+
+                <div class=@cardPosition>
+                    <div class="card-top-content">
+                        <img src="icons/computer.svg" style="height: 40px;" alt="">
+                        <div class="info">
+                            <h1>@computer.localUserName</h1>
+                            @if(computer.isActive)
+                            {
+                                <h2 style="color: #6DD58C;">@computer.geolocation • Online</h2>
+                            }
+                            else
+                            {
+                                <h2 style="color: #8E918F;">@computer.geolocation • Offline (@computer.lastActivity)</h2>
+                            }
+                        </div>
+                        <div class="status">
+                            @if(computer.isBanned == false)
+                            {
+                                <h3 style="font-size: 11px; color: #6DD58C;">ON</h3>
+                                <div class="status-icon-on"></div>
+                            }
+                            else
+                            {
+                                <h3 style="font-size: 11px; color: #DA0000;">OFF</h3>
+                                <div class="status-icon-off"></div>
+                            }
+                        </div>
+                    </div>
+                    <div class="card-bottom-content">
+                        <div class="state">
+                            <p>@computer.machineName</p>
+                            <p>Активирован: @computer.activationDate</p>
+                        </div>
+                        <img src="icons/FAB_Edit.svg" alt="">
+                        <img src="icons/FAB_PlayPause.svg" alt="">
+                    </div>
+                </div>
+            }
+        break;
+    }
+</div>>
+
+@code {
+    public enum PageState
+    {
+        Licenses,
+        LicenseInfo
+    }
+
+    private HubConnection connection;
+    private List<License> licenses = new List<License>();
+    private List<Computer> computers = new List<Computer>();
+    private PageState pageState = PageState.Licenses;
+
+    private License selectedLicense;
+    private string cardPosition = "card-top";
+
+    protected async override Task OnInitializedAsync()
+    {
+        connection = new HubConnectionBuilder()
+            .WithUrl(NavigationManager
+            .ToAbsoluteUri("/adminhub"))
+            .Build();
+
+        connection.On<List<License>, List<Computer>>("OnLicensesListResponse", (licenses, computers) =>
+        {
+            this.licenses = licenses;
+            this.computers = computers;
+            StateHasChanged();
+        });
+
+        connection.On<License>("OnAddNewLicense", license =>
+        {
+            licenses.Add(license);
+            StateHasChanged();
+        });
+
+        connection.On<License>("OnLicenseStatusChanged", license =>
+        {
+            var licenseIndex = licenses.IndexOf(licenses.Find(x => x.id == license.id));
+            licenses[licenseIndex] = license;
+            StateHasChanged();
+        });
+
+        connection.On<string>("OnLicenseRemoved", licenseRegData =>
+        {
+            licenses.Remove(licenses.Find(x => x.registrationDate == licenseRegData));
+            StateHasChanged();
+        });
+
+        connection.On<Computer>("OnAddNewComputer", computer =>
+        {
+            computers.Add(computer);
+            StateHasChanged();
+        });
+
+        connection.On<Computer>("OnComputerSatusChanged", computer =>
+        {
+            var computerIndex = computers.IndexOf(computers.Find(x => x.id == computer.id));
+            computers[computerIndex] = computer;
+            StateHasChanged();
+        });
+
+        connection.On<string>("OnComputerRemoved", computerRegDate =>
+        {
+            computers.Remove(computers.Find(x => x.activationDate == computerRegDate));
+            StateHasChanged();
+        });
+
+        await connection.StartAsync();
+        await connection.SendAsync("OnLicensesListRequest");
+    }
+
+    private void OnLicenseSelect(string licenseid)
+    {
+        selectedLicense = licenses.Find(x => x.id == licenseid);
+        pageState = PageState.LicenseInfo;
+        StateHasChanged();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (connection != null)
+        {
+            await connection.StopAsync();
+            await connection.DisposeAsync();
+        }
+    }
+}

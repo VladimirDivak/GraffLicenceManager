@@ -1,0 +1,14 @@
+﻿@page "/license-information/{licenseid}"
+@using Microsoft.AspNetCore.SignalR.Client
+@inject NavigationManager NavigationManager
+@implements IAsyncDisposable
+
+<div></div>
+
+@code {
+    public string licenseId { get; set; }
+    public async ValueTask DisposeAsync()
+    {
+        
+    }
+}
