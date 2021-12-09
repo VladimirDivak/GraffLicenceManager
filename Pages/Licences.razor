@@ -1,0 +1,83 @@
+﻿@page "/licenses"
+@using Microsoft.AspNetCore.SignalR.Client
+@inject NavigationManager NavigationManager
+@implements IAsyncDisposable
+
+<link rel="stylesheet" href="css/main.css">
+<div class="header">
+    <img class="logo" src="icons/Logo_GRAFFinteractive_Default.svg" alt="">
+    <p>GRAFF Interactive Validator</p>
+    <img src="icons/FAB.svg" alt="">
+</div>
+<div class="content">
+    @foreach(var lic in _licenses)
+    {
+        <div class="card">
+            <div class="card-top-content">
+                <img src="@lic.iconPath" alt="">
+                <div class="project-info">
+                    <h1>@lic.productName</h1>
+                    <h2>@lic.companyName</h2>
+                </div>
+                <div class="status">
+                    @if(lic.status)
+                    {
+                        <h3 style="font-size: 11px; color: #6DD58C;">ON</h3>
+                        <div class="status-icon-on"></div>
+                    }
+                    else
+                    {
+                        <h3 style="font-size: 11px; color: #DA0000;">OFF</h3>
+                        <div class="status-icon-off"></div>
+                    }
+                </div>
+            </div>
+            <div class="card-bottom-content">
+                <div class="state">
+                    <p>Одобрено копий:</p>
+                    <p>Активировано копий:</p>
+                    <p>Сейчас онлайн:</p>
+                </div>
+                <div class="state-value">
+                    <p>@lic.licensesCounter</p>
+                    <p>@_computers.Count(x => x.productName == lic.productName)</p>
+                    <p>@_computers.Where(x => x.productName == lic.productName).Count(x => x.isActive)</p>
+                </div>
+                <img src="icons/FAB_Edit.svg" alt="">
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private HubConnection connection;
+    private List<License> _licenses = new List<License>();
+    private List<Computer> _computers = new List<Computer>();
+
+    protected async override Task OnInitializedAsync()
+    {
+        connection = new HubConnectionBuilder()
+            .WithUrl(NavigationManager
+            .ToAbsoluteUri("/adminhub"))
+            .Build();
+
+        connection.On<List<License>, List<Computer>>("OnLicensesListResponse", (licenses, computers) =>
+        {
+            _licenses = licenses;
+            _computers = computers;
+            StateHasChanged();
+        });
+
+        await connection.StartAsync();
+        await connection.SendAsync("OnLicensesListRequest");
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (connection != null)
+        {
+            await connection.StopAsync();
+            await connection.DisposeAsync();
+        }
+    }
+}
