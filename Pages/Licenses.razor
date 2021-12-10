@@ -5,9 +5,20 @@
 
 <link rel="stylesheet" href="css/main.css">
 <div class="header">
-    <img class="logo" src="icons/Logo_GRAFFinteractive_Default.svg" alt="">
-    <p>GRAFF Interactive Validator</p>
-    <img src="icons/FAB.svg" alt="">
+    @switch(pageState)
+    {
+        case PageState.Licenses:
+                <img class="logo" src="icons/Logo_GRAFFinteractive_Default.svg" alt="">
+                <p>GRAFF Interactive Validator</p>
+                <img src="icons/burger.svg" alt="">
+            break;
+
+        case PageState.LicenseInfo:
+                <img class="logo" style="margin-left: 0; margin-right: auto" src="icons/back.svg" alt="" @onclick="@(()=>SetMode(PageState.Licenses))">
+                <p>@selectedLicense.productName</p>
+                <img style="margin-right: 0; margin-left: auto" src="icons/menu.svg" alt="">
+            break;
+    }
 </div>
 <div class="content">
     @switch(pageState)
@@ -50,7 +61,7 @@
                         </div>
                         <div class="state-value">
                             <p>@lic.licensesCounter</p>
-                            <p>@licenses.Count(x => x.productName == lic.productName)</p>
+                            <p>@computers.Count(x => x.productName == lic.productName)</p>
                             <p>@computers.Where(x => x.productName == lic.productName).Count(x => x.isActive)</p>
                         </div>
                         <img src="icons/FAB_Edit.svg" alt="">
@@ -90,32 +101,40 @@
                 </div>
                 <div class="card-bottom-content">
                     <div class="state">
+                        <p>Лицензия добавлена:</p>
+                        <p>Доступ без интернета:</p>
+                        <p style="margin: 8px"> </p>
                         <p>Одобрено копий:</p>
                         <p>Активировано копий:</p>
                         <p>Сейчас онлайн:</p>
-                        <p style="margin: 8px"> </p>
-                        <p>Доступ без интернета:</p>
-                        <p>Лицензия добавлена:</p>
                     </div>
                     <div class="state-value">
+                        <p>@GetCorrectDateFormat(selectedLicense.registrationDate)</p>
+                        <p>@selectedLicense.trialPeriod</p>
+                        <p style="margin: 8px"> </p>
                         <p>@selectedLicense.licensesCounter</p>
                         <p>@computers.Where(x => x.productName == selectedLicense.productName).Count()</p>
                         <p>@computers.Where(x => x.productName == selectedLicense.productName && x.isActive).Count()</p>
-                        <p style="margin: 8px"> </p>
-                        <p>@selectedLicense.trialPeriod</p>
-                        <p>@selectedLicense.registrationDate</p>
                     </div>
-                    <img src="icons/FAB_Edit.svg" alt="">
+                    <img style="position: absolute; right: 48px; bottom: 0" src="icons/FAB_Edit.svg" alt="">
+                    @if(selectedLicense.status == true)
+                    {
+                        <img src="/icons/FAB_PlayPause.svg" alt="" @onclick="@(()=>OnLicenseStatusChanged(selectedLicense.productName, !selectedLicense.status))">
+                    }
+                    else
+                    {
+                        <img src="/icons/FAB_Play.svg" alt="" @onclick="@(()=>OnLicenseStatusChanged(selectedLicense.productName, !selectedLicense.status))">
+                    }
                 </div>
             </div>
             <h2>Привязанные компьютеры</h2>
             @foreach(var computer in computers.Where(x => x.productName == selectedLicense.productName))
             {
-                if(computers.IndexOf(computer) == 0)
+                if(computersCounter == 0)
                 {
                     cardPosition = "card-top";
                 }
-                else if(computers.IndexOf(computer) > 0 && computers.IndexOf(computer) < computers.IndexOf(computers.Last()))
+                else if(computersCounter > 0 && computersCounter < computers.Where(x => x.productName == selectedLicense.productName).Count() - 1)
                 {
                     cardPosition = "card-middle";
                 }
@@ -123,6 +142,8 @@
                 {
                     cardPosition = "card-bottom";
                 }
+
+                computersCounter++;
 
                 <div class=@cardPosition>
                     <div class="card-top-content">
@@ -135,7 +156,7 @@
                             }
                             else
                             {
-                                <h2 style="color: #8E918F;">@computer.geolocation • Offline (@computer.lastActivity)</h2>
+                                <h2 style="color: #8E918F;">@computer.geolocation • Offline @GetCorrectDateFormat(computer.lastActivity)</h2>
                             }
                         </div>
                         <div class="status">
@@ -154,13 +175,22 @@
                     <div class="card-bottom-content">
                         <div class="state">
                             <p>@computer.machineName</p>
-                            <p>Активирован: @computer.activationDate</p>
+                            <p>Активирован: @GetCorrectDateFormat(computer.activationDate)</p>
                         </div>
-                        <img src="icons/FAB_Edit.svg" alt="">
-                        <img src="icons/FAB_PlayPause.svg" alt="">
+                        <img style="margin-left:auto; margin-right: 0" src="icons/FAB_Edit.svg" alt="">
+                        @if(!computer.isBanned)
+                        {
+                            computerIconPath = "icons/FAB_PlayPause.svg";
+                        }
+                        else 
+                        {
+                            computerIconPath = "icons/FAB_Play.svg";
+                        }
+                        <img @onclick="@(()=> OnComputerBanned(computer.hardwareId, !computer.isBanned))" style="margin-left: 8px" src=@computerIconPath alt="">
                     </div>
                 </div>
             }
+            computersCounter = 0;
         break;
     }
 </div>>
@@ -179,6 +209,21 @@
 
     private License selectedLicense;
     private string cardPosition = "card-top";
+    private string computerIconPath;
+
+    private int computersCounter;
+
+    private string GetCorrectDateFormat (string currentFormat)
+    {
+        DateTime correctFormat = DateTime.Parse(currentFormat);
+        return correctFormat.ToShortDateString();
+    }
+
+    private void SetMode(PageState state)
+    {
+        pageState = state;
+        StateHasChanged();
+    }
 
     protected async override Task OnInitializedAsync()
     {
@@ -190,7 +235,8 @@
         connection.On<List<License>, List<Computer>>("OnLicensesListResponse", (licenses, computers) =>
         {
             this.licenses = licenses;
-            this.computers = computers;
+            this.computers = computers.OrderBy(x => x.productName).ToList();
+
             StateHasChanged();
         });
 
@@ -240,6 +286,24 @@
     {
         selectedLicense = licenses.Find(x => x.id == licenseid);
         pageState = PageState.LicenseInfo;
+        StateHasChanged();
+    }
+
+    private async void OnComputerBanned(string hardwareId, bool banState)
+    {
+        await connection.SendAsync("OnComputerBanned", hardwareId, banState);
+        computers.Find(x => x.hardwareId == hardwareId).isBanned = banState;
+
+        StateHasChanged();
+    }
+
+    private async void OnLicenseStatusChanged(string productName, bool licenseState)
+    {
+        await connection.SendAsync("OnLicenseStatusChanged", productName, licenseState);
+        var license = licenses.Find(x => x.productName == productName);
+        license.status = licenseState;
+        selectedLicense = license;
+
         StateHasChanged();
     }
 

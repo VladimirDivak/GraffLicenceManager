@@ -41,5 +41,21 @@ namespace GraffLicenceManager.Hubs
         {
             await Clients.Caller.SendAsync("OnLicensesListResponse", _databaseService.GetLicenses(), _databaseService.GetComputers());
         }
+
+        public void OnComputerBanned(string hardwareId, bool banState)
+        {
+            var computer = _databaseService.GetComputer(hardwareId);
+            computer.isBanned = banState;
+
+            _databaseService.UpdateComputer(computer);
+        }
+
+        public void OnLicenseStatusChanged(string productName, bool licenseState)
+        {
+            var license = _databaseService.GetLicense(productName);
+            license.status = licenseState;
+
+            _databaseService.UpdateLicense(license);
+        }
     }
 }

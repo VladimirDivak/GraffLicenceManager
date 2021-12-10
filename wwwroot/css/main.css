@@ -149,6 +149,7 @@ body {
         line-height: 16px;
         color: #8E918F;
         bottom: 0;
+        margin-bottom: 2px;
     }
 
 .status {
@@ -178,12 +179,11 @@ body {
 
 .state {
     margin-top: auto;
+    min-width: 164px;
 }
 
 .state-value {
     margin-top: auto;
-    margin-left: 16px;
-    margin-right: auto;
     color: #C4C7C5;
     font-style: normal;
     font-weight: 400;
