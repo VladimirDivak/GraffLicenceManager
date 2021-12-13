@@ -8,15 +8,21 @@
     @switch(pageState)
     {
         case PageState.Licenses:
-                <img class="logo" src="icons/Logo_GRAFFinteractive_Default.svg" alt="">
-                <p>GRAFF Interactive Validator</p>
-                <img src="icons/burger.svg" alt="">
+            <img class="logo" src="icons/Logo_GRAFFinteractive_Default.svg" alt="">
+            <p>GRAFF Interactive Validator</p>
+            <img src="icons/burger.svg" alt="">
             break;
 
         case PageState.LicenseInfo:
-                <img class="logo" style="margin-left: 0; margin-right: auto" src="icons/back.svg" alt="" @onclick="@(()=>SetMode(PageState.Licenses))">
-                <p>@selectedLicense.productName</p>
-                <img style="margin-right: 0; margin-left: auto" src="icons/menu.svg" alt="">
+            <img class="logo" style="margin-left: 0; margin-right: auto" src="icons/back.svg" alt="" @onclick="@(()=>SetMode(PageState.Licenses))">
+            <p>@selectedLicense.productName</p>
+            <img style="margin-right: 0; margin-left: auto" src="icons/menu.svg" alt="">
+            break;
+
+        case PageState.AddLicense:
+            <img class="logo" style="margin-left: 0; margin-right: auto" src="icons/back.svg" alt="" @onclick="@(()=>SetMode(PageState.Licenses))">
+            <p>Добавить лицензию</p>
+            <img style="margin-right: 0; margin-left: auto" src="icons/menu.svg" alt="">
             break;
     }
 </div>
@@ -68,7 +74,7 @@
                     </div>
                 </div>
             }
-            break;
+        break;
 
         case(PageState.LicenseInfo):
             <h2>Информация о лицензии</h2>
@@ -192,6 +198,40 @@
             }
             computersCounter = 0;
         break;
+
+        case PageState.AddLicense:
+                <div class="content">
+                    <div class="card">
+                        <h3 style="margin-top: 8px; color: @inputfieldColor[0]">@inputfieldTopText[0]</h3>
+                        <div style="border-color: @inputfieldColor[0]" class="inputfield">
+                            <input placeholder="Название приложения" value="@inputValue[0]" @onchange="@((e)=>OnInputfieldValueChanged(0, e))" @onfocusout="@(() => OnInputfieldFocusOut(0))" @onfocus="@(() => OnInputfieldFocused(0))" type="text">
+                            <img src="/icons/keyboard.svg" alt="">
+                        </div>
+                        <h3 style="margin-bottom: 8px; color: @inputfieldColor[0]">@inputfieldBottomText[0]</h3>
+
+                        <h3 style="margin-top: 8px; color: @inputfieldColor[1]">@inputfieldTopText[1]</h3>
+                        <div style="border-color: @inputfieldColor[1]" class="inputfield">
+                            <input placeholder="Название компании" value="@inputValue[1]" @onchange="@((e)=>OnInputfieldValueChanged(1, e))" @onfocusout="@(() => OnInputfieldFocusOut(1))" @onfocus="@(() => OnInputfieldFocused(1))" type="text">
+                            <img src="/icons/keyboard.svg" alt="">
+                        </div>
+                        <h3 style="margin-bottom: 8px; color: @inputfieldColor[1]">@inputfieldBottomText[1]</h3>
+
+                        <h3 style="margin-top: 8px; color: @inputfieldColor[2]">@inputfieldTopText[2]</h3>
+                        <div style="border-color: @inputfieldColor[2]" class="inputfield">
+                            <input placeholder="Количество компьютеров"value="@inputValue[2]" @onchange="@((e)=>OnInputfieldValueChanged(2, e))" @onfocusout="@(() => OnInputfieldFocusOut(2))" @onfocus="@(() => OnInputfieldFocused(2))" type="text">
+                            <img src="/icons/keyboard.svg" alt="">
+                        </div>
+                        <h3 style="margin-bottom: 8px; color: @inputfieldColor[2]">@inputfieldBottomText[2]</h3>
+
+                        <h3 style="margin-top: 8px; color: @inputfieldColor[3]">@inputfieldTopText[3]</h3>
+                        <div style="border-color: @inputfieldColor[3]" class="inputfield">
+                            <input placeholder="Триальный период" value="@inputValue[3]" @onchange="@((e)=>OnInputfieldValueChanged(3, e))" @onfocusout="@(() => OnInputfieldFocusOut(3))" @onfocus="@(() => OnInputfieldFocused(3))" type="text">
+                            <img src="/icons/keyboard.svg" alt="">
+                        </div>
+                        <h3 style="margin-bottom: 8px; color: @inputfieldColor[3]">@inputfieldBottomText[3]</h3>
+                    </div>
+                </div>
+            break;
     }
 </div>>
 
@@ -199,19 +239,26 @@
     public enum PageState
     {
         Licenses,
-        LicenseInfo
+        LicenseInfo,
+        AddLicense
     }
+
+    private string[] inputValue { get; set; } = new string[4] { string.Empty, string.Empty, string.Empty, string.Empty };
 
     private HubConnection connection;
     private List<License> licenses = new List<License>();
     private List<Computer> computers = new List<Computer>();
-    private PageState pageState = PageState.Licenses;
+    private PageState pageState = PageState.AddLicense;
 
     private License selectedLicense;
     private string cardPosition = "card-top";
     private string computerIconPath;
 
     private int computersCounter;
+
+    private string[] inputfieldColor = new string[4] { "#8E918F", "#8E918F", "#8E918F", "#8E918F" };
+    private string[] inputfieldTopText = new string[4] { string.Empty, string.Empty, string.Empty, string.Empty };
+    private string[] inputfieldBottomText = new string[4] { string.Empty, string.Empty, string.Empty, string.Empty };
 
     private string GetCorrectDateFormat (string currentFormat)
     {
@@ -313,6 +360,66 @@
         {
             await connection.StopAsync();
             await connection.DisposeAsync();
+        }
+    }
+
+    public void OnInputfieldFocused(int index)
+    {
+        inputfieldColor[index] = "#E3E3E3";
+
+        switch(index)
+        {
+            case 0:
+                inputfieldTopText[index] = "Название приложения";
+                break;
+
+            case 1:
+                inputfieldTopText[index] = "Название компании-заказчика";
+                break;
+
+            case 2:
+                inputfieldTopText[index] = "Количество слотов компьютеров, шт";
+                break;
+
+            case 3:
+                inputfieldTopText[index] = "Время триального периода, ч";
+                break;
+        }
+    }
+
+    public void OnInputfieldFocusOut(int index)
+    {
+        inputfieldColor[index] = "#8E918F";
+        for(int i = 0; i < inputfieldTopText.Length; i++)
+        {
+            inputfieldTopText[i] = string.Empty;
+        }
+    }
+
+    public void OnInputfieldValueChanged(int index, ChangeEventArgs args)
+    {
+        inputValue[index] = args?.Value?.ToString();
+        Console.WriteLine($"{index}, {inputValue[index]}");
+
+        if(inputValue[index] == string.Empty)
+        {
+            inputfieldBottomText[index] = "Недопустимое значение";
+            inputfieldColor[index] = "#8C1D18";
+        }
+
+        switch (index)
+        {
+            case 0:
+                break;
+
+            case 1:
+                break;
+
+            case 2:
+                break;
+
+            case 3:
+                break;
         }
     }
 }

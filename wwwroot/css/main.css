@@ -71,6 +71,18 @@ body {
     border-radius: 12px;
 }
 
+    .card > h3 {
+        margin-left: 32px;
+        margin-bottom: 0;
+        color: #8E918F;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 16px;
+        transition-property: color;
+        transition-duration: .5s;
+    }
+
 .card-top {
     min-height: 96px;
     margin-top: 4px;
@@ -149,7 +161,6 @@ body {
         line-height: 16px;
         color: #8E918F;
         bottom: 0;
-        margin-bottom: 2px;
     }
 
 .status {
@@ -179,11 +190,12 @@ body {
 
 .state {
     margin-top: auto;
-    min-width: 164px;
 }
 
 .state-value {
     margin-top: auto;
+    margin-left: 16px;
+    margin-right: auto;
     color: #C4C7C5;
     font-style: normal;
     font-weight: 400;
@@ -206,3 +218,39 @@ body {
     margin-top: auto;
     margin-bottom: 0;
 }
+
+.inputfield {
+    position: relative;
+    display: flex;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 0;
+    height: 54px;
+    width: auto;
+    border: 1px solid;
+    border-color: #444746;
+    border-radius: 6px;
+    background-color: #1C1B1F;
+    transition-property: border-color;
+    transition-duration: .5s;
+}
+
+    .inputfield > input {
+        width: 216px;
+        background-color: inherit;
+        color: #E3E3E3;
+        margin-left: 20px;
+        border: none;
+        outline: none;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .inputfield > img {
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: auto;
+        margin-right: 20px;
+    }
