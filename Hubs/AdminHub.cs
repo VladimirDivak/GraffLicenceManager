@@ -57,5 +57,10 @@ namespace GraffLicenceManager.Hubs
 
             _databaseService.UpdateLicense(license);
         }
+
+        public void OnAddNewLicense(License newLicense)
+        {
+            _databaseService.CreateLicense(newLicense);
+        }
     }
 }
