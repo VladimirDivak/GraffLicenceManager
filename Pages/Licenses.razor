@@ -1,4 +1,5 @@
-﻿@page "/licenses"
+﻿@page "/"
+@page "/{licenseId?}"
 @using Microsoft.AspNetCore.SignalR.Client
 @inject NavigationManager NavigationManager
 @implements IAsyncDisposable
@@ -151,6 +152,11 @@
 
                 computersCounter++;
 
+                if(computers.Where(x => x.productName == selectedLicense.productName).Count() == 1)
+                {
+                    cardPosition = "card-full";
+                }
+
                 <div class=@cardPosition>
                     <div class="card-top-content">
                         <img src="icons/computer.svg" style="height: 40px;" alt="">
@@ -238,6 +244,9 @@
 </div>
 
 @code {
+    [Parameter]
+    public string? licenseId { get; set; }
+
     public enum PageState
     {
         Licenses,
@@ -297,6 +306,8 @@
 
         connection.On<License>("OnAddNewLicense", license =>
         {
+            if (licenses.Count(x => x.productName == license.productName) == 1) return;
+
             licenses.Add(license);
             StateHasChanged();
         });
@@ -316,6 +327,8 @@
 
         connection.On<Computer>("OnAddNewComputer", computer =>
         {
+            if (computers.Count(x => x.productName == computer.productName) == 1) return;
+
             computers.Add(computer);
             StateHasChanged();
         });
@@ -340,6 +353,8 @@
     private void OnLicenseSelect(string licenseid)
     {
         selectedLicense = licenses.Find(x => x.id == licenseid);
+        //licenseId = licenseid;
+        //NavigationManager.NavigateTo($"/{licenseId}");
         pageState = PageState.LicenseInfo;
         StateHasChanged();
     }

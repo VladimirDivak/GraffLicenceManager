@@ -60,6 +60,7 @@ namespace GraffLicenceManager.Hubs
 
         public void OnAddNewLicense(License newLicense)
         {
+            newLicense.registrationDate = DateTime.Now.ToString();
             _databaseService.CreateLicense(newLicense);
         }
     }

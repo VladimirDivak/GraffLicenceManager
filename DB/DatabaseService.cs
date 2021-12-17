@@ -47,6 +47,7 @@ namespace GraffLicenceManager.DB {
         
         public License CreateLicense(License licence) {
             _licenses.InsertOne(licence);
+            Console.WriteLine("database: сделана новая лицензия");
             OnAddNewLicense?.Invoke(licence);
 
             return licence;

@@ -119,6 +119,16 @@ body {
     border-bottom-right-radius: 12px;
 }
 
+.card-full {
+    min-height: 96px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: #1F1F1F;
+    border: 1px solid #444746;
+    border-radius: 12px;
+}
+
 .card-top-content {
     padding: 16px;
     display: flex;
@@ -270,11 +280,9 @@ body {
     padding: 8px 20px;
     margin: 0 4px 0 4px;
     color: #8E918F;
-
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
-
     line-height: 20px;
     border: solid 1px;
     border-color: #444746;

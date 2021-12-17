@@ -81,7 +81,8 @@ namespace GraffLicenceManager.Hubs {
                         };
 
                         computer = newComputer;
-                        databaseService.CreateComputer(newComputer);
+                        computer = databaseService.CreateComputer(newComputer);
+                        computer = databaseService.GetComputer(newComputer.hardwareId);
 
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine($"[{DateTime.Now}] добавлен компьютер {computer.localUserName} ({computer.geolocation}) для проекта {licence.productName}.");
