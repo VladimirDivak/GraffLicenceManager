@@ -21,6 +21,8 @@ body {
     padding-bottom: 16px;
     padding-left: 32px;
     padding-right: 32px;
+
+    transition-duration: 0.25s;
 }
 
     .header > img {
@@ -45,6 +47,8 @@ body {
     padding-right: 16px;
     padding-top: 12px;
     padding-bottom: 12px;
+
+    transition-duration: 0.25s;
 }
 
     .content > h2 {
@@ -289,3 +293,48 @@ body {
     border-radius: 100px;
     background: #444746;
 }
+
+.password-field {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+
+    transition-property: background-color;
+    transition-duration: .25s;
+}
+
+.password-window {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 16px;
+    height: 316px;
+    background-color: #1F1F1F;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 16px;
+    margin-left: 16px;
+    border: solid 1px;
+    border-color: #747775;
+    border-radius: 28px;
+    transition-property: background-color;
+    transition-duration: .25s;
+}
+
+    .password-window > h2 {
+        margin: auto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 32px;
+        color: #E3E3E3;
+        width: 277px;
+        transition-property: opacity;
+        transition-duration: .25s;
+    }

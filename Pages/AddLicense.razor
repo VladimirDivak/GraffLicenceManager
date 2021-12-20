@@ -4,12 +4,12 @@
 @page "/addlicense"
 
 <link rel="stylesheet" href="css/main.css">
-<div class="header">
+<div class="header" style="filter: blur(@blurValue)">
     <img class="logo" style="margin-left: 0; margin-right: auto" src="icons/back.svg" alt="" @onclick="@(()=>NavigationManager.NavigateTo("/"))">
     <p>Добавить лицензию</p>
     <img style="margin-right: 0; margin-left: auto" src="icons/menu.svg" alt="">
 </div>
-<div class="content">
+<div class="content" style="filter: blur(@blurValue)">
     <div class="card">
         <h3 style="margin-top: 8px; color: @inputfieldColor[0]">Название приложения</h3>
         <div style="border-color: @inputfieldColor[0]" class="inputfield">
@@ -44,6 +44,23 @@
         </div>
     </div>
 </div>
+@if(showPasswordField)
+{
+    <div class="password-field">
+        <div class="password-window">
+            <h2>Введите пароль подтверждения</h2>
+        <div style="border-color: @inputfieldColor[3]" class="inputfield">
+            <input type="password" style="color: @inputfieldTextColor[3]" value="@passwordValue" @oninput="@((e)=>OnInputfieldValueChanged(3, e))" @onfocusout="@(() => OnInputfieldFocusOut(3))" @onfocus="@(() => OnInputfieldFocused(3))">
+            <img style="opacity: @inputfieldIconOpacity[3]" src=@iconPath[3] alt="">
+        </div>
+            <div class="buttons">
+                <div class="button">Подтвердить</div>
+                <div style="background-color: inherit" @onclick="@(()=>{ @showPasswordField = false; StateHasChanged(); blurValue = "0px"; })" class="button">Отмена</div>
+            </div>
+        </div>
+    </div>
+}
+
 
 @code {
     private string[] inputfieldTextColor = new string[4] { "#8E918F", "#8E918F", "#8E918F", "#8E918F" };
@@ -53,29 +70,36 @@
     private string[] inputValue { get; set; } = new string[4] { string.Empty, string.Empty, string.Empty, string.Empty };
     private string[] iconPath = new string[4] { "/icons/keyboard.svg", "/icons/keyboard.svg", "/icons/keyboard.svg", "/icons/keyboard.svg" };
     private string addLicenseStyle = "";
+    private bool showPasswordField;
+    private string blurValue = "0px";
+    private string passwordValue;
 
     protected override async Task OnInitializedAsync()
     {
         if (HubConnection.State == HubConnectionState.Disconnected) await HubConnection.StartAsync();
     }
 
-    public async void OnAddLicenseButtonClick()
+    public void OnAddLicenseButtonClick()
     {
-        if (inputfieldBottomText.Count(x => x.Equals("Поле корректно")) == inputfieldBottomText.Length)
-        {
-            License newLicense = new License()
-            {
-                productName = inputValue[0],
-                companyName = inputValue[1],
-                licensesCounter = int.Parse(inputValue[2]),
-                trialPeriod = int.Parse(inputValue[3]),
-                iconPath = "icons/IconDefault.svg",
-                status = true
-            };
+        showPasswordField = true;
+        blurValue = "4px";
 
-            await HubConnection.SendAsync("OnAddNewLicense", newLicense);
-            StateHasChanged();
-        }
+        StateHasChanged();
+        //if (inputfieldBottomText.Count(x => x.Equals("Поле корректно")) == inputfieldBottomText.Length)
+        //{
+        //    License newLicense = new License()
+        //    {
+        //        productName = inputValue[0],
+        //        companyName = inputValue[1],
+        //        licensesCounter = int.Parse(inputValue[2]),
+        //        trialPeriod = int.Parse(inputValue[3]),
+        //        iconPath = "icons/IconDefault.svg",
+        //        status = true
+        //    };
+
+        //    await HubConnection.SendAsync("OnAddNewLicense", newLicense);
+        //    StateHasChanged();
+        //}
     }
 
     public void OnInputfieldFocused(int index)
