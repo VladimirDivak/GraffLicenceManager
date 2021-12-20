@@ -1,5 +1,4 @@
 ﻿@page "/"
-@page "/{licenseId?}"
 @using Microsoft.AspNetCore.SignalR.Client
 @inject NavigationManager NavigationManager
 @implements IAsyncDisposable
@@ -41,7 +40,7 @@
                         }
                         else
                         {
-                            <img src="@lic.iconPath" alt="">   
+                            <img src="@lic.iconPath" alt="">
                         }
                         <div class="info">
                             <h1>@lic.productName</h1>
@@ -244,9 +243,6 @@
 </div>
 
 @code {
-    [Parameter]
-    public string? licenseId { get; set; }
-
     public enum PageState
     {
         Licenses,
@@ -353,8 +349,6 @@
     private void OnLicenseSelect(string licenseid)
     {
         selectedLicense = licenses.Find(x => x.id == licenseid);
-        //licenseId = licenseid;
-        //NavigationManager.NavigateTo($"/{licenseId}");
         pageState = PageState.LicenseInfo;
         StateHasChanged();
     }

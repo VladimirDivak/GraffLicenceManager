@@ -140,6 +140,9 @@ namespace GraffLicenceManager.Hubs {
         public async Task OnValidationRequest(string hardwareId) {
             Computer comp = databaseService.GetComputer(hardwareId);
             License lic = databaseService.GetLicense(databaseService.GetComputer(hardwareId).productName);
+
+            Console.WriteLine($"[{DateTime.Now}] {comp.localUserName} просит состояние лицензии {lic.productName}...");
+
             if (lic.status == true && comp.isBanned == false) await Clients.Caller.SendAsync("OnValidationResponse", true);
             else await Clients.Caller.SendAsync("OnValidationResponse", false);
         }
