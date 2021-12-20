@@ -1,0 +1,217 @@
+﻿@page "/licenseinfo/{licenseId}"
+@using Microsoft.AspNetCore.SignalR.Client
+@inject HubConnection HubConnection
+@inject NavigationManager NavigationManager
+
+<link rel="stylesheet" href="css/main.css">
+<div class="header">
+    <img class="logo" style="margin-left: 0; margin-right: auto" src="icons/back.svg" alt="" @onclick="@(()=>NavigationManager.NavigateTo("/"))">
+    <p>@selectedLicense?.productName</p>
+    <img style="margin-right: 0; margin-left: auto" src="icons/menu.svg" alt="">
+</div>
+<div class="content">
+    <h2>Информация о лицензии</h2>
+    <div class="card">
+        <div class="card-top-content">
+            @if(selectedLicense?.iconPath == string.Empty)
+            {
+                <img src="icons/IconDefault.svg" alt="">
+            }
+            else
+            {
+                <img src="@selectedLicense?.iconPath" alt="">
+            }
+            <div class="info">
+                <h1>@selectedLicense?.productName</h1>
+                <h2>@selectedLicense?.companyName</h2>
+            </div>
+            <div class="status">
+                @if(selectedLicense?.status == true)
+                {
+                    <h3 style="font-size: 11px; color: #6DD58C;">ON</h3>
+                    <div class="status-icon-on"></div>
+                }
+                else
+                {
+                    <h3 style="font-size: 11px; color: #DA0000;">OFF</h3>
+                    <div class="status-icon-off"></div>
+                }
+            </div>
+        </div>
+        <div class="card-bottom-content">
+            <div class="state">
+                <p>Лицензия добавлена:</p>
+                <p>Доступ без интернета:</p>
+                <p style="margin: 8px"> </p>
+                <p>Одобрено копий:</p>
+                <p>Активировано копий:</p>
+                <p>Сейчас онлайн:</p>
+            </div>
+            <div class="state-value">
+                <p>@GetCorrectDateFormat(selectedLicense?.registrationDate)</p>
+                <p>@selectedLicense?.trialPeriod</p>
+                <p style="margin: 8px"> </p>
+                <p>@selectedLicense?.licensesCounter</p>
+                <p>@computers.Where(x => x.productName == selectedLicense?.productName).Count()</p>
+                <p>@computers.Where(x => x.productName == selectedLicense?.productName && x.isActive).Count()</p>
+            </div>
+            <img style="position: absolute; right: 48px; bottom: 0" src="icons/FAB_Edit.svg" alt="">
+            @if(selectedLicense?.status == true)
+            {
+                <img src="/icons/FAB_PlayPause.svg" alt="" @onclick="@(()=>OnLicenseStatusChanged(selectedLicense?.productName, !selectedLicense.status))">
+            }
+            else
+            {
+                <img src="/icons/FAB_Play.svg" alt="" @onclick="@(()=>OnLicenseStatusChanged(selectedLicense?.productName, !selectedLicense.status))">
+            }
+        </div>
+    </div>
+    <h2>Привязанные компьютеры</h2>
+    @foreach(var computer in computers.Where(x => x.productName == selectedLicense?.productName))
+    {
+        if(computersCounter == 0)
+        {
+            cardPosition = "card-top";
+        }
+        else if(computersCounter > 0 && computersCounter < computers.Where(x => x.productName == selectedLicense?.productName).Count() - 1)
+        {
+            cardPosition = "card-middle";
+        }
+        else
+        {
+            cardPosition = "card-bottom";
+        }
+
+        computersCounter++;
+
+        if(computers.Where(x => x.productName == selectedLicense?.productName).Count() == 1)
+        {
+            cardPosition = "card-full";
+        }
+
+        <div class=@cardPosition>
+            <div class="card-top-content">
+                <img src="icons/computer.svg" style="height: 40px;" alt="">
+                <div class="info">
+                    <h1>@computer.localUserName</h1>
+                    @if(computer.isActive)
+                    {
+                        <h2 style="color: #6DD58C;">@computer.geolocation • Online</h2>
+                    }
+                    else
+                    {
+                        <h2 style="color: #8E918F;">@computer.geolocation • Offline @GetCorrectDateFormat(computer.lastActivity)</h2>
+                    }
+                </div>
+                <div class="status">
+                    @if(computer.isBanned == false)
+                    {
+                        <h3 style="font-size: 11px; color: #6DD58C;">ON</h3>
+                        <div class="status-icon-on"></div>
+                    }
+                    else
+                    {
+                        <h3 style="font-size: 11px; color: #DA0000;">OFF</h3>
+                        <div class="status-icon-off"></div>
+                    }
+                </div>
+            </div>
+            <div class="card-bottom-content">
+                <div class="state">
+                    <p>@computer.machineName</p>
+                    <p>Активирован: @GetCorrectDateFormat(computer.activationDate)</p>
+                </div>
+                <img style="margin-left:auto; margin-right: 0" src="icons/FAB_Edit.svg" alt="">
+                @if(!computer.isBanned)
+                {
+                    computerIconPath = "icons/FAB_PlayPause.svg";
+                }
+                else 
+                {
+                    computerIconPath = "icons/FAB_Play.svg";
+                }
+                <img @onclick="@(()=> OnComputerBanned(computer.hardwareId, !computer.isBanned))" style="margin-left: 8px" src=@computerIconPath alt="">
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public string licenseId { get; set; }
+
+    private License selectedLicense;
+    private string computerIconPath;
+    private string cardPosition = "card-top";
+
+    private List<Computer> computers = new List<Computer>();
+    private List<License> licenses = new List<License>();
+
+    private int computersCounter;
+
+    protected async override Task OnInitializedAsync()
+    {
+        HubConnection.On<List<License>, List<Computer>>("OnLicensesListResponse", (licenses, computers) =>
+        {
+            this.computers = computers.OrderBy(x => x.productName).ToList();
+            this.licenses = licenses.OrderBy(x => x.productName).ToList();
+            selectedLicense = licenses.Find(x => x.id == licenseId);
+
+            StateHasChanged();
+        });
+        HubConnection.On<License>("OnLicenseStatusChanged", license =>
+        {
+            var licenseIndex = licenses.IndexOf(licenses.Find(x => x.id == license.id));
+            licenses[licenseIndex] = license;
+            StateHasChanged();
+        });
+        HubConnection.On<Computer>("OnAddNewComputer", computer =>
+        {
+            if (computers.Count(x => x.productName == computer.productName) == 1) return;
+
+            computers.Add(computer);
+            StateHasChanged();
+        });
+
+        HubConnection.On<Computer>("OnComputerSatusChanged", computer =>
+        {
+            var computerIndex = computers.IndexOf(computers.Find(x => x.id == computer.id));
+            computers[computerIndex] = computer;
+            StateHasChanged();
+        });
+
+        HubConnection.On<string>("OnComputerRemoved", computerRegDate =>
+        {
+            computers.Remove(computers.Find(x => x.activationDate == computerRegDate));
+            StateHasChanged();
+        });
+
+        if (HubConnection.State == HubConnectionState.Disconnected) await HubConnection.StartAsync();
+        await HubConnection.SendAsync("OnLicensesListRequest");
+    }
+
+    private string GetCorrectDateFormat(string currentFormat)
+    {
+        if (currentFormat == null) return "";
+
+        DateTime correctFormat = DateTime.Parse(currentFormat);
+        return correctFormat.ToShortDateString();
+    }
+
+    private async void OnComputerBanned(string hardwareId, bool banState)
+    {
+        await HubConnection.SendAsync("OnComputerBanned", hardwareId, banState);
+        computers.Find(x => x.hardwareId == hardwareId).isBanned = banState;
+
+        StateHasChanged();
+    }
+
+    private async void OnLicenseStatusChanged(string productName, bool licenseState)
+    {
+        await HubConnection.SendAsync("OnLicenseStatusChanged", productName, licenseState);
+        var license = licenses.Find(x => x.productName == productName);
+        license.status = licenseState;
+
+        StateHasChanged();
+    }
+}

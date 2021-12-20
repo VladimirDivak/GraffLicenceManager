@@ -1,306 +1,77 @@
 ﻿@page "/"
 @using Microsoft.AspNetCore.SignalR.Client
+@inject HubConnection HubConnection
 @inject NavigationManager NavigationManager
-@implements IAsyncDisposable
 
 <link rel="stylesheet" href="css/main.css">
 <div class="header">
-    @switch(pageState)
-    {
-        case PageState.Licenses:
-            <img class="logo" src="icons/Logo_GRAFFinteractive_Default.svg" alt="">
-            <p>GRAFF Interactive Validator</p>
-            <img @onclick="@(()=>SetMode(PageState.AddLicense))" src="icons/burger.svg" alt="">
-            break;
-
-        case PageState.LicenseInfo:
-            <img class="logo" style="margin-left: 0; margin-right: auto" src="icons/back.svg" alt="" @onclick="@(()=>SetMode(PageState.Licenses))">
-            <p>@selectedLicense.productName</p>
-            <img style="margin-right: 0; margin-left: auto" src="icons/menu.svg" alt="">
-            break;
-
-        case PageState.AddLicense:
-            <img class="logo" style="margin-left: 0; margin-right: auto" src="icons/back.svg" alt="" @onclick="@(()=>SetMode(PageState.Licenses))">
-            <p>Добавить лицензию</p>
-            <img style="margin-right: 0; margin-left: auto" src="icons/menu.svg" alt="">
-            break;
-    }
+    <img class="logo" src="icons/Logo_GRAFFinteractive_Default.svg" alt="">
+    <p>GRAFF Interactive Validator</p>
+    <img @onclick="@(()=>NavigationManager.NavigateTo("/addlicense"))" src="icons/burger.svg" alt="">
 </div>
 <div class="content">
-    @switch(pageState)
+    @foreach(var lic in licenses)
     {
-        case(PageState.Licenses):
-            @foreach(var lic in licenses)
-            {
-                <div class="card" @onclick="@(eventArgs => OnLicenseSelect(lic.id))">
-                    <div class="card-top-content">
-                        @if(lic.iconPath == string.Empty)
-                        {
-                            <img src="icons/IconDefault.svg" alt="">
-                        }
-                        else
-                        {
-                            <img src="@lic.iconPath" alt="">
-                        }
-                        <div class="info">
-                            <h1>@lic.productName</h1>
-                            <h2>@lic.companyName</h2>
-                        </div>
-                        <div class="status">
-                            @if(lic.status)
-                            {
-                                <h3 style="font-size: 11px; color: #6DD58C;">ON</h3>
-                                <div class="status-icon-on"></div>
-                            }
-                            else
-                            {
-                                <h3 style="font-size: 11px; color: #DA0000;">OFF</h3>
-                                <div class="status-icon-off"></div>
-                            }
-                        </div>
-                    </div>
-                    <div class="card-bottom-content">
-                        <div class="state">
-                            <p>Одобрено копий:</p>
-                            <p>Активировано копий:</p>
-                            <p>Сейчас онлайн:</p>
-                        </div>
-                        <div class="state-value">
-                            <p>@lic.licensesCounter</p>
-                            <p>@computers.Count(x => x.productName == lic.productName)</p>
-                            <p>@computers.Where(x => x.productName == lic.productName).Count(x => x.isActive)</p>
-                        </div>
-                        <img src="icons/FAB_Edit.svg" alt="">
-                    </div>
-                </div>
-            }
-        break;
-
-        case(PageState.LicenseInfo):
-            <h2>Информация о лицензии</h2>
-            <div class="card">
-                <div class="card-top-content">
-                    @if(selectedLicense.iconPath == string.Empty)
-                    {
-                        <img src="icons/IconDefault.svg" alt="">
-                    }
-                    else
-                    {
-                        <img src="@selectedLicense.iconPath" alt="">   
-                    }
-                    <div class="info">
-                        <h1>@selectedLicense.productName</h1>
-                        <h2>@selectedLicense.companyName</h2>
-                    </div>
-                    <div class="status">
-                        @if(selectedLicense.status == true)
-                        {
-                            <h3 style="font-size: 11px; color: #6DD58C;">ON</h3>
-                            <div class="status-icon-on"></div>
-                        }
-                        else
-                        {
-                            <h3 style="font-size: 11px; color: #DA0000;">OFF</h3>
-                            <div class="status-icon-off"></div>
-                        }
-                    </div>
-                </div>
-                <div class="card-bottom-content">
-                    <div class="state">
-                        <p>Лицензия добавлена:</p>
-                        <p>Доступ без интернета:</p>
-                        <p style="margin: 8px"> </p>
-                        <p>Одобрено копий:</p>
-                        <p>Активировано копий:</p>
-                        <p>Сейчас онлайн:</p>
-                    </div>
-                    <div class="state-value">
-                        <p>@GetCorrectDateFormat(selectedLicense.registrationDate)</p>
-                        <p>@selectedLicense.trialPeriod</p>
-                        <p style="margin: 8px"> </p>
-                        <p>@selectedLicense.licensesCounter</p>
-                        <p>@computers.Where(x => x.productName == selectedLicense.productName).Count()</p>
-                        <p>@computers.Where(x => x.productName == selectedLicense.productName && x.isActive).Count()</p>
-                    </div>
-                    <img style="position: absolute; right: 48px; bottom: 0" src="icons/FAB_Edit.svg" alt="">
-                    @if(selectedLicense.status == true)
-                    {
-                        <img src="/icons/FAB_PlayPause.svg" alt="" @onclick="@(()=>OnLicenseStatusChanged(selectedLicense.productName, !selectedLicense.status))">
-                    }
-                    else
-                    {
-                        <img src="/icons/FAB_Play.svg" alt="" @onclick="@(()=>OnLicenseStatusChanged(selectedLicense.productName, !selectedLicense.status))">
-                    }
-                </div>
-            </div>
-            <h2>Привязанные компьютеры</h2>
-            @foreach(var computer in computers.Where(x => x.productName == selectedLicense.productName))
-            {
-                if(computersCounter == 0)
+        <div class="card" @onclick="@(eventArgs => NavigationManager.NavigateTo($"/licenseinfo/{lic.id}"))">
+            <div class="card-top-content">
+                @if(lic.iconPath == string.Empty)
                 {
-                    cardPosition = "card-top";
-                }
-                else if(computersCounter > 0 && computersCounter < computers.Where(x => x.productName == selectedLicense.productName).Count() - 1)
-                {
-                    cardPosition = "card-middle";
+                    <img src="icons/IconDefault.svg" alt="">
                 }
                 else
                 {
-                    cardPosition = "card-bottom";
+                    <img src="@lic.iconPath" alt="">
                 }
-
-                computersCounter++;
-
-                if(computers.Where(x => x.productName == selectedLicense.productName).Count() == 1)
-                {
-                    cardPosition = "card-full";
-                }
-
-                <div class=@cardPosition>
-                    <div class="card-top-content">
-                        <img src="icons/computer.svg" style="height: 40px;" alt="">
-                        <div class="info">
-                            <h1>@computer.localUserName</h1>
-                            @if(computer.isActive)
-                            {
-                                <h2 style="color: #6DD58C;">@computer.geolocation • Online</h2>
-                            }
-                            else
-                            {
-                                <h2 style="color: #8E918F;">@computer.geolocation • Offline @GetCorrectDateFormat(computer.lastActivity)</h2>
-                            }
-                        </div>
-                        <div class="status">
-                            @if(computer.isBanned == false)
-                            {
-                                <h3 style="font-size: 11px; color: #6DD58C;">ON</h3>
-                                <div class="status-icon-on"></div>
-                            }
-                            else
-                            {
-                                <h3 style="font-size: 11px; color: #DA0000;">OFF</h3>
-                                <div class="status-icon-off"></div>
-                            }
-                        </div>
-                    </div>
-                    <div class="card-bottom-content">
-                        <div class="state">
-                            <p>@computer.machineName</p>
-                            <p>Активирован: @GetCorrectDateFormat(computer.activationDate)</p>
-                        </div>
-                        <img style="margin-left:auto; margin-right: 0" src="icons/FAB_Edit.svg" alt="">
-                        @if(!computer.isBanned)
-                        {
-                            computerIconPath = "icons/FAB_PlayPause.svg";
-                        }
-                        else 
-                        {
-                            computerIconPath = "icons/FAB_Play.svg";
-                        }
-                        <img @onclick="@(()=> OnComputerBanned(computer.hardwareId, !computer.isBanned))" style="margin-left: 8px" src=@computerIconPath alt="">
-                    </div>
+                <div class="info">
+                    <h1>@lic.productName</h1>
+                    <h2>@lic.companyName</h2>
                 </div>
-            }
-            computersCounter = 0;
-        break;
-
-        case PageState.AddLicense:
-            <div class="card">
-                <h3 style="margin-top: 8px; color: @inputfieldColor[0]">Название приложения</h3>
-                <div style="border-color: @inputfieldColor[0]" class="inputfield">
-                    <input style="color: @inputfieldTextColor[0]" placeholder="Название приложения" value="@inputValue[0]" @oninput="@((e)=>OnInputfieldValueChanged(0, e))" @onfocusout="@(() => OnInputfieldFocusOut(0))" @onfocus="@(() => OnInputfieldFocused(0))" type="text">
-                    <img style="opacity: @inputfieldIconOpacity[0]" src=@iconPath[0] alt="">
-                </div>
-                <h3 style="margin-bottom: 8px; color: @inputfieldColor[0]">@inputfieldBottomText[0]</h3>
-
-                <h3 style="margin-top: 8px; color: @inputfieldColor[1]">Название компании-заказчика</h3>
-                <div style="border-color: @inputfieldColor[1]" class="inputfield">
-                    <input style="color: @inputfieldTextColor[1]" placeholder="Название компании" value="@inputValue[1]" @oninput="@((e)=>OnInputfieldValueChanged(1, e))" @onfocusout="@(() => OnInputfieldFocusOut(1))" @onfocus="@(() => OnInputfieldFocused(1))" type="text">
-                    <img style="opacity: @inputfieldIconOpacity[1]" src=@iconPath[1] alt="">
-                </div>
-                <h3 style="margin-bottom: 8px; color: @inputfieldColor[1]">@inputfieldBottomText[1]</h3>
-
-                <h3 style="margin-top: 8px; color: @inputfieldColor[2]">Количество слотов компьютеров, шт</h3>
-                <div style="border-color: @inputfieldColor[2]" class="inputfield">
-                    <input type="number" style="color: @inputfieldTextColor[2]" placeholder="Количество компьютеров"value="@inputValue[2]" @oninput="@((e)=>OnInputfieldValueChanged(2, e))" @onfocusout="@(() => OnInputfieldFocusOut(2))" @onfocus="@(() => OnInputfieldFocused(2))">
-                    <img style="opacity: @inputfieldIconOpacity[2]" src=@iconPath[2] alt="">
-                </div>
-                <h3 style="margin-bottom: 8px; color: @inputfieldColor[2]">@inputfieldBottomText[2]</h3>
-
-                <h3 style="margin-top: 8px; color: @inputfieldColor[3]">Время триального периода, ч</h3>
-                <div style="border-color: @inputfieldColor[3]" class="inputfield">
-                    <input type="number" style="color: @inputfieldTextColor[3]" placeholder="Триальный период" value="@inputValue[3]" @oninput="@((e)=>OnInputfieldValueChanged(3, e))" @onfocusout="@(() => OnInputfieldFocusOut(3))" @onfocus="@(() => OnInputfieldFocused(3))">
-                    <img style="opacity: @inputfieldIconOpacity[3]" src=@iconPath[3] alt="">
-                </div>
-                <h3 style="margin-bottom: 8px; color: @inputfieldColor[3]">@inputfieldBottomText[3]</h3>
-                <div class="buttons">
-                    <div style="@addLicenseStyle" @onclick="@(()=>OnAddLicenseButtonClick())" class="button">Добавить лицензию</div>
-                    <div @onclick="@(()=>SetMode(PageState.Licenses))" style="background: none" class="button">Отмена</div>
+                <div class="status">
+                    @if(lic.status)
+                    {
+                        <h3 style="font-size: 11px; color: #6DD58C;">ON</h3>
+                        <div class="status-icon-on"></div>
+                    }
+                    else
+                    {
+                        <h3 style="font-size: 11px; color: #DA0000;">OFF</h3>
+                        <div class="status-icon-off"></div>
+                    }
                 </div>
             </div>
-        break;
+            <div class="card-bottom-content">
+                <div class="state">
+                    <p>Одобрено копий:</p>
+                    <p>Активировано копий:</p>
+                    <p>Сейчас онлайн:</p>
+                </div>
+                <div class="state-value">
+                    <p>@lic.licensesCounter</p>
+                    <p>@computers.Count(x => x.productName == lic.productName)</p>
+                    <p>@computers.Where(x => x.productName == lic.productName).Count(x => x.isActive)</p>
+                </div>
+                <img src="icons/FAB_Edit.svg" alt="">
+            </div>
+        </div>
     }
 </div>
 
 @code {
-    public enum PageState
-    {
-        Licenses,
-        LicenseInfo,
-        AddLicense
-    }
-
-    private string[] inputValue { get; set; } = new string[4] { string.Empty, string.Empty, string.Empty, string.Empty };
-
-    private HubConnection connection;
     private List<License> licenses = new List<License>();
     private List<Computer> computers = new List<Computer>();
-    private PageState pageState = PageState.Licenses;
 
-    private License selectedLicense;
-    private string cardPosition = "card-top";
-    private string computerIconPath;
-
-    private int computersCounter;
-
-    private string[] inputfieldTextColor = new string[4] { "#8E918F", "#8E918F", "#8E918F", "#8E918F" };
-    private string[] inputfieldColor = new string[4] { "#8E918F", "#8E918F", "#8E918F", "#8E918F" };
-    private string[] inputfieldBottomText = new string[4] { string.Empty, string.Empty, string.Empty, string.Empty };
-    private float[] inputfieldIconOpacity = new float[4] { 1, 1, 1, 1 };
     private string[] iconPath = new string[4] { "/icons/keyboard.svg", "/icons/keyboard.svg", "/icons/keyboard.svg", "/icons/keyboard.svg" };
-
-    private string addLicenseStyle = "";
-
-    private string GetCorrectDateFormat (string currentFormat)
-    {
-        if (currentFormat == null) return "";
-
-        DateTime correctFormat = DateTime.Parse(currentFormat);
-        return correctFormat.ToShortDateString();
-    }
-
-    private void SetMode(PageState state)
-    {
-        pageState = state;
-        StateHasChanged();
-    }
 
     protected async override Task OnInitializedAsync()
     {
-        connection = new HubConnectionBuilder()
-            .WithUrl(NavigationManager
-            .ToAbsoluteUri("/adminhub"))
-            .Build();
-
-        connection.On<List<License>, List<Computer>>("OnLicensesListResponse", (licenses, computers) =>
+        HubConnection.On<List<License>, List<Computer>>("OnLicensesListResponse", (licenses, computers) =>
         {
             this.licenses = licenses;
-            this.computers = computers.OrderBy(x => x.productName).ToList();
-
+            this.computers = computers;
             StateHasChanged();
         });
 
-        connection.On<License>("OnAddNewLicense", license =>
+        HubConnection.On<License>("OnAddNewLicense", license =>
         {
             if (licenses.Count(x => x.productName == license.productName) == 1) return;
 
@@ -308,20 +79,20 @@
             StateHasChanged();
         });
 
-        connection.On<License>("OnLicenseStatusChanged", license =>
+        HubConnection.On<License>("OnLicenseStatusChanged", license =>
         {
             var licenseIndex = licenses.IndexOf(licenses.Find(x => x.id == license.id));
             licenses[licenseIndex] = license;
             StateHasChanged();
         });
 
-        connection.On<string>("OnLicenseRemoved", licenseRegData =>
+        HubConnection.On<string>("OnLicenseRemoved", licenseRegData =>
         {
             licenses.Remove(licenses.Find(x => x.registrationDate == licenseRegData));
             StateHasChanged();
         });
 
-        connection.On<Computer>("OnAddNewComputer", computer =>
+        HubConnection.On<Computer>("OnAddNewComputer", computer =>
         {
             if (computers.Count(x => x.productName == computer.productName) == 1) return;
 
@@ -329,161 +100,28 @@
             StateHasChanged();
         });
 
-        connection.On<Computer>("OnComputerSatusChanged", computer =>
+        HubConnection.On<Computer>("OnComputerSatusChanged", computer =>
         {
             var computerIndex = computers.IndexOf(computers.Find(x => x.id == computer.id));
             computers[computerIndex] = computer;
             StateHasChanged();
         });
 
-        connection.On<string>("OnComputerRemoved", computerRegDate =>
+        HubConnection.On<string>("OnComputerRemoved", computerRegDate =>
         {
             computers.Remove(computers.Find(x => x.activationDate == computerRegDate));
             StateHasChanged();
         });
 
-        await connection.StartAsync();
-        await connection.SendAsync("OnLicensesListRequest");
-    }
-
-    private void OnLicenseSelect(string licenseid)
-    {
-        selectedLicense = licenses.Find(x => x.id == licenseid);
-        pageState = PageState.LicenseInfo;
-        StateHasChanged();
+        if(HubConnection.State != HubConnectionState.Connected) await HubConnection.StartAsync();
+        await HubConnection.SendAsync("OnLicensesListRequest");
     }
 
     private async void OnComputerBanned(string hardwareId, bool banState)
     {
-        await connection.SendAsync("OnComputerBanned", hardwareId, banState);
+        await HubConnection.SendAsync("OnComputerBanned", hardwareId, banState);
         computers.Find(x => x.hardwareId == hardwareId).isBanned = banState;
 
         StateHasChanged();
-    }
-
-    private async void OnLicenseStatusChanged(string productName, bool licenseState)
-    {
-        await connection.SendAsync("OnLicenseStatusChanged", productName, licenseState);
-        var license = licenses.Find(x => x.productName == productName);
-        license.status = licenseState;
-        selectedLicense = license;
-
-        StateHasChanged();
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        if (connection != null)
-        {
-            await connection.StopAsync();
-            await connection.DisposeAsync();
-        }
-    }
-
-    public async void OnAddLicenseButtonClick()
-    {
-        if (inputfieldBottomText.Count(x => x.Equals("Поле корректно")) == inputfieldBottomText.Length)
-        {
-            License newLicense = new License()
-            {
-                productName = inputValue[0],
-                companyName = inputValue[1],
-                licensesCounter = int.Parse(inputValue[2]),
-                trialPeriod = int.Parse(inputValue[3]),
-                iconPath = "icons/IconDefault.svg",
-                status = true
-            };
-
-            await connection.SendAsync("OnAddNewLicense", newLicense);
-
-            pageState = PageState.Licenses;
-            StateHasChanged();
-        }
-    }
-
-    public void OnInputfieldFocused(int index)
-    {
-        if (inputfieldColor[index] == "#8E918F")
-        {
-            inputfieldColor[index] = "#E3E3E3";
-            inputfieldTextColor[index] = "#E3E3E3";
-        }
-        inputfieldIconOpacity[index] = 0;
-
-        switch(index)
-        {
-            case 0:
-
-                break;
-
-            case 1:
-
-                break;
-
-            case 2:
-
-                break;
-
-            case 3:
-
-                break;
-        }
-    }
-
-    public void OnInputfieldFocusOut(int index)
-    {
-        if (inputfieldColor[index] == "#E3E3E3")
-        {
-            inputfieldColor[index] = "#8E918F";
-            inputfieldTextColor[index] = "#8E918F";
-        }
-        inputfieldIconOpacity[index] = 1;
-    }
-
-    public void OnInputfieldValueChanged(int index, ChangeEventArgs? args)
-    {
-        inputValue[index] = args?.Value?.ToString();
-
-        if(string.IsNullOrWhiteSpace(inputValue[index]))
-        {
-            inputfieldBottomText[index] = "Недопустимое значение";
-            inputfieldColor[index] = "#F2B8B5";
-            inputfieldTextColor[index] = "#F2B8B5";
-
-            iconPath[index] = "/icons/error.svg";
-        }
-        else
-        {
-            iconPath[index] = "/icons/done.svg";
-            inputfieldTextColor[index] = "#6DD58C";
-            switch (index)
-            {
-                case 0:
-                    inputfieldBottomText[index] = "Поле корректно";
-                    inputfieldColor[index] = "#6DD58C";
-                    break;
-
-                case 1:
-                    inputfieldBottomText[index] = "Поле корректно";
-                    inputfieldColor[index] = "#6DD58C";
-                    break;
-
-                case 2:
-                    inputfieldBottomText[index] = "Поле корректно";
-                    inputfieldColor[index] = "#6DD58C";
-                    break;
-
-                case 3:
-                    inputfieldBottomText[index] = "Поле корректно";
-                    inputfieldColor[index] = "#6DD58C";
-                    break;
-            }   
-        }
-
-        if (inputfieldBottomText.Count(x => x.Equals("Поле корректно")) == inputfieldBottomText.Length)
-        {
-            addLicenseStyle = "background-color: #C4EED0; border-color: #C4EED0; color: inherit;";
-        }
-        else addLicenseStyle = "";
     }
 }

@@ -9,6 +9,8 @@ using MudBlazor.Services;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.Linq;
 using GraffLicenceManager.Hubs;
+using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.AspNetCore.Components;
 
 namespace GraffLicenceManager
 {
@@ -35,6 +37,13 @@ namespace GraffLicenceManager
 
             DatabaseService databaseService = new DatabaseService();
             services.AddSingleton(databaseService);
+            services.AddScoped(x =>
+            {
+                var navManager = x.GetRequiredService<NavigationManager>();
+                return new HubConnectionBuilder()
+                    .WithUrl(navManager.ToAbsoluteUri("/adminhub"))
+                    .Build();
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
