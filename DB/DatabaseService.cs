@@ -20,8 +20,8 @@ namespace GraffLicenceManager.DB {
             var client = new MongoClient("mongodb://localhost:27017");
             var database = client.GetDatabase("GraffInteractive");
 
-            _licenses = database.GetCollection<License>("LicenceData");
-            _computers = database.GetCollection<Computer>("ComputerData");
+            _licenses = database.GetCollection<License>("LicenseDataNew");
+            _computers = database.GetCollection<Computer>("ComputerDataNew");
         }
 
         public List<License> GetLicenses() => _licenses.Find(x => true).ToList();

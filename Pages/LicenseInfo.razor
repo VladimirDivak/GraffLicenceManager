@@ -55,14 +55,14 @@
                 <p>@computers.Where(x => x.productName == selectedLicense?.productName).Count()</p>
                 <p>@computers.Where(x => x.productName == selectedLicense?.productName && x.isActive).Count()</p>
             </div>
-            <img style="position: absolute; right: 48px; bottom: 0" src="icons/FAB_Edit.svg" alt="">
+            <img style="position: absolute; right: 48px; bottom: 0" src="icons/FAB_Edit.svg" alt="" @onclick="@(()=>{ showCounterChangeField = true; showLicensePasswordField = false; showComputerPasswordField = false; })">
             @if(selectedLicense?.status == true)
             {
-                <img src="/icons/FAB_PlayPause.svg" alt="" @onclick="@(()=>OnLicenseStatusChanged(selectedLicense?.productName, !selectedLicense.status))">
+                <img src="/icons/FAB_PlayPause.svg" alt="" @onclick="@(()=>{ showLicensePasswordField = true; showComputerPasswordField = false; showCounterChangeField = false; })">
             }
             else
             {
-                <img src="/icons/FAB_Play.svg" alt="" @onclick="@(()=>OnLicenseStatusChanged(selectedLicense?.productName, !selectedLicense.status))">
+                <img src="/icons/FAB_Play.svg" alt="" @onclick="@(()=>{ showLicensePasswordField = true; showComputerPasswordField = false; showCounterChangeField = false; })">
             }
         </div>
     </div>
@@ -130,24 +130,37 @@
                 {
                     computerIconPath = "icons/FAB_Play.svg";
                 }
-                <img @onclick="@(()=> OnComputerBanned(computer.hardwareId, !computer.isBanned))" style="margin-left: 8px" src=@computerIconPath alt="">
+                <img @onclick="@(()=> { selectedComputer = computer; showComputerPasswordField = true; showLicensePasswordField = false; showCounterChangeField = false; })" style="margin-left: 8px" src=@computerIconPath alt="">
             </div>
         </div>
+
+        if (computers.Where(x => x.productName == selectedLicense?.productName)
+        .ToList().IndexOf(computer) == computers.Where(x => x.productName == selectedLicense?.productName)
+        .ToList().IndexOf(computers.Where(x => x.productName == selectedLicense?.productName).Last())) computersCounter = 0;
     }
 </div>
+<PasswordField OnClosed="OnPasswordFieldClosed" message="Статус доступа компьютера изменён!" CorrectPasswordFieldAction="OnComputerBanned" showField=@showComputerPasswordField></PasswordField>
+<PasswordField OnClosed="OnPasswordFieldClosed" message="Статус лицензии изменён!" CorrectPasswordFieldAction="OnLicenseStatusChanged" showField=@showLicensePasswordField></PasswordField>
+<PasswordField SelectedLicense="selectedLicense" OnClosed="OnPasswordFieldClosed" message="Лицензия изменена!" showLicensesCounterField="true" showField=@showCounterChangeField></PasswordField>
 
 @code {
     [Parameter]
     public string licenseId { get; set; }
 
-    private License selectedLicense;
-    private string computerIconPath;
-    private string cardPosition = "card-top";
+    License selectedLicense;
+    Computer selectedComputer;
 
-    private List<Computer> computers = new List<Computer>();
-    private List<License> licenses = new List<License>();
+    string computerIconPath;
+    string cardPosition = "card-top";
 
-    private int computersCounter;
+    List<Computer> computers = new List<Computer>();
+    List<License> licenses = new List<License>();
+
+    int computersCounter;
+
+    bool showComputerPasswordField;
+    bool showLicensePasswordField;
+    bool showCounterChangeField;
 
     protected async override Task OnInitializedAsync()
     {
@@ -163,13 +176,14 @@
         {
             var licenseIndex = licenses.IndexOf(licenses.Find(x => x.id == license.id));
             licenses[licenseIndex] = license;
+
             StateHasChanged();
         });
         HubConnection.On<Computer>("OnAddNewComputer", computer =>
         {
             if (computers.Count(x => x.productName == computer.productName) == 1) return;
-
             computers.Add(computer);
+
             StateHasChanged();
         });
 
@@ -177,12 +191,14 @@
         {
             var computerIndex = computers.IndexOf(computers.Find(x => x.id == computer.id));
             computers[computerIndex] = computer;
+
             StateHasChanged();
         });
 
         HubConnection.On<string>("OnComputerRemoved", computerRegDate =>
         {
             computers.Remove(computers.Find(x => x.activationDate == computerRegDate));
+
             StateHasChanged();
         });
 
@@ -198,20 +214,30 @@
         return correctFormat.ToShortDateString();
     }
 
-    private async void OnComputerBanned(string hardwareId, bool banState)
+    private async void OnComputerBanned()
     {
-        await HubConnection.SendAsync("OnComputerBanned", hardwareId, banState);
-        computers.Find(x => x.hardwareId == hardwareId).isBanned = banState;
+        await HubConnection.SendAsync("OnComputerBanned", selectedComputer.hardwareId, !selectedComputer.isBanned);
+        computers.Find(x => x.hardwareId == selectedComputer.hardwareId).isBanned = !selectedComputer.isBanned;
+        showComputerPasswordField = false;
 
         StateHasChanged();
     }
 
-    private async void OnLicenseStatusChanged(string productName, bool licenseState)
+    private async void OnLicenseStatusChanged()
     {
-        await HubConnection.SendAsync("OnLicenseStatusChanged", productName, licenseState);
-        var license = licenses.Find(x => x.productName == productName);
-        license.status = licenseState;
+        await HubConnection.SendAsync("OnLicenseStatusChanged", selectedLicense.productName, !selectedLicense.status);
+        var license = licenses.Find(x => x.productName == selectedLicense.productName);
+        license.status = !selectedLicense.status;
+        selectedLicense.status = license.status;
+        showLicensePasswordField = false;
 
         StateHasChanged();
+    }
+
+    private void OnPasswordFieldClosed()
+    {
+        showComputerPasswordField = false;
+        showLicensePasswordField = false;
+        showCounterChangeField = false;
     }
 }

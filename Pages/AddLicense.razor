@@ -44,23 +44,7 @@
         </div>
     </div>
 </div>
-@if(showPasswordField)
-{
-    <div class="password-field">
-        <div class="password-window">
-            <h2>Введите пароль подтверждения</h2>
-        <div style="border-color: @inputfieldColor[3]" class="inputfield">
-            <input type="password" style="color: @inputfieldTextColor[3]" value="@passwordValue" @oninput="@((e)=>OnInputfieldValueChanged(3, e))" @onfocusout="@(() => OnInputfieldFocusOut(3))" @onfocus="@(() => OnInputfieldFocused(3))">
-            <img style="opacity: @inputfieldIconOpacity[3]" src=@iconPath[3] alt="">
-        </div>
-            <div class="buttons">
-                <div class="button">Подтвердить</div>
-                <div style="background-color: inherit" @onclick="@(()=>{ @showPasswordField = false; StateHasChanged(); blurValue = "0px"; })" class="button">Отмена</div>
-            </div>
-        </div>
-    </div>
-}
-
+<PasswordField message="Данные сохранены!" CorrectPasswordFieldAction="@AddNewLicense" showField=@showPasswordField></PasswordField>
 
 @code {
     private string[] inputfieldTextColor = new string[4] { "#8E918F", "#8E918F", "#8E918F", "#8E918F" };
@@ -81,25 +65,27 @@
 
     public void OnAddLicenseButtonClick()
     {
+        if (inputfieldBottomText.Count(x => x.Equals("Поле корректно")) != inputfieldBottomText.Length)
+            return;
+
         showPasswordField = true;
-        blurValue = "4px";
-
         StateHasChanged();
-        //if (inputfieldBottomText.Count(x => x.Equals("Поле корректно")) == inputfieldBottomText.Length)
-        //{
-        //    License newLicense = new License()
-        //    {
-        //        productName = inputValue[0],
-        //        companyName = inputValue[1],
-        //        licensesCounter = int.Parse(inputValue[2]),
-        //        trialPeriod = int.Parse(inputValue[3]),
-        //        iconPath = "icons/IconDefault.svg",
-        //        status = true
-        //    };
+    }
 
-        //    await HubConnection.SendAsync("OnAddNewLicense", newLicense);
-        //    StateHasChanged();
-        //}
+    public async void AddNewLicense()
+    {
+        License newLicense = new License()
+        {
+            productName = inputValue[0],
+            companyName = inputValue[1],
+            licensesCounter = int.Parse(inputValue[2]),
+            trialPeriod = int.Parse(inputValue[3]),
+            iconPath = "icons/IconDefault.svg",
+            status = true
+        };
+
+        await HubConnection.SendAsync("OnAddNewLicense", newLicense);
+        NavigationManager.NavigateTo("/");
     }
 
     public void OnInputfieldFocused(int index)

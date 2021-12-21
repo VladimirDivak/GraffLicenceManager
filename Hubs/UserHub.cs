@@ -19,8 +19,17 @@ namespace GraffLicenceManager.Hubs {
         }
 
         public override async Task OnConnectedAsync() {
-            var ip = "212.220.216.185";
-            var ipInfo = await ipDataClient.Lookup(ip.ToString());
+            var ip = Context.GetHttpContext().Connection.RemoteIpAddress.ToString();
+            IpData.Models.IpInfo ipInfo = new IpData.Models.IpInfo();
+            try
+            {
+                ipInfo = await ipDataClient.Lookup(ip.ToString());
+            }
+            catch
+            {
+                ip = "212.220.216.185";
+                ipInfo = await ipDataClient.Lookup(ip.ToString());
+            }
 
             Console.WriteLine($"[{DateTime.Now}] клиент {ip}({ipInfo.City}) появился в сети.");
 
@@ -45,8 +54,17 @@ namespace GraffLicenceManager.Hubs {
         }
 
         public async Task OnInitializationRequest(RegistrationData registrationData) {
-            var ip = "212.220.216.185";
-            var ipInfo = await ipDataClient.Lookup(ip.ToString());
+            var ip = Context.GetHttpContext().Connection.RemoteIpAddress.ToString();
+            IpData.Models.IpInfo ipInfo = new IpData.Models.IpInfo();
+            try
+            {
+                ipInfo = await ipDataClient.Lookup(ip.ToString());
+            }
+            catch
+            {
+                ip = "212.220.216.185";
+                ipInfo = await ipDataClient.Lookup(ip.ToString());
+            }
 
             var licence = databaseService.GetLicense(registrationData.productName);
             var computer = databaseService.GetComputers()

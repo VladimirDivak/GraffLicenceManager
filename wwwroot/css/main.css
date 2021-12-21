@@ -21,8 +21,6 @@ body {
     padding-bottom: 16px;
     padding-left: 32px;
     padding-right: 32px;
-
-    transition-duration: 0.25s;
 }
 
     .header > img {
@@ -47,8 +45,6 @@ body {
     padding-right: 16px;
     padding-top: 12px;
     padding-bottom: 12px;
-
-    transition-duration: 0.25s;
 }
 
     .content > h2 {
@@ -303,9 +299,8 @@ body {
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.6);
-
     transition-property: background-color;
-    transition-duration: .25s;
+    transition-duration: 1s;
 }
 
 .password-window {
@@ -323,18 +318,16 @@ body {
     border: solid 1px;
     border-color: #747775;
     border-radius: 28px;
-    transition-property: background-color;
-    transition-duration: .25s;
 }
 
     .password-window > h2 {
-        margin: auto;
+        margin-bottom: 0;
+        margin-left: 32px;
+        margin-top: auto;
         font-style: normal;
         font-weight: normal;
-        font-size: 24px;
+        font-size: 12px;
         line-height: 32px;
         color: #E3E3E3;
         width: 277px;
-        transition-property: opacity;
-        transition-duration: .25s;
     }
