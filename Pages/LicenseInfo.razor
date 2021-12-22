@@ -139,9 +139,18 @@
         .ToList().IndexOf(computers.Where(x => x.productName == selectedLicense?.productName).Last())) computersCounter = 0;
     }
 </div>
-<PasswordField OnClosed="OnPasswordFieldClosed" message="Статус доступа компьютера изменён!" CorrectPasswordFieldAction="OnComputerBanned" showField=@showComputerPasswordField></PasswordField>
-<PasswordField OnClosed="OnPasswordFieldClosed" message="Статус лицензии изменён!" CorrectPasswordFieldAction="OnLicenseStatusChanged" showField=@showLicensePasswordField></PasswordField>
-<PasswordField SelectedLicense="selectedLicense" OnClosed="OnPasswordFieldClosed" message="Лицензия изменена!" showLicensesCounterField="true" showField=@showCounterChangeField></PasswordField>
+@if(showComputerPasswordField)
+{
+    <PasswordField OnClosed="OnPasswordFieldClosed" message="Статус доступа компьютера изменён!" CorrectPasswordFieldAction="OnComputerBanned"></PasswordField>
+}
+else if(showLicensePasswordField)
+{
+    <PasswordField OnClosed="OnPasswordFieldClosed" message="Статус лицензии изменён!" CorrectPasswordFieldAction="OnLicenseStatusChanged"></PasswordField>
+}
+else if(showCounterChangeField)
+{
+    <PasswordField SelectedLicense="selectedLicense" OnClosed="OnPasswordFieldClosed" message="Лицензия изменена!" showLicensesCounterField="true"></PasswordField>   
+}
 
 @code {
     [Parameter]
@@ -239,5 +248,7 @@
         showComputerPasswordField = false;
         showLicensePasswordField = false;
         showCounterChangeField = false;
+
+        StateHasChanged();
     }
 }
