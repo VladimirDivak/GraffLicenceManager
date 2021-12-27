@@ -44,14 +44,17 @@
         </div>
     </div>
 </div>
-<PasswordField message="Данные сохранены!" CorrectPasswordFieldAction="@AddNewLicense" showField=@showPasswordField></PasswordField>
+@if(showPasswordField)
+{
+    <PasswordField message="Данные сохранены!" CorrectPasswordFieldAction="@AddNewLicense"></PasswordField>   
+}
 
 @code {
     private string[] inputfieldTextColor = new string[4] { "#8E918F", "#8E918F", "#8E918F", "#8E918F" };
     private string[] inputfieldColor = new string[4] { "#8E918F", "#8E918F", "#8E918F", "#8E918F" };
     private string[] inputfieldBottomText = new string[4] { string.Empty, string.Empty, string.Empty, string.Empty };
     private float[] inputfieldIconOpacity = new float[4] { 1, 1, 1, 1 };
-    private string[] inputValue { get; set; } = new string[4] { string.Empty, string.Empty, string.Empty, string.Empty };
+    private string[] inputValue = new string[4] { string.Empty, string.Empty, string.Empty, string.Empty };
     private string[] iconPath = new string[4] { "/icons/keyboard.svg", "/icons/keyboard.svg", "/icons/keyboard.svg", "/icons/keyboard.svg" };
     private string addLicenseStyle = "";
     private bool showPasswordField;
