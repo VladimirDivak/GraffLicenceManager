@@ -67,9 +67,7 @@ namespace GraffLicenceManager.Hubs {
             }
 
             var licence = databaseService.GetLicense(registrationData.productName);
-            var computer = databaseService.GetComputers()
-                .Find(x => x.productName == registrationData.productName &&
-                x.hardwareId == registrationData.hardwareId);
+            var computer = databaseService.GetComputer(registrationData.hardwareId, registrationData.productName);
 
             if (licence != null) { 
                 if (licence.registrationDate == string.Empty) {
@@ -98,9 +96,7 @@ namespace GraffLicenceManager.Hubs {
                             geolocation = ipInfo.City
                         };
 
-                        computer = newComputer;
                         computer = databaseService.CreateComputer(newComputer);
-                        computer = databaseService.GetComputer(newComputer.hardwareId);
 
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine($"[{DateTime.Now}] добавлен компьютер {computer.localUserName} ({computer.geolocation}) для проекта {licence.productName}.");

@@ -1,12 +1,14 @@
-﻿<h3 style="margin-top: 8px; color: @inputfieldColor">@TopText</h3>
+﻿@using GraffLicenceManager.Pages
+
+<h3 style="margin-top: 8px; color: @inputfieldColor">@TopText</h3>
 <div style="border-color: @inputfieldColor" class="inputfield">
-    <input style="color: @inputfieldTextColor" placeholder=@TopText value="@inputValue" @oninput="@((e)=>OnInputfieldValueChanged(e))" @onfocusout="@(() => OnInputfieldFocusOut())" @onfocus="@(() => OnInputfieldFocused())" type=@SetInputfieldType()>
+    <input style="color: @inputfieldTextColor" placeholder=@Placeholder value="@inputValue" @oninput="@((e)=>OnInputfieldValueChanged(e))" @onfocusout="@(() => OnInputfieldFocusOut())" @onfocus="@(() => OnInputfieldFocused())" type=@SetInputfieldType()>
     <img style="opacity: @inputfieldIconOpacity" src=@IconPath alt="">
 </div>
-<h3 style="margin-bottom: 8px; color: @inputfieldColor">@BottomText</h3>
+<h3 style="margin-bottom: 8px; color: @inputfieldColor">@bottomText</h3>
 
 @code {
-    public enum InputfieldType
+    public enum InputType
     {
         Text,
         Number,
@@ -16,55 +18,56 @@
     [Parameter]
     public string TopText { get; set; }
     [Parameter]
-    public string BottomText { get; set; }
+    public string Placeholder { get; set; }
     [Parameter]
-    public string IconPath { get; set; }
+    public string IconPath { get; set; } = "/icons/keyboard.svg";
     [Parameter]
-    public InputfieldType Type { get; set; } = InputfieldType.Text;
-
+    public InputType Type { get; set; } = InputType.Text;
     [Parameter]
     public EventCallback<string> OnValueChanged { get; set; }
 
+    string bottomText;
     string inputValue;
-    string inputfieldColor;
-    string inputfieldTextColor;
-    float inputfieldIconOpacity;
+    string inputfieldColor = "8E918F";
+    string inputfieldTextColor = "8E918F";
+    float inputfieldIconOpacity = 1;
 
     void OnInputfieldValueChanged(ChangeEventArgs args)
     {
-        string inputValue = args?.Value?.ToString();
+        inputValue = args?.Value?.ToString();
 
-        if (inputValue.Length < 3)
+        if (inputValue.Length < 3 && Type != InputType.Number)
         {
-            BottomText = "Поле содержит мало символов";
+            bottomText = "Поле содержит мало символов";
             inputfieldColor = "#F2B8B5";
             inputfieldTextColor = "#F2B8B5";
 
             IconPath = "/icons/error.svg";
+            OnValueChanged.InvokeAsync(string.Empty);
         }
         else if (string.IsNullOrWhiteSpace(inputValue))
         {
-            BottomText = "Недопустимое значение";
+            bottomText = "Недопустимое значение";
             inputfieldColor = "#F2B8B5";
             inputfieldTextColor = "#F2B8B5";
 
             IconPath = "/icons/error.svg";
+            OnValueChanged.InvokeAsync(string.Empty);
         }
         else
         {
-            BottomText = "Значение введено корректно";
+            bottomText = "Значение введено корректно";
             inputfieldColor = "#6DD58C";
             inputfieldTextColor = "#6DD58C";
 
             IconPath = "/icons/done.svg";
-
             OnValueChanged.InvokeAsync(inputValue);
         }
     }
 
     void OnInputfieldFocused()
     {
-        if (inputfieldColor == "#8E918F")
+        if (inputfieldColor == "8E918F")
         {
             inputfieldColor = "#E3E3E3";
             inputfieldTextColor = "#E3E3E3";
@@ -76,17 +79,17 @@
     {
         if (inputfieldColor == "#E3E3E3")
         {
-            inputfieldColor = "#8E918F";
-            inputfieldTextColor = "#8E918F";
+            inputfieldColor = "8E918F";
+            inputfieldTextColor = "8E918F";
         }
         inputfieldIconOpacity = 1;
     }
 
     string SetInputfieldType()
     {
-        if (Type == InputfieldType.Text) return "text";
-        else if (Type == InputfieldType.Number) return "number";
-        else if (Type == InputfieldType.Password) return "password";
+        if (Type == InputType.Text) return "text";
+        else if (Type == InputType.Number) return "number";
+        else if (Type == InputType.Password) return "password";
         else return string.Empty;
     }
 }

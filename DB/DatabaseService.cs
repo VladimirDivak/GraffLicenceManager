@@ -35,6 +35,14 @@ namespace GraffLicenceManager.DB {
             .Find(computer => computer.hardwareId == hardwareId)
             .First();
 
+        public Computer GetComputer(string hardwareId, string productName) {
+            var computer = _computers.Find(computer => computer.hardwareId == hardwareId && computer.productName == productName)
+                .ToList();
+
+            if(computer.Count == 0) return null;
+            else return computer.FirstOrDefault();
+        }
+
         public License GetLicenseByRegistrationData(RegistrationData registrationData) {
             var data = _licenses.Find(licence =>
             licence.companyName == registrationData.companyName &&
@@ -68,7 +76,7 @@ namespace GraffLicenceManager.DB {
         }
 
         public void UpdateComputer(Computer computer) {
-            _computers.DeleteOne(comp => comp.hardwareId == computer.hardwareId);
+            _computers.DeleteOne(comp => comp.hardwareId == computer.hardwareId && comp.productName == computer.productName);
             _computers.InsertOne(computer);
 
             OnComputerStatusChanged?.Invoke(computer);

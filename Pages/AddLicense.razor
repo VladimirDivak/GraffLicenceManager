@@ -11,33 +11,10 @@
 </div>
 <div class="content" style="filter: blur(@blurValue)">
     <div class="card">
-        <h3 style="margin-top: 8px; color: @inputfieldColor[0]">Название приложения</h3>
-        <div style="border-color: @inputfieldColor[0]" class="inputfield">
-            <input style="color: @inputfieldTextColor[0]" placeholder="Название приложения" value="@inputValue[0]" @oninput="@((e)=>OnInputfieldValueChanged(0, e))" @onfocusout="@(() => OnInputfieldFocusOut(0))" @onfocus="@(() => OnInputfieldFocused(0))" type="text">
-            <img style="opacity: @inputfieldIconOpacity[0]" src=@iconPath[0] alt="">
-        </div>
-        <h3 style="margin-bottom: 8px; color: @inputfieldColor[0]">@inputfieldBottomText[0]</h3>
-
-        <h3 style="margin-top: 8px; color: @inputfieldColor[1]">Название компании-заказчика</h3>
-        <div style="border-color: @inputfieldColor[1]" class="inputfield">
-            <input style="color: @inputfieldTextColor[1]" placeholder="Название компании" value="@inputValue[1]" @oninput="@((e)=>OnInputfieldValueChanged(1, e))" @onfocusout="@(() => OnInputfieldFocusOut(1))" @onfocus="@(() => OnInputfieldFocused(1))" type="text">
-            <img style="opacity: @inputfieldIconOpacity[1]" src=@iconPath[1] alt="">
-        </div>
-        <h3 style="margin-bottom: 8px; color: @inputfieldColor[1]">@inputfieldBottomText[1]</h3>
-
-        <h3 style="margin-top: 8px; color: @inputfieldColor[2]">Количество слотов компьютеров, шт</h3>
-        <div style="border-color: @inputfieldColor[2]" class="inputfield">
-            <input type="number" style="color: @inputfieldTextColor[2]" placeholder="Количество компьютеров"value="@inputValue[2]" @oninput="@((e)=>OnInputfieldValueChanged(2, e))" @onfocusout="@(() => OnInputfieldFocusOut(2))" @onfocus="@(() => OnInputfieldFocused(2))">
-            <img style="opacity: @inputfieldIconOpacity[2]" src=@iconPath[2] alt="">
-        </div>
-        <h3 style="margin-bottom: 8px; color: @inputfieldColor[2]">@inputfieldBottomText[2]</h3>
-
-        <h3 style="margin-top: 8px; color: @inputfieldColor[3]">Время триального периода, ч</h3>
-        <div style="border-color: @inputfieldColor[3]" class="inputfield">
-            <input type="number" style="color: @inputfieldTextColor[3]" placeholder="Триальный период" value="@inputValue[3]" @oninput="@((e)=>OnInputfieldValueChanged(3, e))" @onfocusout="@(() => OnInputfieldFocusOut(3))" @onfocus="@(() => OnInputfieldFocused(3))">
-            <img style="opacity: @inputfieldIconOpacity[3]" src=@iconPath[3] alt="">
-        </div>
-        <h3 style="margin-bottom: 8px; color: @inputfieldColor[3]">@inputfieldBottomText[3]</h3>
+        <Inputfield TopText="Название приложения" Placeholder="Название приложения" Type=Inputfield.InputType.Text OnValueChanged="@(value => { productNameValue = value; OnInputfieldValueChanged(); })"></Inputfield>
+        <Inputfield TopText="Название компании-заказчика" Placeholder="Название компании" Type=Inputfield.InputType.Text OnValueChanged="@(value => { companyNameValue = value; OnInputfieldValueChanged(); } )"></Inputfield>
+        <Inputfield TopText="Количество одобренных копий, шт" Placeholder="Количество устройств" Type=Inputfield.InputType.Number OnValueChanged="@(value => { computersValue = value; OnInputfieldValueChanged(); })"></Inputfield>
+        <Inputfield TopText="Время триального периода, ч" Placeholder="Триальный период" Type=Inputfield.InputType.Number OnValueChanged="@(value => { trialPeriodValue = value; OnInputfieldValueChanged(); })"></Inputfield>
         <div class="buttons">
             <div style="@addLicenseStyle" @onclick="@(()=>OnAddLicenseButtonClick())" class="button">Добавить лицензию</div>
             <div @onclick="@(()=>NavigationManager.NavigateTo("/"))" style="background: none" class="button">Отмена</div>
@@ -46,16 +23,15 @@
 </div>
 @if(showPasswordField)
 {
-    <PasswordField message="Данные сохранены!" CorrectPasswordFieldAction="@AddNewLicense"></PasswordField>   
+    <PasswordField message="Данные сохранены!" OnClosed="@(()=>{showPasswordField = !showPasswordField; StateHasChanged(); })" CorrectPasswordFieldAction="@AddNewLicense"></PasswordField>   
 }
 
 @code {
-    private string[] inputfieldTextColor = new string[4] { "#8E918F", "#8E918F", "#8E918F", "#8E918F" };
-    private string[] inputfieldColor = new string[4] { "#8E918F", "#8E918F", "#8E918F", "#8E918F" };
-    private string[] inputfieldBottomText = new string[4] { string.Empty, string.Empty, string.Empty, string.Empty };
-    private float[] inputfieldIconOpacity = new float[4] { 1, 1, 1, 1 };
-    private string[] inputValue = new string[4] { string.Empty, string.Empty, string.Empty, string.Empty };
-    private string[] iconPath = new string[4] { "/icons/keyboard.svg", "/icons/keyboard.svg", "/icons/keyboard.svg", "/icons/keyboard.svg" };
+    string productNameValue;
+    string companyNameValue;
+    string computersValue;
+    string trialPeriodValue;
+
     private string addLicenseStyle = "";
     private bool showPasswordField;
     private string blurValue = "0px";
@@ -68,7 +44,7 @@
 
     public void OnAddLicenseButtonClick()
     {
-        if (inputfieldBottomText.Count(x => x.Equals("Поле корректно")) != inputfieldBottomText.Length)
+        if (addLicenseStyle == string.Empty)
             return;
 
         showPasswordField = true;
@@ -79,11 +55,11 @@
     {
         License newLicense = new License()
         {
-            productName = inputValue[0],
-            companyName = inputValue[1],
-            licensesCounter = int.Parse(inputValue[2]),
-            trialPeriod = int.Parse(inputValue[3]),
-            iconPath = "icons/IconDefault.svg",
+            productName = productNameValue,
+            companyName = companyNameValue,
+            licensesCounter = int.Parse(computersValue),
+            trialPeriod = int.Parse(trialPeriodValue),
+            iconPath = "/icons/IconDefault.svg",
             status = true
         };
 
@@ -91,89 +67,15 @@
         NavigationManager.NavigateTo("/");
     }
 
-    public void OnInputfieldFocused(int index)
+    public void OnInputfieldValueChanged()
     {
-        if (inputfieldColor[index] == "#8E918F")
-        {
-            inputfieldColor[index] = "#E3E3E3";
-            inputfieldTextColor[index] = "#E3E3E3";
-        }
-        inputfieldIconOpacity[index] = 0;
-
-        switch(index)
-        {
-            case 0:
-
-                break;
-
-            case 1:
-
-                break;
-
-            case 2:
-
-                break;
-
-            case 3:
-
-                break;
-        }
-    }
-
-    public void OnInputfieldFocusOut(int index)
-    {
-        if (inputfieldColor[index] == "#E3E3E3")
-        {
-            inputfieldColor[index] = "#8E918F";
-            inputfieldTextColor[index] = "#8E918F";
-        }
-        inputfieldIconOpacity[index] = 1;
-    }
-
-    public void OnInputfieldValueChanged(int index, ChangeEventArgs? args)
-    {
-        inputValue[index] = args?.Value?.ToString();
-
-        if(string.IsNullOrWhiteSpace(inputValue[index]))
-        {
-            inputfieldBottomText[index] = "Недопустимое значение";
-            inputfieldColor[index] = "#F2B8B5";
-            inputfieldTextColor[index] = "#F2B8B5";
-
-            iconPath[index] = "/icons/error.svg";
-        }
-        else
-        {
-            iconPath[index] = "/icons/done.svg";
-            inputfieldTextColor[index] = "#6DD58C";
-            switch (index)
-            {
-                case 0:
-                    inputfieldBottomText[index] = "Поле корректно";
-                    inputfieldColor[index] = "#6DD58C";
-                    break;
-
-                case 1:
-                    inputfieldBottomText[index] = "Поле корректно";
-                    inputfieldColor[index] = "#6DD58C";
-                    break;
-
-                case 2:
-                    inputfieldBottomText[index] = "Поле корректно";
-                    inputfieldColor[index] = "#6DD58C";
-                    break;
-
-                case 3:
-                    inputfieldBottomText[index] = "Поле корректно";
-                    inputfieldColor[index] = "#6DD58C";
-                    break;
-            }   
-        }
-
-        if (inputfieldBottomText.Count(x => x.Equals("Поле корректно")) == inputfieldBottomText.Length)
+        if (!string.IsNullOrEmpty(productNameValue) &&
+        !string.IsNullOrEmpty(companyNameValue) &&
+        !string.IsNullOrEmpty(computersValue) &&
+        !string.IsNullOrEmpty(trialPeriodValue))
         {
             addLicenseStyle = "background-color: #C4EED0; border-color: #C4EED0; color: inherit;";
         }
-        else addLicenseStyle = "";
+        else addLicenseStyle = string.Empty;
     }
 }
