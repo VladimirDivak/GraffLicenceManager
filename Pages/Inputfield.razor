@@ -1,0 +1,92 @@
+﻿<h3 style="margin-top: 8px; color: @inputfieldColor">@TopText</h3>
+<div style="border-color: @inputfieldColor" class="inputfield">
+    <input style="color: @inputfieldTextColor" placeholder=@TopText value="@inputValue" @oninput="@((e)=>OnInputfieldValueChanged(e))" @onfocusout="@(() => OnInputfieldFocusOut())" @onfocus="@(() => OnInputfieldFocused())" type=@SetInputfieldType()>
+    <img style="opacity: @inputfieldIconOpacity" src=@IconPath alt="">
+</div>
+<h3 style="margin-bottom: 8px; color: @inputfieldColor">@BottomText</h3>
+
+@code {
+    public enum InputfieldType
+    {
+        Text,
+        Number,
+        Password
+    }
+
+    [Parameter]
+    public string TopText { get; set; }
+    [Parameter]
+    public string BottomText { get; set; }
+    [Parameter]
+    public string IconPath { get; set; }
+    [Parameter]
+    public InputfieldType Type { get; set; } = InputfieldType.Text;
+
+    [Parameter]
+    public EventCallback<string> OnValueChanged { get; set; }
+
+    string inputValue;
+    string inputfieldColor;
+    string inputfieldTextColor;
+    float inputfieldIconOpacity;
+
+    void OnInputfieldValueChanged(ChangeEventArgs args)
+    {
+        string inputValue = args?.Value?.ToString();
+
+        if (inputValue.Length < 3)
+        {
+            BottomText = "Поле содержит мало символов";
+            inputfieldColor = "#F2B8B5";
+            inputfieldTextColor = "#F2B8B5";
+
+            IconPath = "/icons/error.svg";
+        }
+        else if (string.IsNullOrWhiteSpace(inputValue))
+        {
+            BottomText = "Недопустимое значение";
+            inputfieldColor = "#F2B8B5";
+            inputfieldTextColor = "#F2B8B5";
+
+            IconPath = "/icons/error.svg";
+        }
+        else
+        {
+            BottomText = "Значение введено корректно";
+            inputfieldColor = "#6DD58C";
+            inputfieldTextColor = "#6DD58C";
+
+            IconPath = "/icons/done.svg";
+
+            OnValueChanged.InvokeAsync(inputValue);
+        }
+    }
+
+    void OnInputfieldFocused()
+    {
+        if (inputfieldColor == "#8E918F")
+        {
+            inputfieldColor = "#E3E3E3";
+            inputfieldTextColor = "#E3E3E3";
+        }
+        inputfieldIconOpacity = 0;
+    }
+
+    void OnInputfieldFocusOut()
+    {
+        if (inputfieldColor == "#E3E3E3")
+        {
+            inputfieldColor = "#8E918F";
+            inputfieldTextColor = "#8E918F";
+        }
+        inputfieldIconOpacity = 1;
+    }
+
+    string SetInputfieldType()
+    {
+        if (Type == InputfieldType.Text) return "text";
+        else if (Type == InputfieldType.Number) return "number";
+        else if (Type == InputfieldType.Password) return "password";
+        else return string.Empty;
+    }
+}
