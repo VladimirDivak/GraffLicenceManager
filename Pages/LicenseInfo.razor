@@ -52,8 +52,8 @@
                 <p>@selectedLicense?.trialPeriod</p>
                 <p style="margin: 8px"> </p>
                 <p>@selectedLicense?.licensesCounter</p>
-                <p>@computers.Where(x => x.productName == selectedLicense?.productName).Count()</p>
-                <p>@computers.Where(x => x.productName == selectedLicense?.productName && x.isActive).Count()</p>
+                <p>@computers.Count()</p>
+                <p>@computers.Where(x => x.isActive).Count()</p>
             </div>
             <img style="position: absolute; right: 48px; bottom: 0" src="icons/FAB_Edit.svg" alt="" @onclick="@(()=>{ showCounterChangeField = true; showLicensePasswordField = false; showComputerPasswordField = false; })">
             @if(selectedLicense?.status == true)
@@ -67,13 +67,13 @@
         </div>
     </div>
     <h2>Привязанные компьютеры</h2>
-    @foreach(var computer in computers.Where(x => x.productName == selectedLicense?.productName))
+    @foreach(var computer in computers)
     {
         if(computersCounter == 0)
         {
             cardPosition = "card-top";
         }
-        else if(computersCounter > 0 && computersCounter < computers.Where(x => x.productName == selectedLicense?.productName).Count() - 1)
+        else if(computersCounter > 0 && computersCounter < computers.Count() - 1)
         {
             cardPosition = "card-middle";
         }
@@ -84,7 +84,7 @@
 
         computersCounter++;
 
-        if(computers.Where(x => x.productName == selectedLicense?.productName).Count() == 1)
+        if(computers.Count() == 1)
         {
             cardPosition = "card-full";
         }
@@ -134,9 +134,7 @@
             </div>
         </div>
 
-        if (computers.Where(x => x.productName == selectedLicense?.productName)
-        .ToList().IndexOf(computer) == computers.Where(x => x.productName == selectedLicense?.productName)
-        .ToList().IndexOf(computers.Where(x => x.productName == selectedLicense?.productName).Last())) computersCounter = 0;
+        if (computers.IndexOf(computer) == computers.IndexOf(computers.Last())) computersCounter = 0;
     }
 </div>
 @if(showComputerPasswordField)
@@ -163,7 +161,6 @@ else if(showCounterChangeField)
     string cardPosition = "card-top";
 
     List<Computer> computers = new List<Computer>();
-    List<License> licenses = new List<License>();
 
     int computersCounter;
 
@@ -175,21 +172,26 @@ else if(showCounterChangeField)
     {
         HubConnection.On<List<License>, List<Computer>>("OnLicensesListResponse", (licenses, computers) =>
         {
-            this.computers = computers.OrderBy(x => x.productName).ToList();
-            this.licenses = licenses.OrderBy(x => x.productName).ToList();
             selectedLicense = licenses.Find(x => x.id == licenseId);
+            this.computers = computers
+                .Where(x => x.productName == selectedLicense.productName)
+                .OrderBy(x => x.isActive)
+                .ToList();
 
             StateHasChanged();
         });
         HubConnection.On<License>("OnLicenseStatusChanged", license =>
         {
-            var licenseIndex = licenses.IndexOf(licenses.Find(x => x.id == license.id));
-            licenses[licenseIndex] = license;
+            if(license.productName == selectedLicense.productName)
+            {
+                selectedLicense = license;
+            }
 
             StateHasChanged();
         });
         HubConnection.On<Computer>("OnAddNewComputer", computer =>
         {
+            if (computer.productName != selectedLicense.productName) return;
             if (computers.Count(x => x.productName == computer.productName) == 1) return;
             computers.Add(computer);
 
@@ -198,6 +200,8 @@ else if(showCounterChangeField)
 
         HubConnection.On<Computer>("OnComputerSatusChanged", computer =>
         {
+            if (computer.productName != selectedLicense.productName) return;
+
             var computerIndex = computers.IndexOf(computers.Find(x => x.id == computer.id));
             computers[computerIndex] = computer;
 
@@ -206,7 +210,11 @@ else if(showCounterChangeField)
 
         HubConnection.On<string>("OnComputerRemoved", computerRegDate =>
         {
-            computers.Remove(computers.Find(x => x.activationDate == computerRegDate));
+            try
+            {
+                computers.Remove(computers.Find(x => x.activationDate == computerRegDate));
+            }
+            catch{ }
 
             StateHasChanged();
         });
@@ -235,11 +243,6 @@ else if(showCounterChangeField)
     private async void OnLicenseStatusChanged()
     {
         await HubConnection.SendAsync("OnLicenseStatusChanged", selectedLicense.productName, !selectedLicense.status);
-        var license = licenses.Find(x => x.productName == selectedLicense.productName);
-        license.status = !selectedLicense.status;
-        selectedLicense.status = license.status;
-        showLicensePasswordField = false;
-
         StateHasChanged();
     }
 
