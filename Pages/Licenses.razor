@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.SignalR.Client
 @inject HubConnection HubConnection
 @inject NavigationManager NavigationManager
+@inject DatabaseService DatabaseService
 
 <link rel="stylesheet" href="css/main.css">
 <div class="header">
@@ -12,47 +13,9 @@
 <div class="content">
     @foreach(var lic in licenses)
     {
-        <div class="card" @onclick="@(eventArgs => NavigationManager.NavigateTo($"/licenseinfo/{lic.id}"))">
-            <div class="card-top-content">
-                @if(lic.iconPath == string.Empty)
-                {
-                    <img src="icons/IconDefault.svg" alt="">
-                }
-                else
-                {
-                    <img src="@lic.iconPath" alt="">
-                }
-                <div class="info">
-                    <h1>@lic.productName</h1>
-                    <h2>@lic.companyName</h2>
-                </div>
-                <div class="status">
-                    @if(lic.status)
-                    {
-                        <h3 style="font-size: 11px; color: #6DD58C;">ON</h3>
-                        <div class="status-icon-on"></div>
-                    }
-                    else
-                    {
-                        <h3 style="font-size: 11px; color: #DA0000;">OFF</h3>
-                        <div class="status-icon-off"></div>
-                    }
-                </div>
-            </div>
-            <div class="card-bottom-content">
-                <div class="state">
-                    <p>Одобрено копий:</p>
-                    <p>Активировано копий:</p>
-                    <p>Сейчас онлайн:</p>
-                </div>
-                <div class="state-value">
-                    <p>@lic.licensesCounter</p>
-                    <p>@computers.Count(x => x.productName == lic.productName)</p>
-                    <p>@computers.Where(x => x.productName == lic.productName).Count(x => x.isActive)</p>
-                </div>
-                <img src="icons/FAB_Edit.svg" alt="">
-            </div>
-        </div>
+        List<Computer> licComputers = DatabaseService.GetComputers(lic.productName);
+        bool isWarining = lic.licensesCounter < licComputers.Count && (licComputers.Count - lic.licensesCounter) - licComputers.Count(x => x.isBanned) != 0;
+        <LicenseCard License="@lic" IsWarning="@isWarining" Computers="@computers"></LicenseCard>
     }
 </div>
 
@@ -64,12 +27,9 @@
 
     protected async override Task OnInitializedAsync()
     {
-        HubConnection.On<List<License>, List<Computer>>("OnLicensesListResponse", (licenses, computers) =>
-        {
-            this.licenses = licenses;
-            this.computers = computers;
-            StateHasChanged();
-        });
+        licenses = DatabaseService.GetLicenses();
+        computers = DatabaseService.GetComputers();
+        StateHasChanged();
 
         HubConnection.On<License>("OnAddNewLicense", license =>
         {
@@ -100,10 +60,11 @@
             StateHasChanged();
         });
 
-        HubConnection.On<Computer>("OnComputerSatusChanged", computer =>
+        HubConnection.On<Computer>("OnComputerStatusChanged", computer =>
         {
-            var computerIndex = computers.IndexOf(computers.Find(x => x.id == computer.id));
-            computers[computerIndex] = computer;
+            int index = computers.IndexOf(computers.Find(x => x.hardwareId == computer.hardwareId && x.productName == computer.productName));
+            computers[index] = computer;
+
             StateHasChanged();
         });
 
@@ -114,14 +75,5 @@
         });
 
         if(HubConnection.State != HubConnectionState.Connected) await HubConnection.StartAsync();
-        await HubConnection.SendAsync("OnLicensesListRequest");
-    }
-
-    private async void OnComputerBanned(string hardwareId, bool banState)
-    {
-        await HubConnection.SendAsync("OnComputerBanned", hardwareId, banState);
-        computers.Find(x => x.hardwareId == hardwareId).isBanned = banState;
-
-        StateHasChanged();
     }
 }

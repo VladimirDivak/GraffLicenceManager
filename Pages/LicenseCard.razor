@@ -1,0 +1,57 @@
+﻿@inject NavigationManager NavigationManager
+
+<div class="card" style=@GetLicenseStatus(IsWarning) @onclick="@(eventArgs => NavigationManager.NavigateTo($"/licenseinfo/{License.id}"))">
+    <div class="card-top-content">
+        @if(License.iconPath == string.Empty)
+        {
+            <img src="icons/IconDefault.svg" alt="">
+        }
+        else
+        {
+            <img src="@License.iconPath" alt="">
+        }
+        <div class="info">
+            <h1>@License.productName</h1>
+            <h2>@License.companyName</h2>
+        </div>
+        <div class="status">
+            @if(License.status)
+            {
+                <h3 style="font-size: 11px; color: #6DD58C;">ON</h3>
+                <div class="status-icon-on"></div>
+            }
+            else
+            {
+                <h3 style="font-size: 11px; color: #DA0000;">OFF</h3>
+                <div class="status-icon-off"></div>
+            }
+        </div>
+    </div>
+    <div class="card-bottom-content">
+        <div class="state">
+            <p>Одобрено копий:</p>
+            <p>Активировано копий:</p>
+            <p>Сейчас онлайн:</p>
+        </div>
+        <div class="state-value">
+            <p>@License.licensesCounter</p>
+            <p>@Computers.Count(x => x.productName == License.productName)</p>
+            <p>@Computers.Where(x => x.productName == License.productName).Count(x => x.isActive)</p>
+        </div>
+        <img src="icons/FAB_Edit.svg" alt="">
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public List<Computer> Computers { get; set; }
+    [Parameter]
+    public License License { get; set; }
+    [Parameter]
+    public bool IsWarning { get; set; }
+
+    string GetLicenseStatus(bool value)
+    {
+        return value ? "border: 1px solid yellow" : "";
+    }
+}

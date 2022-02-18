@@ -4,8 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using GraffLicenceManager.DB;
-using Microsoft.Extensions.Options;
-using MudBlazor.Services;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.Linq;
 using GraffLicenceManager.Hubs;
@@ -27,16 +25,14 @@ namespace GraffLicenceManager
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddMudServices();
-
             services.AddResponseCompression(opts =>
             {
                 opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
                     new[] { "application/octet-stream" });
             });
 
-            DatabaseService databaseService = new DatabaseService();
-            services.AddSingleton(databaseService);
+            services.AddSingleton(new DatabaseService());
+            services.AddSingleton(new MailSender());
             services.AddScoped(x =>
             {
                 var navManager = x.GetRequiredService<NavigationManager>();

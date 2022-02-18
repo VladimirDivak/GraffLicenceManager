@@ -1,10 +1,32 @@
 ﻿using System;
 using System.Linq;
 using MongoDB.Driver;
+using System.Collections;
 using System.Collections.Generic;
 
-namespace GraffLicenceManager.DB {
-    public class DatabaseService {
+namespace GraffLicenceManager.DB
+{
+    public class DatabaseService
+    {
+        public DatabaseService()
+        {
+            var client = new MongoClient("mongodb://localhost:27017");
+            var database = client.GetDatabase("GraffInteractive");
+
+            _licenses = database.GetCollection<License>("LicenseDataNew");
+            _computers = database.GetCollection<Computer>("ComputerDataNew");
+
+            var computers = GetComputers();
+            foreach (var computer in computers)
+            {
+                if(computer.isActive)
+                {
+                    computer.isActive = false;
+                    UpdateComputer(computer);
+                }
+            }
+        }
+
         public event Action<Computer> OnAddNewComputer;
         public event Action<Computer> OnComputerStatusChanged;
         public event Action<string> OnComputerRemoved;
@@ -15,14 +37,6 @@ namespace GraffLicenceManager.DB {
 
         private readonly IMongoCollection<License> _licenses;
         private readonly IMongoCollection<Computer> _computers;
-
-        public DatabaseService() {
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("GraffInteractive");
-
-            _licenses = database.GetCollection<License>("LicenseDataNew");
-            _computers = database.GetCollection<Computer>("ComputerDataNew");
-        }
 
         public List<License> GetLicenses() => _licenses.Find(x => true).ToList();
         public List<Computer> GetComputers() => _computers.Find(x => true).ToList();
@@ -35,7 +49,8 @@ namespace GraffLicenceManager.DB {
             .Find(computer => computer.hardwareId == hardwareId)
             .First();
 
-        public Computer GetComputer(string hardwareId, string productName) {
+        public Computer GetComputer(string hardwareId, string productName)
+        {
             var computer = _computers.Find(computer => computer.hardwareId == hardwareId && computer.productName == productName)
                 .ToList();
 
@@ -43,7 +58,8 @@ namespace GraffLicenceManager.DB {
             else return computer.FirstOrDefault();
         }
 
-        public License GetLicenseByRegistrationData(RegistrationData registrationData) {
+        public License GetLicenseByRegistrationData(RegistrationData registrationData)
+        {
             var data = _licenses.Find(licence =>
             licence.companyName == registrationData.companyName &&
             licence.productName == registrationData.productName)
@@ -53,52 +69,72 @@ namespace GraffLicenceManager.DB {
             else return data;
         }
         
-        public License CreateLicense(License licence) {
+        public License CreateLicense(License licence)
+        {
             _licenses.InsertOne(licence);
-            Console.WriteLine("database: сделана новая лицензия");
             OnAddNewLicense?.Invoke(licence);
 
             return licence;
         }
 
-        public Computer CreateComputer(Computer computer) {
+        public Computer CreateComputer(Computer computer)
+        {
             _computers.InsertOne(computer);
             OnAddNewComputer?.Invoke(computer);
 
             return computer;
         }
 
-        public void UpdateLicense(License licence) {
-            _licenses.DeleteOne(lic => lic.companyName == licence.companyName && lic.productName == licence.productName);
-            _licenses.InsertOne(licence);
+        public void UpdateLicense(License license)
+        {
+            _licenses.DeleteOne(lic => lic.id == license.id);
+            _licenses.InsertOne(license);
 
-            OnLicenseStatusChanged?.Invoke(licence);
+            OnLicenseStatusChanged?.Invoke(license);
         }
 
-        public void UpdateComputer(Computer computer) {
-            _computers.DeleteOne(comp => comp.hardwareId == computer.hardwareId && comp.productName == computer.productName);
+        public void UpdateComputer(Computer computer)
+        {
+            _computers.DeleteOne(comp => comp.id == computer.id);
             _computers.InsertOne(computer);
 
-            OnComputerStatusChanged?.Invoke(computer);
+            OnComputerStatusChanged?.Invoke(GetComputer(computer.hardwareId, computer.productName));
         }
 
-        public void RemoveLicense(License licence) {
-            _licenses.DeleteOne(lic => lic.id == licence.id);
-            OnLicenseRemoved?.Invoke(licence.registrationDate);
+        public void RemoveLicense(License license)
+        {
+            _licenses.DeleteOne(lic => lic.id == license.id);
+            OnLicenseRemoved?.Invoke(license.registrationDate);
         }
 
-        public void RemoveLicense(string projectName) {
+        public void RemoveLicense(string projectName)
+        {
             OnLicenseRemoved?.Invoke(GetLicense(projectName).registrationDate);
             _licenses.DeleteOne(lic => lic.productName == projectName);
         }
-        public void RemoveComputer(Computer computer) {
+        public void RemoveComputer(Computer computer)
+        {
             OnComputerRemoved?.Invoke(computer.activationDate);
             _computers.DeleteOne(comp => comp.Equals(computer));
         }
-        public void RemoveComputer(string hardwareID) {
+        public void RemoveComputer(string hardwareID)
+        {
             OnComputerRemoved?.Invoke(GetComputer(hardwareID).activationDate);
             _computers.DeleteOne(comp => comp.hardwareId == hardwareID);
         }
         public void RemoveComputers(string product) => _computers.DeleteMany(x => x.productName == product);
+
+        public bool IsAllowedComputer(Computer computer, License license)
+        {
+            if (computer.isBanned) return true;
+
+            var computers = GetComputers(license.productName);
+
+            if (computers.Count <= license.licensesCounter) return true;
+            if (computers.Count == 0) return true;
+
+            var lastAllowedActivationDate = DateTime.Parse(computers[license.licensesCounter - 1].activationDate);
+            return DateTime.Parse(computer.activationDate) < lastAllowedActivationDate;
+        }
     }
 }

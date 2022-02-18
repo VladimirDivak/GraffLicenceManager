@@ -4,6 +4,14 @@ using System.Net;
 
 namespace GraffLicenceManager
 {
+    public enum CardPosition
+    {
+        Top,
+        Center,
+        Bottom,
+        Full
+    }
+
     public class Program
     {
         public static void Main(string[] args)

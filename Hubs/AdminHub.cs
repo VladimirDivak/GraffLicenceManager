@@ -23,7 +23,7 @@ namespace GraffLicenceManager.Hubs
             _databaseService.OnLicenseRemoved += async licenseRegDate => await _hubContext.Clients.All.SendAsync("OnLicenseRemoved", licenseRegDate);
 
             _databaseService.OnAddNewComputer += async computer => await _hubContext.Clients.All.SendAsync("OnAddNewComputer", computer);
-            _databaseService.OnComputerStatusChanged += async computer => await _hubContext.Clients.All.SendAsync("OnComputerSatusChanged", computer);
+            _databaseService.OnComputerStatusChanged += async computer => await _hubContext.Clients.All.SendAsync("OnComputerStatusChanged", computer);
             _databaseService.OnComputerRemoved += async computerRegDate => await _hubContext.Clients.All.SendAsync("OnComputerRemoved", computerRegDate);
         }
 
@@ -37,16 +37,10 @@ namespace GraffLicenceManager.Hubs
             return base.OnDisconnectedAsync(exception);
         }
 
-        public async Task OnLicensesListRequest()
+        public void OnComputerBanned(string hardwareId, string productName)
         {
-            await Clients.Caller.SendAsync("OnLicensesListResponse", _databaseService.GetLicenses(), _databaseService.GetComputers());
-        }
-
-        public void OnComputerBanned(string hardwareId, bool banState)
-        {
-            var computer = _databaseService.GetComputer(hardwareId);
-            computer.isBanned = banState;
-
+            var computer = _databaseService.GetComputer(hardwareId, productName);
+            computer.isBanned = !computer.isBanned;
             _databaseService.UpdateComputer(computer);
         }
 

@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.SignalR.Client
 @inject HubConnection HubConnection
 @inject NavigationManager NavigationManager
+@inject DatabaseService DatabaseService
 
 <link rel="stylesheet" href="css/main.css">
 <div class="header">
@@ -69,70 +70,17 @@
     <h2>Привязанные компьютеры</h2>
     @foreach(var computer in computers)
     {
-        if(computersCounter == 0)
-        {
-            cardPosition = "card-top";
-        }
-        else if(computersCounter > 0 && computersCounter < computers.Count() - 1)
-        {
-            cardPosition = "card-middle";
-        }
-        else
-        {
-            cardPosition = "card-bottom";
-        }
+        CardPosition cardPos;
+        bool isWarningComputerStatus = false;
 
+        if(computersCounter == 0) cardPos = CardPosition.Top;
+        else if(computersCounter > 0 && computersCounter < computers.Count() - 1)  cardPos = CardPosition.Center;
+        else cardPos = CardPosition.Bottom;
         computersCounter++;
+        if (computers.Count() == 1) cardPos = CardPosition.Full;
+        if (computersCounter > selectedLicense.licensesCounter) isWarningComputerStatus = true;
 
-        if(computers.Count() == 1)
-        {
-            cardPosition = "card-full";
-        }
-
-        <div class=@cardPosition>
-            <div class="card-top-content">
-                <img src="icons/computer.svg" style="height: 40px;" alt="">
-                <div class="info">
-                    <h1>@computer.localUserName</h1>
-                    @if(computer.isActive)
-                    {
-                        <h2 style="color: #6DD58C;">@computer.geolocation • Online</h2>
-                    }
-                    else
-                    {
-                        <h2 style="color: #8E918F;">@computer.geolocation • Offline @GetCorrectDateFormat(computer.lastActivity)</h2>
-                    }
-                </div>
-                <div class="status">
-                    @if(computer.isBanned == false)
-                    {
-                        <h3 style="font-size: 11px; color: #6DD58C;">ON</h3>
-                        <div class="status-icon-on"></div>
-                    }
-                    else
-                    {
-                        <h3 style="font-size: 11px; color: #DA0000;">OFF</h3>
-                        <div class="status-icon-off"></div>
-                    }
-                </div>
-            </div>
-            <div class="card-bottom-content">
-                <div class="state">
-                    <p>@computer.machineName</p>
-                    <p>Активирован: @GetCorrectDateFormat(computer.activationDate)</p>
-                </div>
-                <img style="margin-left:auto; margin-right: 0" src="icons/FAB_Edit.svg" alt="">
-                @if(!computer.isBanned)
-                {
-                    computerIconPath = "icons/FAB_PlayPause.svg";
-                }
-                else 
-                {
-                    computerIconPath = "icons/FAB_Play.svg";
-                }
-                <img @onclick="@(()=> { selectedComputer = computer; showComputerPasswordField = true; showLicensePasswordField = false; showCounterChangeField = false; })" style="margin-left: 8px" src=@computerIconPath alt="">
-            </div>
-        </div>
+        <ComputerCard IsWarningStatus="@isWarningComputerStatus" CardPosition="@cardPos" Computer="@computer" OnComputerStatusButtonClick="@(()=>OnComputerBanStatusButtonClick(computer))"></ComputerCard>
 
         if (computers.IndexOf(computer) == computers.IndexOf(computers.Last())) computersCounter = 0;
     }
@@ -170,16 +118,13 @@ else if(showCounterChangeField)
 
     protected async override Task OnInitializedAsync()
     {
-        HubConnection.On<List<License>, List<Computer>>("OnLicensesListResponse", (licenses, computers) =>
-        {
-            selectedLicense = licenses.Find(x => x.id == licenseId);
-            this.computers = computers
-                .Where(x => x.productName == selectedLicense.productName)
-                .OrderBy(x => x.isActive)
-                .ToList();
+        selectedLicense = DatabaseService.GetLicenses().Find(x => x.id == licenseId);
+        computers = DatabaseService.GetComputers(selectedLicense.productName)
+            .OrderBy(x => DateTime.Parse(x.activationDate))
+            .ToList();
 
-            StateHasChanged();
-        });
+        StateHasChanged();
+
         HubConnection.On<License>("OnLicenseStatusChanged", license =>
         {
             if(license.productName == selectedLicense.productName)
@@ -192,7 +137,7 @@ else if(showCounterChangeField)
         HubConnection.On<Computer>("OnAddNewComputer", computer =>
         {
             if (computer.productName != selectedLicense.productName) return;
-            if (computers.Count(x => x.productName == computer.productName) == 1) return;
+            if (computers.Count(x => x.hardwareId == computer.hardwareId) == 1) return;
             computers.Add(computer);
 
             StateHasChanged();
@@ -202,7 +147,7 @@ else if(showCounterChangeField)
         {
             if (computer.productName != selectedLicense.productName) return;
 
-            var computerIndex = computers.IndexOf(computers.Find(x => x.id == computer.id));
+            int computerIndex = computers.IndexOf(computers.Find(x => x.hardwareId == computer.hardwareId));
             computers[computerIndex] = computer;
 
             StateHasChanged();
@@ -231,11 +176,22 @@ else if(showCounterChangeField)
         return correctFormat.ToShortDateString();
     }
 
+    private void OnComputerBanStatusButtonClick(Computer computer)
+    {
+        selectedComputer = computer;
+
+        showComputerPasswordField = true;
+        showLicensePasswordField = false;
+        showCounterChangeField = false;
+    }
+
     private async void OnComputerBanned()
     {
-        await HubConnection.SendAsync("OnComputerBanned", selectedComputer.hardwareId, !selectedComputer.isBanned);
-        computers.Find(x => x.hardwareId == selectedComputer.hardwareId).isBanned = !selectedComputer.isBanned;
-        showComputerPasswordField = false;
+        await HubConnection.SendAsync("OnComputerBanned", selectedComputer.hardwareId, selectedComputer.productName);
+        Computer computer = computers.Find(x => x.hardwareId == selectedComputer.hardwareId && x.productName == selectedComputer.productName);
+        int index = computers.IndexOf(computer);
+        computer.isBanned = !computer.isBanned;
+        computers[index] = computer;
 
         StateHasChanged();
     }

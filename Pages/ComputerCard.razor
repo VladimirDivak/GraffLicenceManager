@@ -1,0 +1,123 @@
+﻿<div class=@SetCardPosition() style="@warningStatus">
+    <div class="card-top-content">
+        <img src="icons/computer.svg" style="height: 40px;" alt="">
+        <div class="info">
+            <h1>@Computer.localUserName</h1>
+            @if(Computer.isActive)
+            {
+                <h2 style="color: #6DD58C;">@Computer.geolocation • Online</h2>
+            }
+            else
+            {
+                <h2 style="color: #8E918F;">@Computer.geolocation • Offline @GetCorrectDateFormat(Computer.lastActivity)</h2>
+            }
+        </div>
+        <div class="status">
+            @if(Computer.isBanned == false)
+            {
+                <h3 style="font-size: 11px; color: #6DD58C;">ON</h3>
+                <div class="status-icon-on"></div>
+            }
+            else
+            {
+                <h3 style="font-size: 11px; color: #DA0000;">OFF</h3>
+                <div class="status-icon-off"></div>
+            }
+        </div>
+    </div>
+    <div class="card-bottom-content">
+        <div class="state">
+            <p>@Computer.machineName</p>
+            <p>Активирован: @GetCorrectDateFormat(Computer.activationDate)</p>
+        </div>
+        <img style="margin-left:auto; margin-right: 0" src="icons/FAB_Edit.svg" alt="">
+        @if(!Computer.isBanned)
+        {
+            computerIconPath = "icons/FAB_PlayPause.svg";
+        }
+        else 
+        {
+            computerIconPath = "icons/FAB_Play.svg";
+        }
+        <img @onclick="@(()=> OnComputerStatusButtonClick.InvokeAsync())" style="margin-left: 8px" src=@computerIconPath alt="">
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public CardPosition CardPosition { get; set; }
+    [Parameter]
+    public Computer Computer { get; set; }
+    [Parameter]
+    public EventCallback OnComputerStatusButtonClick { get; set; }
+    [Parameter]
+    public bool IsWarningStatus { get; set; }
+
+    private string computerIconPath;
+    private string warningStatus
+    {
+        get
+        {
+            string result = string.Empty;
+            string color = string.Empty;
+
+            if (IsWarningStatus) color = "yellow";
+            else color = "#444746";
+
+            switch(CardPosition)
+            {
+                case CardPosition.Top:
+                    result = $"border-left: 1px solid {color}; border-right: 1px solid {color}; border-top: 1px solid {color};";
+                    break;
+
+                case CardPosition.Center:
+                    result = $"border-left: 1px solid {color}; border-right: 1px solid {color}; border-top: 1px solid {color};";
+                    break;
+
+                case CardPosition.Bottom:
+                    result = $"border: 1px solid {color}";
+                    break;
+
+                case CardPosition.Full:
+                    result = $"border: 1px solid {color}";
+                    break;
+            }
+
+            return result;
+        }
+    }
+
+    string SetCardPosition()
+    {
+        string cardPositionStyle = string.Empty;
+
+        switch(CardPosition)
+        {
+            case CardPosition.Top:
+                cardPositionStyle = "card-top";
+                break;
+
+            case CardPosition.Center:
+                cardPositionStyle = "card-middle";
+                break;
+
+            case CardPosition.Bottom:
+                cardPositionStyle = "card-bottom";
+                break;
+
+            case CardPosition.Full:
+                cardPositionStyle = "card-full";
+                break;
+        }
+
+        return cardPositionStyle;
+    }
+
+    private string GetCorrectDateFormat(string currentFormat)
+    {
+        if (currentFormat == null) return "";
+
+        DateTime correctFormat = DateTime.Parse(currentFormat);
+        return correctFormat.ToShortDateString();
+    }
+}

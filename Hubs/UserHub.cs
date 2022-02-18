@@ -8,17 +8,23 @@ using GraffLicenceManager.DB;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.SignalR;
 
-namespace GraffLicenceManager.Hubs {
-    public class UserHub : Hub {
+namespace GraffLicenceManager.Hubs
+{
+    public class UserHub : Hub
+    {
+        private readonly MailSender mailSender;
         private readonly DatabaseService databaseService;
         private readonly IpDataClient ipDataClient;
 
-        public UserHub(DatabaseService service) {
+        public UserHub(DatabaseService service, MailSender sender)
+        {
             databaseService = service;
+            mailSender = sender;
             ipDataClient = new IpDataClient("a6162964e4404f14e89accb08d97fe2ec852e20014ffa5de62758df9");
         }
 
-        public override async Task OnConnectedAsync() {
+        public override async Task OnConnectedAsync()
+        {
             var ip = Context.GetHttpContext().Connection.RemoteIpAddress.ToString();
             IpData.Models.IpInfo ipInfo = new IpData.Models.IpInfo();
             try
@@ -35,12 +41,14 @@ namespace GraffLicenceManager.Hubs {
 
             await base.OnConnectedAsync();
         }
-        public override async Task OnDisconnectedAsync(Exception exception) {
+        public override async Task OnDisconnectedAsync(Exception exception)
+        {
             Computer computer = databaseService.GetComputers()
                 .ToList()
                 .Find(x => x.sessionId == Context.ConnectionId);
 
-            if (computer != null) {
+            if (computer != null)
+            {
                 computer.isActive = false;
                 computer.sessionId = string.Empty;
                 computer.lastActivity = DateTime.Now.ToString();
@@ -53,7 +61,8 @@ namespace GraffLicenceManager.Hubs {
             await base.OnDisconnectedAsync(exception);
         }
 
-        public async Task OnInitializationRequest(RegistrationData registrationData) {
+        public async Task OnInitializationRequest(RegistrationData registrationData)
+        {
             var ip = Context.GetHttpContext().Connection.RemoteIpAddress.ToString();
             IpData.Models.IpInfo ipInfo = new IpData.Models.IpInfo();
             try
@@ -66,63 +75,54 @@ namespace GraffLicenceManager.Hubs {
                 ipInfo = await ipDataClient.Lookup(ip.ToString());
             }
 
-            var licence = databaseService.GetLicense(registrationData.productName);
+            var license = databaseService.GetLicense(registrationData.productName);
             var computer = databaseService.GetComputer(registrationData.hardwareId, registrationData.productName);
 
-            if (licence != null) { 
-                if (licence.registrationDate == string.Empty) {
-                    licence.registrationDate = DateTime.Now.ToString();
-                    licence.status = true;
-                    licence.trialPeriod = 7;
+            if (license != null)
+            { 
+                if (license.registrationDate == string.Empty)
+                {
+                    license.registrationDate = DateTime.Now.ToString();
+                    license.status = true;
+                    license.trialPeriod = 7;
 
-                    databaseService.UpdateLicense(licence);
+                    databaseService.UpdateLicense(license);
 
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"[{DateTime.Now}] лицензия для проекта {licence.productName} ({licence.companyName}) активирована.");
+                    Console.WriteLine($"[{DateTime.Now}] лицензия для проекта {license.productName} ({license.companyName}) активирована.");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
-                if (computer == null) {
-                    if (databaseService.GetComputers()
-                        .Where(x => x.productName == licence.productName)
-                        .Count() < licence.licensesCounter) {
+                if (computer == null)
+                {
+                    Computer newComputer = new Computer() {
+                        hardwareId = registrationData.hardwareId,
+                        productName = registrationData.productName,
+                        activationDate = DateTime.Now.ToString(),
+                        machineName = registrationData.machineName,
+                        localUserName = registrationData.userName,
+                        lastActivity = DateTime.Now.ToString(),
+                        geolocation = ipInfo.City
+                    };
 
-                        Computer newComputer = new Computer() {
-                            hardwareId = registrationData.hardwareId,
-                            productName = registrationData.productName,
-                            activationDate = DateTime.Now.ToString(),
-                            machineName = registrationData.machineName,
-                            localUserName = registrationData.userName,
-                            lastActivity = DateTime.Now.ToString(),
-                            geolocation = ipInfo.City
-                        };
-
-                        computer = databaseService.CreateComputer(newComputer);
-
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine($"[{DateTime.Now}] добавлен компьютер {computer.localUserName} ({computer.geolocation}) для проекта {licence.productName}.");
-                        Console.ForegroundColor = ConsoleColor.White;
-                    }
-                    else {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"[{DateTime.Now}] отказ в доступе - нет слотов в лицении для {licence.productName}.");
-                        Console.ForegroundColor = ConsoleColor.White;
-
-                        await Clients.Caller.SendAsync("OnInitializationResponse", false);
-                        Aborted(computer, Context);
-                        return;
-                    }
-                }
-
-                if (licence.licensesCounter == databaseService
-                    .GetComputers()
-                    .Count(x => x.productName == licence.productName)) {
+                    computer = databaseService.CreateComputer(newComputer);
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"[{DateTime.Now}] закончились слоты для лицензии {licence.productName}({licence.companyName}).");
+                    Console.WriteLine($"[{DateTime.Now}] добавлен компьютер {computer.localUserName} ({computer.geolocation}) для проекта {license.productName}.");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
 
-                if (computer.isBanned) {
+                if (license.licensesCounter == databaseService
+                    .GetComputers()
+                    .Count(x => x.productName == license.productName))
+                {
+
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"[{DateTime.Now}] закончились слоты для лицензии {license.productName}({license.companyName}).");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+
+                if (computer.isBanned)
+                {
                     Console.ForegroundColor= ConsoleColor.Red;
                     Console.WriteLine($"[{DateTime.Now}] Компьютер {computer.localUserName} ({computer.geolocation}) находится в бане.");
                     Console.ForegroundColor = ConsoleColor.White;
@@ -140,9 +140,19 @@ namespace GraffLicenceManager.Hubs {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"[{DateTime.Now}] Компьютер {computer.localUserName} ({computer.geolocation}) успешно авторизован. Проект - {computer.productName}.");
                 Console.ForegroundColor = ConsoleColor.White;
+
+                if (!databaseService.IsAllowedComputer(computer, license))
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"[{DateTime.Now}] Компьютер {computer.localUserName} ({computer.geolocation}), скорее всего, не находится в списке разрешённых.");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    //mailSender.SendWarningAsync($"{license.productName} | Подозрительная активность", $"В общем, какой-то хер под именем {computer.localUserName} из {computer.geolocation} с адресом {Context.GetHttpContext().Connection.RemoteIpAddress} попытался запустить приложение.\nПредлагаю посмотреть данные о лицензии {license.productName}.");
+                }
+
                 await Clients.Caller.SendAsync("OnInitializationResponse", true);
             }
-            else {
+            else
+            {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"[{DateTime.Now}] отказ в доступе - обращение к несуществующей лицензии.");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -151,7 +161,8 @@ namespace GraffLicenceManager.Hubs {
                 Aborted(computer, Context);
             }
         }
-        public async Task OnValidationRequest(string hardwareId) {
+        public async Task OnValidationRequest(string hardwareId)
+        {
             Computer comp = databaseService.GetComputer(hardwareId);
             License lic = databaseService.GetLicense(databaseService.GetComputer(hardwareId).productName);
 
