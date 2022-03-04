@@ -38,6 +38,7 @@ namespace GraffLicenceManager
                 var navManager = x.GetRequiredService<NavigationManager>();
                 return new HubConnectionBuilder()
                     .WithUrl(navManager.ToAbsoluteUri("/adminhub"))
+                    //.WithUrl("http://127.0.0.1:5000/adminhub")
                     .Build();
             });
         }
@@ -56,9 +57,7 @@ namespace GraffLicenceManager
             }
 
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapBlazorHub();
