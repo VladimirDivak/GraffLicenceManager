@@ -126,7 +126,7 @@ namespace GraffLicenceManager.Hubs
                     Console.ForegroundColor= ConsoleColor.Red;
                     Console.WriteLine($"[{DateTime.Now}] Компьютер {computer.localUserName} ({computer.geolocation}) находится в бане.");
                     Console.ForegroundColor = ConsoleColor.White;
-                    await Clients.Caller.SendAsync("OnInitializationResponse", false);
+                    await Clients.Caller.SendAsync("OnInitializationResponse", false, computer.hardwareId);
                     Aborted(computer, Context);
 
                     return;
@@ -149,7 +149,7 @@ namespace GraffLicenceManager.Hubs
                     //mailSender.SendWarningAsync($"{license.productName} | Подозрительная активность", $"В общем, какой-то хер под именем {computer.localUserName} из {computer.geolocation} с адресом {Context.GetHttpContext().Connection.RemoteIpAddress} попытался запустить приложение.\nПредлагаю посмотреть данные о лицензии {license.productName}.");
                 }
 
-                await Clients.Caller.SendAsync("OnInitializationResponse", true);
+                await Clients.Caller.SendAsync("OnInitializationResponse", true, computer.hardwareId);
             }
             else
             {
@@ -157,7 +157,7 @@ namespace GraffLicenceManager.Hubs
                 Console.WriteLine($"[{DateTime.Now}] отказ в доступе - обращение к несуществующей лицензии.");
                 Console.ForegroundColor = ConsoleColor.White;
 
-                await Clients.Caller.SendAsync("OnInitializationResponse", false);
+                await Clients.Caller.SendAsync("OnInitializationResponse", false, computer.hardwareId);
                 Aborted(computer, Context);
             }
         }
@@ -166,8 +166,8 @@ namespace GraffLicenceManager.Hubs
             Computer comp = databaseService.GetComputer(hardwareId);
             License lic = databaseService.GetLicense(databaseService.GetComputer(hardwareId).productName);
 
-            if (lic.status == true && comp.isBanned == false) await Clients.Caller.SendAsync("OnValidationResponse", true);
-            else await Clients.Caller.SendAsync("OnValidationResponse", false);
+            if (lic.status == true && comp.isBanned == false) await Clients.Caller.SendAsync("OnValidationResponse", true, comp.hardwareId);
+            else await Clients.Caller.SendAsync("OnValidationResponse", false, comp.hardwareId);
         }
 
         public void Aborted(Computer computer, HubCallerContext context)

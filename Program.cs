@@ -23,7 +23,7 @@ namespace GraffLicenceManager
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseKestrel(x => x.Listen(IPAddress.Loopback, 5000));
+                    webBuilder.UseKestrel(x => x.Listen(IPAddress.Parse("0.0.0.0"), 5000));
                     webBuilder.UseStartup<Startup>();
                 });
     }
