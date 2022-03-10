@@ -15,6 +15,8 @@ namespace GraffLicenceManager.DB
 
             _licenses = database.GetCollection<License>("LicenseDataNew");
             _computers = database.GetCollection<Computer>("ComputerDataNew");
+            _admins = database.GetCollection<Admin>("Admins");
+            
 
             var computers = GetComputers();
             foreach (var computer in computers)
@@ -27,6 +29,8 @@ namespace GraffLicenceManager.DB
             }
         }
 
+        public bool isAuthorized { get; set; }
+
         public event Action<Computer> OnAddNewComputer;
         public event Action<Computer> OnComputerStatusChanged;
         public event Action<string> OnComputerRemoved;
@@ -37,6 +41,7 @@ namespace GraffLicenceManager.DB
 
         private readonly IMongoCollection<License> _licenses;
         private readonly IMongoCollection<Computer> _computers;
+        private readonly IMongoCollection<Admin> _admins;
 
         public List<License> GetLicenses() => _licenses.Find(x => true).ToList();
         public List<Computer> GetComputers() => _computers.Find(x => true).ToList();
@@ -83,6 +88,16 @@ namespace GraffLicenceManager.DB
             OnAddNewComputer?.Invoke(computer);
 
             return computer;
+        }
+
+        public void GetAdminValidation(string login, string password)
+        {
+            Admin admin = _admins.Find(x => x.login == login && x.password == password)
+                .ToList()
+                .LastOrDefault();
+
+            if (admin != null) isAuthorized = true;
+            else isAuthorized = false;
         }
 
         public void UpdateLicense(License license)

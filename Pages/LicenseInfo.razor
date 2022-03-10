@@ -4,6 +4,12 @@
 @inject NavigationManager NavigationManager
 @inject DatabaseService DatabaseService
 
+
+@*@if(!DatabaseService.isAuthorized)
+{
+    NavigationManager.NavigateTo("/authorization");
+}*@
+
 <link rel="stylesheet" href="css/main.css">
 <div class="header">
     <img class="logo" style="margin-left: 0; margin-right: auto" src="icons/back.svg" alt="" @onclick="@(()=>NavigationManager.NavigateTo("/"))">

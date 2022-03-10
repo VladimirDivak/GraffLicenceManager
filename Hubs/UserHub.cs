@@ -1,7 +1,6 @@
 ﻿using System;
 using IpData;
 using System.Linq;
-using Newtonsoft.Json;
 using System.Collections;
 using System.Threading.Tasks;
 using GraffLicenceManager.DB;
@@ -25,7 +24,12 @@ namespace GraffLicenceManager.Hubs
 
         public override async Task OnConnectedAsync()
         {
-            var ip = Context.GetHttpContext().Connection.RemoteIpAddress.ToString();
+            var ip = Context
+                .GetHttpContext()
+                .Connection
+                .RemoteIpAddress
+                .ToString();
+
             IpData.Models.IpInfo ipInfo = new IpData.Models.IpInfo();
             try
             {
@@ -63,7 +67,12 @@ namespace GraffLicenceManager.Hubs
 
         public async Task OnInitializationRequest(RegistrationData registrationData)
         {
-            var ip = Context.GetHttpContext().Connection.RemoteIpAddress.ToString();
+            var ip = Context
+                .GetHttpContext()
+                .Connection
+                .RemoteIpAddress
+                .ToString();
+
             IpData.Models.IpInfo ipInfo = new IpData.Models.IpInfo();
             try
             {
@@ -126,7 +135,7 @@ namespace GraffLicenceManager.Hubs
                     Console.ForegroundColor= ConsoleColor.Red;
                     Console.WriteLine($"[{DateTime.Now}] Компьютер {computer.localUserName} ({computer.geolocation}) находится в бане.");
                     Console.ForegroundColor = ConsoleColor.White;
-                    await Clients.Caller.SendAsync("OnInitializationResponse", false, computer.hardwareId);
+                    await Clients.Caller.SendAsync("OnInitializationResponse", false, computer.hardwareId, 0);
                     Aborted(computer, Context);
 
                     return;
@@ -149,7 +158,7 @@ namespace GraffLicenceManager.Hubs
                     //mailSender.SendWarningAsync($"{license.productName} | Подозрительная активность", $"В общем, какой-то хер под именем {computer.localUserName} из {computer.geolocation} с адресом {Context.GetHttpContext().Connection.RemoteIpAddress} попытался запустить приложение.\nПредлагаю посмотреть данные о лицензии {license.productName}.");
                 }
 
-                await Clients.Caller.SendAsync("OnInitializationResponse", true, computer.hardwareId);
+                await Clients.Caller.SendAsync("OnInitializationResponse", true, computer.hardwareId, databaseService.GetLicense(computer.productName).trialPeriod);
             }
             else
             {
@@ -157,7 +166,7 @@ namespace GraffLicenceManager.Hubs
                 Console.WriteLine($"[{DateTime.Now}] отказ в доступе - обращение к несуществующей лицензии.");
                 Console.ForegroundColor = ConsoleColor.White;
 
-                await Clients.Caller.SendAsync("OnInitializationResponse", false, computer.hardwareId);
+                await Clients.Caller.SendAsync("OnInitializationResponse", false, computer.hardwareId, 0);
                 Aborted(computer, Context);
             }
         }
@@ -166,7 +175,7 @@ namespace GraffLicenceManager.Hubs
             Computer comp = databaseService.GetComputer(hardwareId);
             License lic = databaseService.GetLicense(databaseService.GetComputer(hardwareId).productName);
 
-            if (lic.status == true && comp.isBanned == false) await Clients.Caller.SendAsync("OnValidationResponse", true, comp.hardwareId);
+            if (lic?.status == true && comp?.isBanned == false) await Clients.Caller.SendAsync("OnValidationResponse", true, comp.hardwareId);
             else await Clients.Caller.SendAsync("OnValidationResponse", false, comp.hardwareId);
         }
 

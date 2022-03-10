@@ -1,0 +1,55 @@
+﻿@namespace GraffLicenceManager.Pages
+
+@page "/authorization"
+@using Microsoft.AspNetCore.SignalR.Client
+@inject NavigationManager NavigationManager
+@inject DatabaseService DatabaseService
+@inject HubConnection HubConnection
+
+<link rel="stylesheet" href="css/main.css">
+<div class="header">
+    <img class="logo" style="margin-left: 0; margin-right: auto" src="" alt="">
+    <p>Авторизация</p>
+    <img style="margin-right: 0; margin-left: auto" src="icons/menu.svg" alt="">
+</div>
+<div class="content">
+    <div class="card">
+        <Inputfield TopText="Логин" Placeholder="Логин" Type=Inputfield.InputType.Text OnValueChanged="@(value => { loginValue = value; OnInputfieldsChanged(); })"></Inputfield>
+        <Inputfield TopText="Пароль" Placeholder="Пароль" Type=Inputfield.InputType.Password OnValueChanged="@(value => { passwordValue = value; OnInputfieldsChanged(); })"></Inputfield>
+        <div class="buttons">
+            <div style="@buttonStyle" @onclick="@(()=>CheckDataValidation())" class="button">Авторизоваться</div>
+        </div>
+    </div>
+</div>
+
+@code {
+    string loginValue { get; set; }
+    string passwordValue { get; set; }
+    string buttonStyle { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (HubConnection.State == HubConnectionState.Disconnected) await HubConnection.StartAsync();
+    }
+
+    async void CheckDataValidation()
+    {
+        if (buttonStyle == string.Empty) return;
+
+        DatabaseService.GetAdminValidation(loginValue, passwordValue);
+        if (DatabaseService.isAuthorized)
+        {
+            await HubConnection.SendAsync("OnAcceptAuthorization", loginValue, passwordValue);
+            NavigationManager.NavigateTo("/");
+        }
+    }
+
+    void OnInputfieldsChanged()
+    {
+        if (!string.IsNullOrEmpty(loginValue) && !string.IsNullOrEmpty(passwordValue))
+        {
+            buttonStyle = "background-color: #C4EED0; border-color: #C4EED0; color: inherit;";
+        }
+        else buttonStyle = string.Empty;
+    }
+}

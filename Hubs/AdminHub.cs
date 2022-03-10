@@ -29,12 +29,29 @@ namespace GraffLicenceManager.Hubs
 
         public override Task OnConnectedAsync()
         {
+            if(Context.GetHttpContext().Request.Cookies.ContainsKey("login"))
+            {
+                string login = Context.GetHttpContext().Request.Cookies["login"];
+                string password = Context.GetHttpContext().Request.Cookies["password"];
+
+                _databaseService.GetAdminValidation(login, password);
+            }    
+
             return base.OnConnectedAsync();
         }
 
         public override Task OnDisconnectedAsync(Exception exception)
         {
             return base.OnDisconnectedAsync(exception);
+        }
+
+        public void OnAcceptAuthorization(string login, string password)
+        {
+            Context
+                .GetHttpContext()
+                .Response
+                .Cookies
+                .Append(login, password);
         }
 
         public void OnComputerBanned(string hardwareId, string productName)

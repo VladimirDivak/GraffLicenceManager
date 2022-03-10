@@ -27,6 +27,11 @@
 
     protected async override Task OnInitializedAsync()
     {
+        //@if(!DatabaseService.isAuthorized)
+        //{
+        //    NavigationManager.NavigateTo("/authorization");
+        //}
+
         licenses = DatabaseService.GetLicenses();
         computers = DatabaseService.GetComputers();
         StateHasChanged();
