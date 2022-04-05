@@ -12,9 +12,6 @@
     <PackageReference Include="MongoDB.Bson" Version="2.13.1" />
     <PackageReference Include="MongoDB.Driver" Version="2.13.1" />
     <PackageReference Include="MongoDB.Driver.Core" Version="2.13.1" />
-    <PackageReference Include="MongoDB.Driver.GridFS" Version="2.13.1" />
-    <PackageReference Include="MudBlazor" Version="5.1.5" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
 </Project>

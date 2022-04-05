@@ -30,13 +30,13 @@
     <div class="card-bottom-content">
         <div class="state">
             <p>Одобрено копий:</p>
-            <p>Активировано копий:</p>
-            <p>Сейчас онлайн:</p>
+            <p style=@(License.licensesCounter < Computers.Count(x => x.productName == License.productName) ? "color: yellow" : "")>Активировано копий:</p>
+            <p style=@GetGreenStatus(Computers.Where(x => x.productName == License.productName).Count(x => x.isActive))>Сейчас онлайн:</p>
         </div>
         <div class="state-value">
             <p>@License.licensesCounter</p>
-            <p>@Computers.Count(x => x.productName == License.productName)</p>
-            <p>@Computers.Where(x => x.productName == License.productName).Count(x => x.isActive)</p>
+            <p style=@(License.licensesCounter < Computers.Count(x => x.productName == License.productName) ? "color: yellow" : "")>@Computers.Count(x => x.productName == License.productName)</p>
+            <p style=@GetGreenStatus(Computers.Where(x => x.productName == License.productName).Count(x => x.isActive))>@Computers.Where(x => x.productName == License.productName).Count(x => x.isActive)</p>
         </div>
         <img src="icons/FAB_Edit.svg" alt="">
     </div>
@@ -53,5 +53,10 @@
     string GetLicenseStatus(bool value)
     {
         return value ? "border: 1px solid yellow" : "";
+    }
+
+    string GetGreenStatus(int value)
+    {
+        return value > 0 ? "color: #6DD58C" : "";
     }
 }

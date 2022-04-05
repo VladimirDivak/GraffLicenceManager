@@ -15,7 +15,7 @@
     {
         List<Computer> licComputers = DatabaseService.GetComputers(lic.productName);
         bool isWarining = lic.licensesCounter < licComputers.Count && (licComputers.Count - lic.licensesCounter) - licComputers.Count(x => x.isBanned) != 0;
-        <LicenseCard License="@lic" IsWarning="@isWarining" Computers="@computers"></LicenseCard>
+        <LicenseCard License="@lic" IsWarning="@isWarining" Computers="@computers"/>
     }
 </div>
 
@@ -27,11 +27,6 @@
 
     protected async override Task OnInitializedAsync()
     {
-        //@if(!DatabaseService.isAuthorized)
-        //{
-        //    NavigationManager.NavigateTo("/authorization");
-        //}
-
         licenses = DatabaseService.GetLicenses();
         computers = DatabaseService.GetComputers();
         StateHasChanged();

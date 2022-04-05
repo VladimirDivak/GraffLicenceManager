@@ -1,0 +1,96 @@
+﻿@using Microsoft.AspNetCore.SignalR.Client
+@inject DatabaseService DatabaseService
+
+<div class="edit-field">
+    <div class="card" style="border-color: @borderColor; margin-top: auto; margin-bottom: auto; margin-right: 16px; margin-left: 16px;">
+        @if(isCorrect)
+        {
+            <img style="height: 128px; margin: auto; padding-top: 16px;" src="/icons/ok.svg" alt="">
+            <p style=
+            "margin-top: 0;
+            margin-bottom: auto;
+            margin-left: auto;
+            margin-right: auto;
+
+            padding-left: 16px;
+            padding-right: 16px;
+            padding-bottom: 16px;
+
+            color: #C4EED0;
+
+            font-style: normal;
+            font-weight: normal;
+            font-size: 24px;
+            line-height: 32px;
+            text-align: center;">
+
+            @Message</p>
+        }
+        else
+        {
+            @ChildContent
+            <Inputfield TopText="Логин" Placeholder="Логин" Type=Inputfield.InputType.Text OnValueChanged="@(value => loginField = value)"></Inputfield>
+            <Inputfield TopText="Пароль" Placeholder="Пароль" Type=Inputfield.InputType.Password OnValueChanged="@(value => OnPasswordValueChanged(value))"></Inputfield>
+             <div class="buttons">
+                <div style="@acceptButtonStyle" @onclick="@(()=> PasswordValidation())" class="button">Подтвердить</div>
+                <div style="background-color: inherit" @onclick="@OnClosed" class="button">Отмена</div>
+            </div> 
+        }
+    </div>
+</div>
+
+@code
+{
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public EventCallback OnPasswordValidate { get; set; }
+    [Parameter]
+    public EventCallback OnClosed { get; set; }
+    [Parameter]
+    public string Message { get; set; }
+
+    private string acceptButtonStyle;
+    private string loginField;
+    private string passwordField;
+    private bool isCorrect;
+
+    private string borderColor;
+    private string inputfieldTextColor = "#8E918F";
+
+    private async void PasswordValidation()
+    {
+        if(DatabaseService.GetAdminValidation(loginField, passwordField))
+        {
+            isCorrect = true;
+            borderColor = "#C4EED0";
+
+            await Task.Delay(2000);
+
+            isCorrect = false;
+
+            loginField = string.Empty;
+            passwordField = string.Empty;
+            borderColor = string.Empty;
+
+            await OnPasswordValidate.InvokeAsync();
+        }
+        else
+        {
+            inputfieldTextColor = "#F2B8B5";
+        }
+    }
+
+    private void OnPasswordValueChanged(string value)
+    {
+        passwordField = value;
+        if(passwordField != string.Empty && loginField != string.Empty)
+        {
+            acceptButtonStyle = "background-color: #C4EED0; border-color: #C4EED0; color: inherit;";
+        }
+        else
+        {
+            acceptButtonStyle = string.Empty;
+        }
+    }
+}

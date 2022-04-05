@@ -29,8 +29,6 @@ namespace GraffLicenceManager.DB
             }
         }
 
-        public bool isAuthorized { get; set; }
-
         public event Action<Computer> OnAddNewComputer;
         public event Action<Computer> OnComputerStatusChanged;
         public event Action<string> OnComputerRemoved;
@@ -90,14 +88,14 @@ namespace GraffLicenceManager.DB
             return computer;
         }
 
-        public void GetAdminValidation(string login, string password)
+        public bool GetAdminValidation(string login, string password)
         {
             Admin admin = _admins.Find(x => x.login == login && x.password == password)
                 .ToList()
                 .LastOrDefault();
 
-            if (admin != null) isAuthorized = true;
-            else isAuthorized = false;
+            if (admin != null) return true;
+            else return false;
         }
 
         public void UpdateLicense(License license)

@@ -2,7 +2,7 @@
 
 <h3 style="margin-top: 8px; color: @inputfieldColor">@TopText</h3>
 <div style="border-color: @inputfieldColor" class="inputfield">
-    <input style="color: @inputfieldTextColor" placeholder=@Placeholder value="@inputValue" @oninput="@((e)=>OnInputfieldValueChanged(e))" @onfocusout="@(() => OnInputfieldFocusOut())" @onfocus="@(() => OnInputfieldFocused())" type=@SetInputfieldType()>
+    <input style="color: @inputfieldTextColor" placeholder=@Placeholder value="@Value" @oninput="@((e)=>OnInputfieldValueChanged(e))" @onfocusout="@(() => OnInputfieldFocusOut())" @onfocus="@(() => OnInputfieldFocused())" type=@SetInputfieldType()>
     <img style="opacity: @inputfieldIconOpacity" src=@IconPath alt="">
 </div>
 <h3 style="margin-bottom: 8px; color: @inputfieldColor">@bottomText</h3>
@@ -25,34 +25,36 @@
     public InputType Type { get; set; } = InputType.Text;
     [Parameter]
     public EventCallback<string> OnValueChanged { get; set; }
+    [Parameter]
+    public string Value { get; set; }
 
     string bottomText;
-    string inputValue;
-    string inputfieldColor = "8E918F";
-    string inputfieldTextColor = "8E918F";
+    public string inputfieldColor  = "8E918F";
+    public string inputfieldTextColor = "8E918F";
+
     float inputfieldIconOpacity = 1;
 
-    void OnInputfieldValueChanged(ChangeEventArgs args)
+    async void OnInputfieldValueChanged(ChangeEventArgs args)
     {
-        inputValue = args?.Value?.ToString();
+        Value = args?.Value?.ToString();
 
-        if (inputValue.Length < 3 && Type != InputType.Number)
+        if (Value.Length < 3 && Type != InputType.Number)
         {
             bottomText = "Поле содержит мало символов";
             inputfieldColor = "#F2B8B5";
             inputfieldTextColor = "#F2B8B5";
 
             IconPath = "/icons/error.svg";
-            OnValueChanged.InvokeAsync(string.Empty);
+            await OnValueChanged.InvokeAsync(string.Empty);
         }
-        else if (string.IsNullOrWhiteSpace(inputValue))
+        else if (string.IsNullOrWhiteSpace(Value))
         {
             bottomText = "Недопустимое значение";
             inputfieldColor = "#F2B8B5";
             inputfieldTextColor = "#F2B8B5";
 
             IconPath = "/icons/error.svg";
-            OnValueChanged.InvokeAsync(string.Empty);
+            await OnValueChanged.InvokeAsync(string.Empty);
         }
         else
         {
@@ -61,7 +63,7 @@
             inputfieldTextColor = "#6DD58C";
 
             IconPath = "/icons/done.svg";
-            OnValueChanged.InvokeAsync(inputValue);
+            await OnValueChanged.InvokeAsync(Value);
         }
     }
 

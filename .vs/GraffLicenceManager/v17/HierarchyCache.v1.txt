@@ -1,0 +1,785 @@
+﻿++Решение "GraffLicenceManager" ‎(проекты: 1 из 1)
+i:{00000000-0000-0000-0000-000000000000}:GraffLicenceManager.sln
+++GraffLicenceManager
+i:{00000000-0000-0000-0000-000000000000}:GraffLicenceManager
+++Connected Services 
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:>2176
+++Properties
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\properties\
+++wwwroot
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\
+++Зависимости
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:>2175
+++Импортирует
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:>1018
+++.config
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\.config\
+++.vscode
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\.vscode\
+++bin
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\bin\
+++DB
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\db\
+++Hubs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\hubs\
+++obj
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\
+++Pages
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\pages\
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razor\pages\
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razordeclaration\pages\
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razor\pages\
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razordeclaration\pages\
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razor\pages\
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razordeclaration\pages\
+++.gitattributes
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\.gitattributes
+++.gitignore
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\.gitignore
+++_Imports.razor
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\_imports.razor
+++App.razor
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\app.razor
+++appsettings.json
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\appsettings.json
+++GraffLicenceManager.sln
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\grafflicencemanager.sln
+++libsnappy64.dylib
+++libsnappy64.so
+++libzstd.dll
+++libzstd.dylib
+++libzstd.so
+++Program.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\program.cs
+++snappy32.dll
+++snappy64.dll
+++Startup.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\startup.cs
+++Зависимости службы не обнаружены
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:>2177
+++PublishProfiles
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\properties\publishprofiles\
+++launchSettings.json
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\properties\launchsettings.json
+++css
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\css\
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\css\open-iconic\font\css\
+++icons
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\icons\
+++favicon.ico
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\favicon.ico
+++Анализаторы
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:анализаторы
+++Пакеты
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:пакеты
+++Платформы
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:платформы
+++Sdk.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.web\sdk\sdk.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.illink.tasks\sdk\sdk.props
+++Sdk.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.web\sdk\sdk.targets
+++dotnet-tools.json
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\.config\dotnet-tools.json
+++launch.json
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\.vscode\launch.json
+++tasks.json
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\.vscode\tasks.json
+++Debug
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\bin\debug\
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\
+++Admin.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\db\admin.cs
+++Computer.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\db\computer.cs
+++DatabaseService.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\db\databaseservice.cs
+++License.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\db\license.cs
+++RegistrationData.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\db\registrationdata.cs
+++AdminHub.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\hubs\adminhub.cs
+++UserHub.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\hubs\userhub.cs
+++publish
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\publish\
+++Release
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\
+++GraffLicenceManager.csproj.EntityFrameworkCore.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\grafflicencemanager.csproj.entityframeworkcore.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\grafflicencemanager.csproj.entityframeworkcore.targets
+++GraffLicenceManager.csproj.nuget.dgspec.json
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\grafflicencemanager.csproj.nuget.dgspec.json
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\publish\linux-x64\grafflicencemanager.csproj.nuget.dgspec.json
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\publish\win-x64\grafflicencemanager.csproj.nuget.dgspec.json
+++GraffLicenceManager.csproj.nuget.g.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\grafflicencemanager.csproj.nuget.g.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\publish\linux-x64\grafflicencemanager.csproj.nuget.g.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\publish\win-x64\grafflicencemanager.csproj.nuget.g.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\grafflicencemanager.csproj.nuget.g.props
+++GraffLicenceManager.csproj.nuget.g.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\grafflicencemanager.csproj.nuget.g.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\publish\linux-x64\grafflicencemanager.csproj.nuget.g.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\publish\win-x64\grafflicencemanager.csproj.nuget.g.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\grafflicencemanager.csproj.nuget.g.targets
+++project.assets.json
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\project.assets.json
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\publish\linux-x64\project.assets.json
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\publish\win-x64\project.assets.json
+++project.nuget.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\project.nuget.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\publish\linux-x64\project.nuget.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\publish\win-x64\project.nuget.cache
+++_Host.cshtml
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\pages\_host.cshtml
+++AddLicense.razor
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\pages\addlicense.razor
+++Authorization.razor
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\pages\authorization.razor
+++ComputerCard.razor
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\pages\computercard.razor
+++Inputfield.razor
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\pages\inputfield.razor
+++LicenseCard.razor
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\pages\licensecard.razor
+++LicenseInfo.razor
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\pages\licenseinfo.razor
+++Licenses.razor
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\pages\licenses.razor
+++MailSender.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\pages\mailsender.cs
+++PasswordField.razor
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\pages\passwordfield.razor
+++appsettings.Development.json
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\appsettings.development.json
+++FolderProfile.pubxml
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\properties\publishprofiles\folderprofile.pubxml
+++FolderProfile.pubxml.user
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\properties\publishprofiles\folderprofile.pubxml.user
+++bootstrap
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\css\bootstrap\
+++open-iconic
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\css\open-iconic\
+++main.css
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\css\main.css
+++site.css
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\css\site.css
+++AppIcon.png
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\icons\appicon.png
+++AppIcon.svg
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\icons\appicon.svg
+++AppIconIva.svg
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\icons\appiconiva.svg
+++back.svg
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\icons\back.svg
+++burger.svg
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\icons\burger.svg
+++computer.svg
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\icons\computer.svg
+++done.svg
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\icons\done.svg
+++error.svg
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\icons\error.svg
+++FAB.svg
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\icons\fab.svg
+++FAB_Edit.svg
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\icons\fab_edit.svg
+++FAB_Play.svg
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\icons\fab_play.svg
+++FAB_PlayPause.svg
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\icons\fab_playpause.svg
+++IconDefault.svg
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\icons\icondefault.svg
+++keyboard.svg
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\icons\keyboard.svg
+++Logo_GRAFFinteractive_Default.svg
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\icons\logo_graffinteractive_default.svg
+++menu.svg
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\icons\menu.svg
+++ok.svg
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\icons\ok.svg
+++visibility.svg
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\icons\visibility.svg
+++Microsoft.AspNetCore.Analyzers
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.web\analyzers\cs\microsoft.aspnetcore.analyzers.dll
+++Microsoft.AspNetCore.Components.Analyzers
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.web\analyzers\cs\microsoft.aspnetcore.components.analyzers.dll
+++Microsoft.AspNetCore.Mvc.Analyzers
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.web\analyzers\cs\microsoft.aspnetcore.mvc.analyzers.dll
+++Microsoft.CodeAnalysis.CSharp.NetAnalyzers
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
+++Microsoft.CodeAnalysis.NetAnalyzers
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
+++Microsoft.Extensions.Logging.Generators
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\.nuget\packages\microsoft.extensions.logging.abstractions\6.0.1\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
+++System.Text.Json.SourceGeneration
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\.nuget\packages\system.text.json\6.0.2\analyzers\dotnet\roslyn4.0\cs\system.text.json.sourcegeneration.dll
+++IpData (2.0.1)
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:>2188
+++Microsoft.AspNetCore.SignalR.Client (6.0.3)
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:>2189
+++MongoDB.Bson (2.15.0)
+++MongoDB.Driver (2.15.0)
+++MongoDB.Driver.Core (2.15.0)
+++Microsoft.AspNetCore.App
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\microsoft.aspnetcore.app
+++Microsoft.NETCore.App
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\microsoft.netcore.app
+++Sdk.props (C:\Program Files\dotnet\sdk\6.0.101\Sdks\Microsoft.NET.Sdk\Sdk)
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\sdk\sdk.props
+++Sdk.props (C:\Program Files\dotnet\sdk\6.0.101\Sdks\Microsoft.NET.Sdk.Razor\Sdk)
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.razor\sdk\sdk.props
+++Sdk.props (C:\Program Files\dotnet\sdk\6.0.101\Sdks\Microsoft.NET.Sdk.Web.ProjectSystem\Sdk)
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.web.projectsystem\sdk\sdk.props
+++Sdk.props (C:\Program Files\dotnet\sdk\6.0.101\Sdks\Microsoft.NET.Sdk.Publish\Sdk)
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.publish\sdk\sdk.props
+++Sdk.targets (C:\Program Files\dotnet\sdk\6.0.101\Sdks\Microsoft.NET.Sdk\Sdk)
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\sdk\sdk.targets
+++Sdk.targets (C:\Program Files\dotnet\sdk\6.0.101\Sdks\Microsoft.NET.Sdk.Razor\Sdk)
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.razor\sdk\sdk.targets
+++Sdk.targets (C:\Program Files\dotnet\sdk\6.0.101\Sdks\Microsoft.NET.Sdk.Web.ProjectSystem\Sdk)
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.web.projectsystem\sdk\sdk.targets
+++Sdk.targets (C:\Program Files\dotnet\sdk\6.0.101\Sdks\Microsoft.NET.Sdk.Publish\Sdk)
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.publish\sdk\sdk.targets
+++net5.0
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\bin\debug\net5.0\
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\
+++linux-x64
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\publish\linux-x64\
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\
+++win-x64
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\publish\win-x64\
+++bootstrap.min.css
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\css\bootstrap\bootstrap.min.css
+++font
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\css\open-iconic\font\
+++FONT-LICENSE
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\css\open-iconic\font-license
+++ICON-LICENSE
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\css\open-iconic\icon-license
+++README.md
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\css\open-iconic\readme.md
+++Microsoft.Common.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\current\microsoft.common.props
+++Microsoft.NET.Sdk.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.props
+++Sdk.Razor.CurrentVersion.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.razor\targets\sdk.razor.currentversion.props
+++Microsoft.NET.Sdk.Web.ProjectSystem.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.web.projectsystem\targets\microsoft.net.sdk.web.projectsystem.props
+++Microsoft.NET.Sdk.Publish.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.publish\targets\microsoft.net.sdk.publish.props
+++Microsoft.NET.Sdk.BeforeCommon.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.beforecommon.targets
+++Microsoft.CSharp.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\current\bin\amd64\microsoft.csharp.targets
+++Microsoft.NET.Sdk.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.targets
+++Microsoft.NET.Compatibility.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.compatibility.targets
+++NuGet.Build.Tasks.Pack.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\nuget.build.tasks.pack\build\nuget.build.tasks.pack.targets
+++Sdk.Razor.CurrentVersion.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.razor\targets\sdk.razor.currentversion.targets
+++Microsoft.NET.Sdk.Web.ProjectSystem.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.web.projectsystem\targets\microsoft.net.sdk.web.projectsystem.targets
+++Microsoft.NET.Sdk.Publish.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.publish\targets\microsoft.net.sdk.publish.targets
+++ref
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\bin\debug\net5.0\ref\
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\ref\
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\ref\
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\ref\
+++Razor
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razor\
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razor\
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razor\
+++RazorDeclaration
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razordeclaration\
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razordeclaration\
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razordeclaration\
+++scopedcss
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\scopedcss\
+++staticwebassets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\staticwebassets\
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\staticwebassets\
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\staticwebassets\
+++.NETCoreApp,Version=v5.0.AssemblyAttributes.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\.netcoreapp,version=v5.0.assemblyattributes.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\.netcoreapp,version=v5.0.assemblyattributes.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\.netcoreapp,version=v5.0.assemblyattributes.cs
+++apphost.exe
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\apphost.exe
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\apphost.exe
+++GraffLicenceManager.AssemblyInfo.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanager.assemblyinfo.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanager.assemblyinfo.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanager.assemblyinfo.cs
+++GraffLicenceManager.AssemblyInfoInputs.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanager.assemblyinfoinputs.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanager.assemblyinfoinputs.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanager.assemblyinfoinputs.cache
+++GraffLicenceManager.assets.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanager.assets.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanager.assets.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanager.assets.cache
+++GraffLicenceManager.csproj.AssemblyReference.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanager.csproj.assemblyreference.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanager.csproj.assemblyreference.cache
+++GraffLicenceManager.csproj.BuildWithSkipAnalyzers
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanager.csproj.buildwithskipanalyzers
+++GraffLicenceManager.csproj.CopyComplete
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanager.csproj.copycomplete
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanager.csproj.copycomplete
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanager.csproj.copycomplete
+++GraffLicenceManager.csproj.CoreCompileInputs.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanager.csproj.corecompileinputs.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanager.csproj.corecompileinputs.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanager.csproj.corecompileinputs.cache
+++GraffLicenceManager.csproj.FileListAbsolute.txt
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanager.csproj.filelistabsolute.txt
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanager.csproj.filelistabsolute.txt
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanager.csproj.filelistabsolute.txt
+++GraffLicenceManager.GeneratedMSBuildEditorConfig.editorconfig
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanager.generatedmsbuildeditorconfig.editorconfig
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanager.generatedmsbuildeditorconfig.editorconfig
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanager.generatedmsbuildeditorconfig.editorconfig
+++GraffLicenceManager.genruntimeconfig.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanager.genruntimeconfig.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanager.genruntimeconfig.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanager.genruntimeconfig.cache
+++GraffLicenceManager.RazorAssemblyInfo.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanager.razorassemblyinfo.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanager.razorassemblyinfo.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanager.razorassemblyinfo.cache
+++GraffLicenceManager.RazorAssemblyInfo.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanager.razorassemblyinfo.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanager.razorassemblyinfo.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanager.razorassemblyinfo.cs
+++GraffLicenceManager.RazorComponent.input.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanager.razorcomponent.input.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanager.razorcomponent.input.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanager.razorcomponent.input.cache
+++GraffLicenceManager.RazorComponent.output.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanager.razorcomponent.output.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanager.razorcomponent.output.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanager.razorcomponent.output.cache
+++GraffLicenceManager.RazorCoreGenerate.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanager.razorcoregenerate.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanager.razorcoregenerate.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanager.razorcoregenerate.cache
+++GraffLicenceManager.RazorTargetAssemblyInfo.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanager.razortargetassemblyinfo.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanager.razortargetassemblyinfo.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanager.razortargetassemblyinfo.cache
+++GraffLicenceManager.RazorTargetAssemblyInfo.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanager.razortargetassemblyinfo.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanager.razortargetassemblyinfo.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanager.razortargetassemblyinfo.cs
+++GraffLicenceManager.Views.dll
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanager.views.dll
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanager.views.dll
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanager.views.dll
+++GraffLicenceManagerLatestVersion.dll
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanagerlatestversion.dll
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanagerlatestversion.dll
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razordeclaration\grafflicencemanagerlatestversion.dll
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\ref\grafflicencemanagerlatestversion.dll
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanagerlatestversion.dll
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razordeclaration\grafflicencemanagerlatestversion.dll
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\ref\grafflicencemanagerlatestversion.dll
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razordeclaration\grafflicencemanagerlatestversion.dll
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\ref\grafflicencemanagerlatestversion.dll
+++GraffLicenceManagerLatestVersion.MvcApplicationPartsAssemblyInfo.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanagerlatestversion.mvcapplicationpartsassemblyinfo.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanagerlatestversion.mvcapplicationpartsassemblyinfo.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanagerlatestversion.mvcapplicationpartsassemblyinfo.cache
+++GraffLicenceManagerLatestVersion.pdb
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanagerlatestversion.pdb
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanagerlatestversion.pdb
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razordeclaration\grafflicencemanagerlatestversion.pdb
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanagerlatestversion.pdb
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razordeclaration\grafflicencemanagerlatestversion.pdb
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razordeclaration\grafflicencemanagerlatestversion.pdb
+++GraffLicenceManagerLatestVersion.TagHelpers.input.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanagerlatestversion.taghelpers.input.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanagerlatestversion.taghelpers.input.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanagerlatestversion.taghelpers.input.cache
+++GraffLicenceManagerLatestVersion.TagHelpers.output.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanagerlatestversion.taghelpers.output.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanagerlatestversion.taghelpers.output.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanagerlatestversion.taghelpers.output.cache
+++GraffLicenceManagerLatestVersion.Views.dll
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanagerlatestversion.views.dll
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanagerlatestversion.views.dll
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanagerlatestversion.views.dll
+++GraffLicenceManagerLatestVersion.Views.pdb
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\grafflicencemanagerlatestversion.views.pdb
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\grafflicencemanagerlatestversion.views.pdb
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\grafflicencemanagerlatestversion.views.pdb
+++project.razor.json
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\project.razor.json
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\project.razor.json
+++PubTmp
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\pubtmp\
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\pubtmp\
+++PublishOutputs.94b2f6d7f4.txt
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\publishoutputs.94b2f6d7f4.txt
+++bootstrap.min.css.map
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\css\bootstrap\bootstrap.min.css.map
+++fonts
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\css\open-iconic\font\fonts\
+++Microsoft.NuGet.ImportBefore.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\current\imports\microsoft.common.props\importbefore\microsoft.nuget.importbefore.props
+++NuGet.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\common7\ide\commonextensions\microsoft\nuget\nuget.props
+++Microsoft.NET.Sdk.DefaultItems.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.defaultitems.props
+++Microsoft.NET.Sdk.ImportWorkloads.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.importworkloads.props
+++Microsoft.NET.SupportedTargetFrameworks.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.supportedtargetframeworks.props
+++Microsoft.NET.SupportedPlatforms.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.supportedplatforms.props
+++Microsoft.NET.WindowsSdkSupportedTargetPlatforms.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.windowssdksupportedtargetplatforms.props
+++Microsoft.NET.Sdk.CSharp.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.csharp.props
+++Microsoft.NET.ILLink.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.illink.props
+++Microsoft.NET.Compatibility.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.compatibility.props
+++Microsoft.NET.PackTool.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.packtool.props
+++Microsoft.NET.PackProjectTool.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.packprojecttool.props
+++Microsoft.NET.Sdk.WindowsDesktop.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.windowsdesktop\targets\microsoft.net.sdk.windowsdesktop.props
+++Microsoft.NET.Windows.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.windows.props
+++Sdk.Razor.StaticAssets.ProjectSystem.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.razor\sdk\sdk.razor.staticassets.projectsystem.props
+++Microsoft.TypeScript.Default.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\microsoft\visualstudio\v17.0\typescript\microsoft.typescript.default.props
+++Microsoft.NET.Sdk.Web.DefaultItems.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.web.projectsystem\targets\microsoft.net.sdk.web.defaultitems.props
+++Microsoft.NET.DefaultAssemblyInfo.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.defaultassemblyinfo.targets
+++Microsoft.NET.DefaultOutputPaths.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.defaultoutputpaths.targets
+++Microsoft.NET.Sdk.ImportPublishProfile.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.importpublishprofile.targets
+++Microsoft.NET.TargetFrameworkInference.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.targetframeworkinference.targets
+++Microsoft.NET.Sdk.Razor.BeforeCommon.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.razor\targets\microsoft.net.sdk.razor.beforecommon.targets
+++Microsoft.NET.Sdk.ImportWorkloads.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.importworkloads.targets
+++Microsoft.NET.RuntimeIdentifierInference.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.runtimeidentifierinference.targets
+++Microsoft.NET.EolTargetFrameworks.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.eoltargetframeworks.targets
+++Microsoft.NET.NuGetOfflineCache.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.nugetofflinecache.targets
+++Microsoft.Managed.Before.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\current\bin\amd64\microsoft.managed.before.targets
+++Microsoft.CSharp.CurrentVersion.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\current\bin\amd64\microsoft.csharp.currentversion.targets
+++Microsoft.Managed.After.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\current\bin\amd64\microsoft.managed.after.targets
+++Microsoft.NET.Sdk.Common.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.common.targets
+++Microsoft.PackageDependencyResolution.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.packagedependencyresolution.targets
+++Microsoft.NET.Sdk.DefaultItems.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.defaultitems.targets
+++Microsoft.NET.Sdk.FrameworkReferenceResolution.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.frameworkreferenceresolution.targets
+++Microsoft.NET.Sdk.Shared.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.shared.targets
+++Microsoft.NET.DisableStandardFrameworkResolution.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.disablestandardframeworkresolution.targets
+++Microsoft.NET.DesignerSupport.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.designersupport.targets
+++Microsoft.NET.GenerateAssemblyInfo.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.generateassemblyinfo.targets
+++Microsoft.NET.GenerateGlobalUsings.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.generateglobalusings.targets
+++Microsoft.NET.GenerateSupportedRuntime.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.generatesupportedruntime.targets
+++Microsoft.NET.ComposeStore.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.composestore.targets
+++Microsoft.NET.CrossGen.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.crossgen.targets
+++Microsoft.NET.ObsoleteReferences.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.obsoletereferences.targets
+++Microsoft.NET.Publish.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.publish.targets
+++Microsoft.NET.PackTool.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.packtool.targets
+++Microsoft.NET.PackProjectTool.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.packprojecttool.targets
+++Microsoft.NET.PreserveCompilationContext.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.preservecompilationcontext.targets
+++Microsoft.NET.ConflictResolution.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.conflictresolution.targets
+++Microsoft.NET.Sdk.CSharp.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.csharp.targets
+++Microsoft.NET.ILLink.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.illink.targets
+++Microsoft.NET.Sdk.Analyzers.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.analyzers.targets
+++Microsoft.NET.Compatibility.Common.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.compatibility.common.targets
+++Microsoft.NET.Sdk.Razor.Compilation.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.razor\targets\microsoft.net.sdk.razor.compilation.targets
+++Microsoft.NET.Sdk.Razor.Configuration.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.razor\targets\microsoft.net.sdk.razor.configuration.targets
+++Microsoft.NET.Sdk.Razor.CodeGeneration.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.razor\targets\microsoft.net.sdk.razor.codegeneration.targets
+++Microsoft.NET.Sdk.Razor.Component.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.razor\targets\microsoft.net.sdk.razor.component.targets
+++Microsoft.NET.Sdk.Razor.StaticWebAssets.5_0.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.razor\targets\microsoft.net.sdk.razor.staticwebassets.5_0.targets
+++Microsoft.NET.Sdk.Razor.ScopedCss.5_0.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.razor\targets\microsoft.net.sdk.razor.scopedcss.5_0.targets
+++Microsoft.NET.Sdk.Razor.GenerateAssemblyInfo.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.razor\targets\microsoft.net.sdk.razor.generateassemblyinfo.targets
+++Microsoft.NET.Sdk.Razor.MvcApplicationPartsDiscovery.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.razor\targets\microsoft.net.sdk.razor.mvcapplicationpartsdiscovery.targets
+++Microsoft.NET.Sdk.Razor.DesignTime.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\microsoft\visualstudio\razor\microsoft.net.sdk.razor.designtime.targets
+++Microsoft.TypeScript.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\microsoft\visualstudio\v17.0\typescript\microsoft.typescript.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files (x86)\microsoft sdks\typescript\4.3\build\microsoft.typescript.targets
+++Microsoft.TypeScript.DotNetCore.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\microsoft\visualstudio\v17.0\typescript\microsoft.typescript.dotnetcore.targets
+++Microsoft.Web.Designtime.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\microsoft\visualstudio\managed.web\microsoft.web.designtime.targets
+++Default.pubxml
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.publish\targets\publishprofiles\default.pubxml
+++Microsoft.NET.Sdk.Publish.ComputeFiles.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.publish\targets\computetargets\microsoft.net.sdk.publish.computefiles.targets
+++Microsoft.NET.Sdk.Publish.FilterFiles.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.publish\targets\copytargets\microsoft.net.sdk.publish.filterfiles.targets
+++Microsoft.NET.Sdk.Publish.CopyFiles.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.publish\targets\copytargets\microsoft.net.sdk.publish.copyfiles.targets
+++Microsoft.NET.Sdk.Publish.TransformFiles.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.publish\targets\transformtargets\microsoft.net.sdk.publish.transformfiles.targets
+++Microsoft.NET.Sdk.Publish.FileSystem.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.publish\targets\publishtargets\microsoft.net.sdk.publish.filesystem.targets
+++Microsoft.NET.Sdk.DotNetCLITool.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.publish\targets\dotnetclitooltargets\microsoft.net.sdk.dotnetclitool.targets
+++_Imports.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razor\_imports.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razordeclaration\_imports.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razor\_imports.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razordeclaration\_imports.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razor\_imports.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razordeclaration\_imports.razor.g.cs
+++App.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razor\app.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razordeclaration\app.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razor\app.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razordeclaration\app.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razor\app.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razordeclaration\app.razor.g.cs
+++Shared
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razordeclaration\shared\
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\scopedcss\shared\
+++GraffLicenceManager.pdb
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razordeclaration\grafflicencemanager.pdb
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razordeclaration\grafflicencemanager.pdb
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razordeclaration\grafflicencemanager.pdb
+++bundle
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\scopedcss\bundle\
+++projectbundle
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\scopedcss\projectbundle\
+++GraffLicenceManagerLatestVersion.StaticWebAssets.Manifest.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\staticwebassets\grafflicencemanagerlatestversion.staticwebassets.manifest.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\staticwebassets\grafflicencemanagerlatestversion.staticwebassets.manifest.cache
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\staticwebassets\grafflicencemanagerlatestversion.staticwebassets.manifest.cache
+++apphost
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\apphost
+++PublishOutputs.69bb5e47e7.txt
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\publishoutputs.69bb5e47e7.txt
+++GraffLicenceManagerLatestVersion.StaticWebAssets.xml
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\staticwebassets\grafflicencemanagerlatestversion.staticwebassets.xml
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\staticwebassets\grafflicencemanagerlatestversion.staticwebassets.xml
+++open-iconic-bootstrap.min.css
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\css\open-iconic\font\css\open-iconic-bootstrap.min.css
+++open-iconic.eot
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\css\open-iconic\font\fonts\open-iconic.eot
+++open-iconic.otf
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\css\open-iconic\font\fonts\open-iconic.otf
+++open-iconic.svg
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\css\open-iconic\font\fonts\open-iconic.svg
+++open-iconic.ttf
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\css\open-iconic\font\fonts\open-iconic.ttf
+++open-iconic.woff
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\wwwroot\css\open-iconic\font\fonts\open-iconic.woff
+++Microsoft.NuGet.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\microsoft\nuget\17.0\microsoft.nuget.props
+++Microsoft.NETCoreSdk.BundledVersions.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\microsoft.netcoresdk.bundledversions.props
+++Microsoft.NET.Sdk.WindowsDesktop.WindowsForms.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.windowsdesktop\targets\microsoft.net.sdk.windowsdesktop.windowsforms.props
+++Microsoft.NET.Sdk.WindowsDesktop.WPF.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.windowsdesktop\targets\microsoft.net.sdk.windowsdesktop.wpf.props
+++WorkloadManifest.targets (C:\Program Files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.android)
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.android\workloadmanifest.targets
+++WorkloadManifest.targets (C:\Program Files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.ios)
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.ios\workloadmanifest.targets
+++WorkloadManifest.targets (C:\Program Files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.maccatalyst)
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.maccatalyst\workloadmanifest.targets
+++WorkloadManifest.targets (C:\Program Files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.macos)
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.macos\workloadmanifest.targets
+++WorkloadManifest.targets (C:\Program Files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.maui)
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.maui\workloadmanifest.targets
+++WorkloadManifest.targets (C:\Program Files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.tvos)
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.tvos\workloadmanifest.targets
+++WorkloadManifest.targets (C:\Program Files\dotnet\sdk-manifests\6.0.100\microsoft.net.workload.emscripten)
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk-manifests\6.0.100\microsoft.net.workload.emscripten\workloadmanifest.targets
+++WorkloadManifest.targets (C:\Program Files\dotnet\sdk-manifests\6.0.100\microsoft.net.workload.mono.toolchain)
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk-manifests\6.0.100\microsoft.net.workload.mono.toolchain\workloadmanifest.targets
+++Microsoft.CSharp.Core.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\current\bin\roslyn\microsoft.csharp.core.targets
+++Microsoft.CSharp.DesignTime.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\microsoft\visualstudio\managed\microsoft.csharp.designtime.targets
+++Microsoft.Common.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\current\bin\amd64\microsoft.common.targets
+++Microsoft.ServiceModel.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\current\bin\amd64\microsoft.servicemodel.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\windows\microsoft.net\framework\v4.0.30319\microsoft.servicemodel.targets
+++Microsoft.NET.Sdk.DefaultItems.Shared.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.defaultitems.shared.targets
+++Microsoft.NETCoreSdk.BundledCliTools.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\microsoft.netcoresdk.bundledclitools.props
+++Microsoft.NET.DefaultPackageConflictOverrides.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\targets\microsoft.net.defaultpackageconflictoverrides.targets
+++Microsoft.CodeAnalysis.NetAnalyzers.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\analyzers\build\microsoft.codeanalysis.netanalyzers.props
+++Microsoft.CodeAnalysis.NetAnalyzers.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk\analyzers\build\microsoft.codeanalysis.netanalyzers.targets
+++04.03.05.00.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files (x86)\microsoft sdks\typescript\versions\04.03.05.00.props
+++_Host.cshtml.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razor\pages\_host.cshtml.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razor\pages\_host.cshtml.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razor\pages\_host.cshtml.g.cs
+++AddLicense.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razor\pages\addlicense.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razordeclaration\pages\addlicense.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razor\pages\addlicense.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razordeclaration\pages\addlicense.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razor\pages\addlicense.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razordeclaration\pages\addlicense.razor.g.cs
+++Authorization.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razor\pages\authorization.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razordeclaration\pages\authorization.razor.g.cs
+++ComputerCard.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razor\pages\computercard.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razordeclaration\pages\computercard.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razor\pages\computercard.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razordeclaration\pages\computercard.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razor\pages\computercard.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razordeclaration\pages\computercard.razor.g.cs
+++Inputfield.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razor\pages\inputfield.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razordeclaration\pages\inputfield.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razor\pages\inputfield.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razordeclaration\pages\inputfield.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razor\pages\inputfield.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razordeclaration\pages\inputfield.razor.g.cs
+++LicenseCard.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razor\pages\licensecard.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razordeclaration\pages\licensecard.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razor\pages\licensecard.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razordeclaration\pages\licensecard.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razor\pages\licensecard.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razordeclaration\pages\licensecard.razor.g.cs
+++LicenseInfo.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razor\pages\licenseinfo.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razordeclaration\pages\licenseinfo.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razor\pages\licenseinfo.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razordeclaration\pages\licenseinfo.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razor\pages\licenseinfo.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razordeclaration\pages\licenseinfo.razor.g.cs
+++Licenses.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razor\pages\licenses.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razordeclaration\pages\licenses.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razor\pages\licenses.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razordeclaration\pages\licenses.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razor\pages\licenses.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razordeclaration\pages\licenses.razor.g.cs
+++PasswordField.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razor\pages\passwordfield.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razordeclaration\pages\passwordfield.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razor\pages\passwordfield.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\razordeclaration\pages\passwordfield.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razor\pages\passwordfield.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\release\net5.0\linux-x64\razordeclaration\pages\passwordfield.razor.g.cs
+++Counter.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razordeclaration\pages\counter.razor.g.cs
+++FetchData.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razordeclaration\pages\fetchdata.razor.g.cs
+++Layout.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razordeclaration\pages\layout.razor.g.cs
+++MainLayout.razor.g.cs
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\obj\debug\net5.0\razordeclaration\pages\mainlayout.razor.g.cs
+++Microsoft.NET.ILLink.Tasks.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.illink.tasks\build\microsoft.net.illink.tasks.props
+++System.Windows.Forms.Analyzers.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\dotnet\sdk\6.0.101\sdks\microsoft.net.sdk.windowsdesktop\targets\system.windows.forms.analyzers.props
+++Microsoft.Managed.Core.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\current\bin\roslyn\microsoft.managed.core.targets
+++Microsoft.Managed.DesignTime.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\microsoft\visualstudio\managed\microsoft.managed.designtime.targets
+++Microsoft.Common.CurrentVersion.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\current\bin\amd64\microsoft.common.currentversion.targets
+++Microsoft.Managed.Core.CurrentVersions.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\current\bin\roslyn\microsoft.managed.core.currentversions.targets
+++GraffLicenceManager.csproj.user
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\users\vladimir_graff\source\repos\grafflicencemanager\grafflicencemanager.csproj.user
+++Microsoft.NET.props
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\current\bin\amd64\microsoft.net.props
+++Microsoft.CodeAnalysis.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\microsoft\visualstudio\v17.0\codeanalysis\microsoft.codeanalysis.targets
+++Microsoft.Xaml.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\current\bin\amd64\microsoft.xaml.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\windows\microsoft.net\framework\v4.0.30319\microsoft.xaml.targets
+++Microsoft.WorkflowBuildExtensions.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\current\bin\amd64\microsoft.workflowbuildextensions.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\windows\microsoft.net\framework\v4.0.30319\microsoft.workflowbuildextensions.targets
+++Microsoft.TeamTest.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\microsoft\visualstudio\v17.0\teamtest\microsoft.teamtest.targets
+++NuGet.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\common7\ide\commonextensions\microsoft\nuget\nuget.targets
+++Microsoft.Docker.ImportAfter.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\current\microsoft.common.targets\importafter\microsoft.docker.importafter.targets
+++Microsoft.NET.Build.Extensions.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\current\microsoft.common.targets\importafter\microsoft.net.build.extensions.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\microsoft\microsoft.net.build.extensions\microsoft.net.build.extensions.targets
+++Microsoft.NuGet.ImportAfter.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\current\microsoft.common.targets\importafter\microsoft.nuget.importafter.targets
+++Microsoft.Web.ImportAfter.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\current\microsoft.common.targets\importafter\microsoft.web.importafter.targets
+++Xamarin.Common.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\current\microsoft.common.targets\importafter\xamarin.common.targets
+++MongoDB.Driver.Core.targets
+++Microsoft.Docker.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\sdks\microsoft.docker.sdk\build\microsoft.docker.targets
+++Microsoft.Web.IISSupport.targets
+i:{f38a06a4-e360-4ebb-9143-65edc208c2db}:c:\program files\microsoft visual studio\2022\community\msbuild\microsoft\visualstudio\managed.web\microsoft.web.iissupport.targets
+++MongoDB.Driver (2.14.1)
+++MongoDB.Driver.Core (2.14.1)
+++Core
+++Compression
+++Snappy
+++Zstandard
+++lib
+++linux
+++osx
+++win

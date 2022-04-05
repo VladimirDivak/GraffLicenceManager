@@ -4,12 +4,6 @@
 @inject NavigationManager NavigationManager
 @inject DatabaseService DatabaseService
 
-
-@*@if(!DatabaseService.isAuthorized)
-{
-    NavigationManager.NavigateTo("/authorization");
-}*@
-
 <link rel="stylesheet" href="css/main.css">
 <div class="header">
     <img class="logo" style="margin-left: 0; margin-right: auto" src="icons/back.svg" alt="" @onclick="@(()=>NavigationManager.NavigateTo("/"))">
@@ -51,25 +45,25 @@
                 <p>Доступ без интернета:</p>
                 <p style="margin: 8px"> </p>
                 <p>Одобрено копий:</p>
-                <p>Активировано копий:</p>
-                <p>Сейчас онлайн:</p>
+                <p style=@(selectedLicense.licensesCounter < computers.Count() ? "color: yellow" : "")>Активировано копий:</p>
+                <p style=@GetGreenStatus(@computers.Where(x => x.isActive).Count())>Сейчас онлайн:</p>
             </div>
             <div class="state-value">
                 <p>@GetCorrectDateFormat(selectedLicense?.registrationDate)</p>
                 <p>@selectedLicense?.trialPeriod</p>
                 <p style="margin: 8px"> </p>
                 <p>@selectedLicense?.licensesCounter</p>
-                <p>@computers.Count()</p>
-                <p>@computers.Where(x => x.isActive).Count()</p>
+                <p style=@(selectedLicense.licensesCounter < computers.Count() ? "color: yellow" : "")>@computers.Count()</p>
+                <p style=@GetGreenStatus(@computers.Where(x => x.isActive).Count())>@computers.Where(x => x.isActive).Count()</p>
             </div>
-            <img style="position: absolute; right: 48px; bottom: 0" src="icons/FAB_Edit.svg" alt="" @onclick="@(()=>{ showCounterChangeField = true; showLicensePasswordField = false; showComputerPasswordField = false; })">
+            <img style="position: absolute; right: 48px; bottom: 0" src="icons/FAB_Edit.svg" alt="" @onclick="@(()=>{ showLicenseDataField = true; showLicenseBanField = false; showComputerBanField = false; })">
             @if(selectedLicense?.status == true)
             {
-                <img src="/icons/FAB_PlayPause.svg" alt="" @onclick="@(()=>{ showLicensePasswordField = true; showComputerPasswordField = false; showCounterChangeField = false; })">
+                <img src="/icons/FAB_PlayPause.svg" alt="" @onclick="@(()=>{ showLicenseBanField = true; showComputerBanField = false; showLicenseDataField = false; })">
             }
             else
             {
-                <img src="/icons/FAB_Play.svg" alt="" @onclick="@(()=>{ showLicensePasswordField = true; showComputerPasswordField = false; showCounterChangeField = false; })">
+                <img src="/icons/FAB_Play.svg" alt="" @onclick="@(()=>{ showLicenseBanField = true; showComputerBanField = false; showLicenseDataField = false; })">
             }
         </div>
     </div>
@@ -91,17 +85,21 @@
         if (computers.IndexOf(computer) == computers.IndexOf(computers.Last())) computersCounter = 0;
     }
 </div>
-@if(showComputerPasswordField)
+@if(showLicenseDataField)
 {
-    <PasswordField OnClosed="OnPasswordFieldClosed" message="Статус доступа компьютера изменён!" CorrectPasswordFieldAction="OnComputerBanned"></PasswordField>
+    <EditLayout OnClosed="@(()=> CloseEditLayout())" Message="Данные лицензии изменены!" OnPasswordValidate="@(()=> OnLicenseChanged())">
+        <Inputfield TopText="Количество слотов, шт" Placeholder=@selectedLicense.licensesCounter.ToString() Type=Inputfield.InputType.Number OnValueChanged="@((value) => { if(int.TryParse(value, out int newValue)) newLicenseCounter = newValue; })"></Inputfield>
+        <Inputfield TopText="Время триального периода, ч" Placeholder=@selectedLicense.trialPeriod.ToString() Type=Inputfield.InputType.Number OnValueChanged="@((value) => { if(int.TryParse(value, out int newValue)) newLicenseTrial = newValue; })"></Inputfield>
+        <hr/>
+    </EditLayout>
 }
-else if(showLicensePasswordField)
+else if(showComputerBanField)
 {
-    <PasswordField OnClosed="OnPasswordFieldClosed" message="Статус лицензии изменён!" CorrectPasswordFieldAction="OnLicenseStatusChanged"></PasswordField>
+    <EditLayout OnClosed="@(()=> CloseEditLayout())" Message="Статус доступа компьютера изменён!" OnPasswordValidate="@(()=> OnComputerBanned())"></EditLayout>
 }
-else if(showCounterChangeField)
+else if(showLicenseBanField)
 {
-    <PasswordField SelectedLicense="selectedLicense" OnClosed="OnPasswordFieldClosed" message="Лицензия изменена!" showLicensesCounterField="true"></PasswordField>   
+    <EditLayout OnClosed="@(()=> CloseEditLayout())" Message="Статус лицензии изменён!" OnPasswordValidate="@(()=> OnLicenseStatusChanged())"></EditLayout>
 }
 
 @code {
@@ -109,6 +107,8 @@ else if(showCounterChangeField)
     public string licenseId { get; set; }
 
     License selectedLicense;
+    int newLicenseCounter;
+    int newLicenseTrial;
     Computer selectedComputer;
 
     string computerIconPath;
@@ -118,9 +118,14 @@ else if(showCounterChangeField)
 
     int computersCounter;
 
-    bool showComputerPasswordField;
-    bool showLicensePasswordField;
-    bool showCounterChangeField;
+    bool showComputerBanField;
+    bool showLicenseBanField;
+    bool showLicenseDataField;
+
+    private string GetGreenStatus(int value)
+    {
+        return value > 0 ? "color: #6DD58C" : "";
+    }
 
     protected async override Task OnInitializedAsync()
     {
@@ -186,9 +191,9 @@ else if(showCounterChangeField)
     {
         selectedComputer = computer;
 
-        showComputerPasswordField = true;
-        showLicensePasswordField = false;
-        showCounterChangeField = false;
+        showComputerBanField = true;
+        showLicenseBanField = false;
+        showLicenseDataField = false;
     }
 
     private async void OnComputerBanned()
@@ -199,20 +204,31 @@ else if(showCounterChangeField)
         computer.isBanned = !computer.isBanned;
         computers[index] = computer;
 
-        StateHasChanged();
+        CloseEditLayout();
+    }
+
+    private async void OnLicenseChanged()
+    {
+        if(newLicenseCounter != 0)
+            selectedLicense.licensesCounter = newLicenseCounter;
+        if(newLicenseTrial != 0)
+            selectedLicense.trialPeriod = newLicenseTrial;
+
+        await HubConnection.SendAsync("OnChangeLicense", selectedLicense);
+        CloseEditLayout();
     }
 
     private async void OnLicenseStatusChanged()
     {
         await HubConnection.SendAsync("OnLicenseStatusChanged", selectedLicense.productName, !selectedLicense.status);
-        StateHasChanged();
+        CloseEditLayout();
     }
 
-    private void OnPasswordFieldClosed()
+    private void CloseEditLayout()
     {
-        showComputerPasswordField = false;
-        showLicensePasswordField = false;
-        showCounterChangeField = false;
+        showComputerBanField = false;
+        showLicenseBanField = false;
+        showLicenseDataField = false;
 
         StateHasChanged();
     }

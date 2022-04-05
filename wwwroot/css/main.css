@@ -45,6 +45,7 @@ body {
     padding-right: 16px;
     padding-top: 12px;
     padding-bottom: 12px;
+    max-width: 500px;
 }
 
     .content > h2 {
@@ -69,6 +70,7 @@ body {
     background: #1F1F1F;
     border: 1px solid #444746;
     border-radius: 12px;
+    max-width: 500px;
 }
 
     .card > h3 {
@@ -290,11 +292,12 @@ body {
     background: #444746;
 }
 
-.password-field {
+.edit-field {
     position: absolute;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
+    align-content: center;
     top: 0;
     width: 100vw;
     height: 100vh;
@@ -303,13 +306,14 @@ body {
     transition-duration: 1s;
 }
 
-.password-window {
+.edit-window {
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     padding: 16px;
     height: 316px;
+    max-width: 500px;
     background-color: #1F1F1F;
     margin-top: auto;
     margin-bottom: auto;
@@ -320,14 +324,11 @@ body {
     border-radius: 28px;
 }
 
-    .password-window > h2 {
-        margin-bottom: 0;
-        margin-left: 32px;
-        margin-top: auto;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 12px;
-        line-height: 32px;
-        color: #E3E3E3;
-        width: 277px;
-    }
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #444746;
+    margin: 1em 0;
+    padding: 0;
+}

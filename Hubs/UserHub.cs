@@ -1,5 +1,6 @@
 ﻿using System;
 using IpData;
+using System.IO;
 using System.Linq;
 using System.Collections;
 using System.Threading.Tasks;
@@ -93,7 +94,7 @@ namespace GraffLicenceManager.Hubs
                 {
                     license.registrationDate = DateTime.Now.ToString();
                     license.status = true;
-                    license.trialPeriod = 7;
+                    license.trialPeriod = 96;
 
                     databaseService.UpdateLicense(license);
 
@@ -117,16 +118,6 @@ namespace GraffLicenceManager.Hubs
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine($"[{DateTime.Now}] добавлен компьютер {computer.localUserName} ({computer.geolocation}) для проекта {license.productName}.");
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-
-                if (license.licensesCounter == databaseService
-                    .GetComputers()
-                    .Count(x => x.productName == license.productName))
-                {
-
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"[{DateTime.Now}] закончились слоты для лицензии {license.productName}({license.companyName}).");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
 
@@ -155,7 +146,7 @@ namespace GraffLicenceManager.Hubs
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine($"[{DateTime.Now}] Компьютер {computer.localUserName} ({computer.geolocation}), скорее всего, не находится в списке разрешённых.");
                     Console.ForegroundColor = ConsoleColor.White;
-                    //mailSender.SendWarningAsync($"{license.productName} | Подозрительная активность", $"В общем, какой-то хер под именем {computer.localUserName} из {computer.geolocation} с адресом {Context.GetHttpContext().Connection.RemoteIpAddress} попытался запустить приложение.\nПредлагаю посмотреть данные о лицензии {license.productName}.");
+                    //mailSender.SendWarningAsync($"лицензия {license.productName} | подозрительная активность", $"В общем, какой-то хер пидор с именем {computer.localUserName} из {computer.geolocation} с адресом {Context.GetHttpContext().Connection.RemoteIpAddress} попытался запустить приложение.\nПредлагаю посмотреть данные о лицензии {license.productName} и заблакировать его к хуям собачьим.");
                 }
 
                 await Clients.Caller.SendAsync("OnInitializationResponse", true, computer.hardwareId, databaseService.GetLicense(computer.productName).trialPeriod);
@@ -170,12 +161,28 @@ namespace GraffLicenceManager.Hubs
                 Aborted(computer, Context);
             }
         }
-        public async Task OnValidationRequest(string hardwareId)
-        {
-            Computer comp = databaseService.GetComputer(hardwareId);
-            License lic = databaseService.GetLicense(databaseService.GetComputer(hardwareId).productName);
 
-            if (lic?.status == true && comp?.isBanned == false) await Clients.Caller.SendAsync("OnValidationResponse", true, comp.hardwareId);
+        public async void OnGetClientAppStatistic(string productName, string fileName, byte[] info)
+        {
+            string envPath = Environment.CurrentDirectory + "/AppsLogger" + $"/{productName}";
+            if(!Directory.Exists(envPath)) Directory.CreateDirectory(envPath);
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"[{DateTime.Now}] {productName}: запись в размере {info.Length} байт.");
+            Console.ForegroundColor = ConsoleColor.White;
+
+            using (FileStream fs = new FileStream($"{envPath}/{fileName}.txt", FileMode.Append))
+            {
+                await fs.WriteAsync(info, 0, info.Length);
+            }
+        }
+
+        public async Task OnValidationRequest(string hardwareId, string productName)
+        {
+            Computer comp = databaseService.GetComputer(hardwareId, productName);
+            License lic = databaseService.GetLicense(productName);
+
+            if (lic.status == true && comp.isBanned == false) await Clients.Caller.SendAsync("OnValidationResponse", true, comp.hardwareId);
             else await Clients.Caller.SendAsync("OnValidationResponse", false, comp.hardwareId);
         }
 
