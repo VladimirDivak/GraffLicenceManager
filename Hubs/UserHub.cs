@@ -25,8 +25,7 @@ namespace GraffLicenceManager.Hubs
 
         public override async Task OnConnectedAsync()
         {
-            var ip = Context
-                .GetHttpContext()
+            var ip = Context.GetHttpContext()
                 .Connection
                 .RemoteIpAddress
                 .ToString();
@@ -137,6 +136,8 @@ namespace GraffLicenceManager.Hubs
                 computer.geolocation = ipInfo.City;
                 databaseService.UpdateComputer(computer);
 
+                databaseService.RemoveDoublers(license, computer);
+
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"[{DateTime.Now}] Компьютер {computer.localUserName} ({computer.geolocation}) успешно авторизован. Проект - {computer.productName}.");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -146,7 +147,12 @@ namespace GraffLicenceManager.Hubs
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine($"[{DateTime.Now}] Компьютер {computer.localUserName} ({computer.geolocation}), скорее всего, не находится в списке разрешённых.");
                     Console.ForegroundColor = ConsoleColor.White;
-                    //mailSender.SendWarningAsync($"лицензия {license.productName} | подозрительная активность", $"В общем, какой-то хер пидор с именем {computer.localUserName} из {computer.geolocation} с адресом {Context.GetHttpContext().Connection.RemoteIpAddress} попытался запустить приложение.\nПредлагаю посмотреть данные о лицензии {license.productName} и заблакировать его к хуям собачьим.");
+
+                    if (!Context.GetHttpContext()
+                        .Connection
+                        .RemoteIpAddress
+                        .ToString().Contains("192.168."))
+                    await mailSender.SendWarningAsync($"лицензия {license.productName} | подозрительная активность", $"В общем, какой-то хер с именем {computer.localUserName} из {computer.geolocation} с адресом {Context.GetHttpContext().Connection.RemoteIpAddress} попытался запустить приложение.\nПредлагаю посмотреть данные о лицензии {license.productName} и заблакировать его к хуям собачьим.");
                 }
 
                 await Clients.Caller.SendAsync("OnInitializationResponse", true, computer.hardwareId, databaseService.GetLicense(computer.productName).trialPeriod);
@@ -159,21 +165,6 @@ namespace GraffLicenceManager.Hubs
 
                 await Clients.Caller.SendAsync("OnInitializationResponse", false, computer.hardwareId, 0);
                 Aborted(computer, Context);
-            }
-        }
-
-        public async void OnGetClientAppStatistic(string productName, string fileName, byte[] info)
-        {
-            string envPath = Environment.CurrentDirectory + "/AppsLogger" + $"/{productName}";
-            if(!Directory.Exists(envPath)) Directory.CreateDirectory(envPath);
-
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"[{DateTime.Now}] {productName}: запись в размере {info.Length} байт.");
-            Console.ForegroundColor = ConsoleColor.White;
-
-            using (FileStream fs = new FileStream($"{envPath}/{fileName}.txt", FileMode.Append))
-            {
-                await fs.WriteAsync(info, 0, info.Length);
             }
         }
 

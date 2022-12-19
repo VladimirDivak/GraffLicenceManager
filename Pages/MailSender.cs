@@ -17,28 +17,30 @@ namespace GraffLicenceManager
 
         public MailSender()
         {
-            senderMail = "graff.validation@gmail.com";
+            senderMail = "license.validation@graff.tech";
 
             mail = new MailMessage();
-            smptServer = new SmtpClient("smtp.gmail.com");
+            smptServer = new SmtpClient("mail.netangels.ru");
             dangeonMasterMail = "gera@graff.tech";
 
-            smptServer.EnableSsl = true;
-            smptServer.Port = 587;
+            smptServer.Port = 25;
+            smptServer.EnableSsl = false;
             smptServer.UseDefaultCredentials = false;
             smptServer.Credentials = new NetworkCredential(
                 senderMail,
-                "tBUL3WbWUnARhCe"
+                "L010203V"
             );
         }
 
-        public async void SendWarningAsync(string subject, string message)
+        public async Task SendWarningAsync(string subject, string message)
         {
             mail.From = new MailAddress(senderMail);
             mail.Subject = subject;
             mail.Body = message;
 
             mail.To.Add(dangeonMasterMail);
+            mail.To.Add("vladimir.divak@gmail.com");
+            mail.To.Add("1andariel1@mail.ru");
 
             await Task.Run(() =>
             {
