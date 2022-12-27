@@ -13,6 +13,8 @@ using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.UseUrls("http://0.0.0.0:5000");
+
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddResponseCompression(opts =>
@@ -36,6 +38,7 @@ var app = builder.Build();
 app.UseResponseCompression();
 app.UseStaticFiles();
 app.UseRouting();
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapBlazorHub();

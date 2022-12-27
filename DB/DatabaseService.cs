@@ -10,12 +10,12 @@ namespace GraffLicenceManager.DB
     {
         public DatabaseService()
         {
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("GraffInteractive");
+            var client = new MongoClient("mongodb://GRAFF:G3432664499@192.168.1.28:27017");
+            var database = client.GetDatabase("license_manager");
 
-            _licenses = database.GetCollection<License>("LicenseDataNew");
-            _computers = database.GetCollection<Computer>("ComputerDataNew");
-            _admins = database.GetCollection<Admin>("Admins");
+            _licenses = database.GetCollection<License>("license_data");
+            _computers = database.GetCollection<Computer>("computer_data");
+            _admins = database.GetCollection<Admin>("admins");
 
             var computers = GetComputers();
             foreach (var computer in computers)
@@ -49,7 +49,6 @@ namespace GraffLicenceManager.DB
         private readonly IMongoCollection<License> _licenses;
         private readonly IMongoCollection<Computer> _computers;
         private readonly IMongoCollection<Admin> _admins;
-        private readonly IMongoCollection<ProjectStateHanlder> _projectsStates;
 
         public List<License> GetLicenses() => _licenses.Find(x => true).ToList();
         public List<Computer> GetComputers() => _computers.Find(x => true).ToList();
