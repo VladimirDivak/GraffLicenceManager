@@ -152,7 +152,7 @@ namespace GraffLicenceManager.Hubs
                         .Connection
                         .RemoteIpAddress
                         .ToString().Contains("192.168."))
-                    await mailSender.SendWarningAsync($"лицензия {license.productName} | подозрительная активность", $"В общем, какой-то хер с именем {computer.localUserName} из {computer.geolocation} с адресом {Context.GetHttpContext().Connection.RemoteIpAddress} попытался запустить приложение.\nПредлагаю посмотреть данные о лицензии {license.productName} и заблакировать его к хуям собачьим.");
+                    await mailSender.SendWarningAsync($"лицензия {license.productName} | подозрительная активность", $"В общем, какой-то хер с именем {computer.localUserName} из {computer.geolocation} с адресом {Context.GetHttpContext().Connection.RemoteIpAddress} попытался запустить приложение.\nПредлагаю посмотреть данные о лицензии {license.productName} и заблокировать его к хуям собачьим.");
                 }
 
                 await Clients.Caller.SendAsync("OnInitializationResponse", true, computer.hardwareId, databaseService.GetLicense(computer.productName).trialPeriod);

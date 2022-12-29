@@ -1,5 +1,6 @@
 ﻿@page "/licenseinfo/{licenseId}"
 @using Microsoft.AspNetCore.SignalR.Client
+@using System.Globalization;
 @inject HubConnection HubConnection
 @inject NavigationManager NavigationManager
 @inject DatabaseService DatabaseService
@@ -49,7 +50,7 @@
                 <p style=@GetGreenStatus(@computers.Where(x => x.isActive).Count())>Сейчас онлайн:</p>
             </div>
             <div class="state-value">
-                <p>@GetCorrectDateFormat(selectedLicense?.registrationDate)</p>
+                <p>@DateFormater.GetCorrectDateFormat(selectedLicense?.registrationDate)</p>
                 <p>@selectedLicense?.trialPeriod</p>
                 <p style="margin: 8px"> </p>
                 <p>@selectedLicense?.licensesCounter</p>
@@ -130,8 +131,9 @@ else if(showLicenseBanField)
     protected async override Task OnInitializedAsync()
     {
         selectedLicense = DatabaseService.GetLicenses().Find(x => x.id == licenseId);
-        computers = DatabaseService.GetComputers(selectedLicense.productName)
-            .OrderBy(x => DateTime.Parse(x.activationDate))
+        computers = DatabaseService
+            .GetComputers(selectedLicense.productName)
+            .OrderBy(x => DateFormater.GetParseDate(x.activationDate))
             .ToList();
 
         StateHasChanged();
@@ -177,14 +179,6 @@ else if(showLicenseBanField)
 
         if (HubConnection.State == HubConnectionState.Disconnected) await HubConnection.StartAsync();
         await HubConnection.SendAsync("OnLicensesListRequest");
-    }
-
-    private string GetCorrectDateFormat(string currentFormat)
-    {
-        if (currentFormat == null) return "";
-
-        DateTime correctFormat = DateTime.Parse(currentFormat);
-        return correctFormat.ToShortDateString();
     }
 
     private void OnComputerBanStatusButtonClick(Computer computer)

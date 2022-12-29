@@ -10,7 +10,7 @@ namespace GraffLicenceManager.DB
     {
         public DatabaseService()
         {
-            var client = new MongoClient("mongodb://GRAFF:G3432664499@192.168.1.28:27017");
+            var client = new MongoClient("mongodb://GRAFF:G3432664499@192.168.1.163:27017");
             var database = client.GetDatabase("license_manager");
 
             _licenses = database.GetCollection<License>("license_data");
@@ -144,8 +144,8 @@ namespace GraffLicenceManager.DB
             if (computers.Count <= license.licensesCounter) return true;
             if (computers.Count == 0) return true;
 
-            var lastAllowedActivationDate = DateTime.Parse(computers[license.licensesCounter - 1].activationDate);
-            return DateTime.Parse(computer.activationDate) < lastAllowedActivationDate;
+            var lastAllowedActivationDate = DateFormater.GetParseDate(computers[license.licensesCounter - 1].activationDate);
+            return DateFormater.GetParseDate(computer.activationDate) < lastAllowedActivationDate;
         }
         public void RemoveDoublers(License license, Computer computer)
         {

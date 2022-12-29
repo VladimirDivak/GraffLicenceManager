@@ -1,4 +1,5 @@
-﻿<div class=@SetCardPosition() style="@warningStatus">
+﻿@using System.Globalization;
+<div class=@SetCardPosition() style="@warningStatus">
     <div class="card-top-content">
         <img src="icons/computer.svg" style="height: 40px;" alt="">
         <div class="info">
@@ -9,7 +10,7 @@
             }
             else
             {
-                <h2 style="color: #8E918F;">@Computer.geolocation • Offline @GetCorrectDateFormat(Computer.lastActivity)</h2>
+                <h2 style="color: #8E918F;">@Computer.geolocation • Offline @DateFormater.GetCorrectDateFormat(Computer.lastActivity)</h2>
             }
         </div>
         <div class="status">
@@ -28,7 +29,7 @@
     <div class="card-bottom-content">
         <div class="state">
             <p>@Computer.machineName</p>
-            <p>Активирован: @GetCorrectDateFormat(Computer.activationDate)</p>
+            <p>Активирован: @DateFormater.GetCorrectDateFormat(Computer.activationDate)</p>
         </div>
         <img style="margin-left:auto; margin-right: 0" src="icons/FAB_Delete.svg" alt="">
         @if(!Computer.isBanned)
@@ -111,13 +112,5 @@
         }
 
         return cardPositionStyle;
-    }
-
-    private string GetCorrectDateFormat(string currentFormat)
-    {
-        if (currentFormat == null) return "";
-
-        DateTime correctFormat = DateTime.Parse(currentFormat);
-        return correctFormat.ToShortDateString();
     }
 }
